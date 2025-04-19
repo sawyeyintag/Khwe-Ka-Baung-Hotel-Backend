@@ -9,8 +9,10 @@
     "build": "prisma generate && tsc"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.0",
     "nodemon": "^3.1.9",
     "prisma": "^6.4.1",
@@ -20,8 +22,12 @@
   "dependencies": {
     "-": "^0.0.1",
     "@prisma/client": "^6.3.0",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
-    "vercel": "^41.4.0"
+    "jsonwebtoken": "^9.0.2",
+    "vercel": "^41.4.0",
+    "zod": "^3.24.3"
   }
 }
