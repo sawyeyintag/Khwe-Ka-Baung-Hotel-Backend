@@ -15,9 +15,9 @@ class AuthController {
 
   async registerAdmin(req: Request, res: Response, next: NextFunction) {
     RegisterSchema.parse(req.body);
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
     let admin = await prismaClient.admin.findFirst({
-      where: { userName: userName },
+      where: { username },
     });
     if (admin) {
       next(
@@ -29,7 +29,7 @@ class AuthController {
     }
     admin = await prismaClient.admin.create({
       data: {
-        userName: userName,
+        username: username,
         password: await hash(password, 10),
       },
     });
@@ -37,9 +37,9 @@ class AuthController {
   }
 
   async loginAdmin(req: Request, res: Response) {
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
     const admin = await prismaClient.admin.findFirst({
-      where: { userName: userName },
+      where: { username: username },
     });
     if (!admin) {
       throw Error("User not found");

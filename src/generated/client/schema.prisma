@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// ----------- Item -----------
+model Item {
+  id        Int        @id @default(autoincrement())
+  name      String
+  price     Float
+  inventory Inventory?
+  minibar   MiniBar[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+/// ----------- Inventory Item -----------
+model Inventory {
+  id       Int            @id @default(autoincrement())
+  item     Item           @relation(fields: [itemId], references: [id])
+  itemId   Int            @unique
+  quantity Int
+  history  InventoryLog[]
+}
+
+enum InventoryAction {
+  ADD
+  USE
+}
+
+model InventoryLog {
+  id          Int             @id @default(autoincrement())
+  inventoryId Int
+  type        InventoryAction
+  quantity    Int
+  timestamp   DateTime        @default(now())
+  inventory   Inventory       @relation(fields: [inventoryId], references: [id])
+}
+
+model MiniBar {
+  id         Int          @id @default(autoincrement())
+  room       Room         @relation(fields: [roomNumber], references: [number])
+  roomNumber Int
+  item       Item         @relation(fields: [itemId], references: [id])
+  itemId     Int
+  quantity   Int
+  MiniBarLog MiniBarLog[]
+
+  @@unique([roomNumber, itemId])
+}
+
+model MiniBarLog {
+  id        Int             @id @default(autoincrement())
+  minibarId Int
+  type      InventoryAction
+  quantity  Int
+  timestamp DateTime        @default(now())
+  minibar   MiniBar         @relation(fields: [minibarId], references: [id])
+}
+
+model Room {
+  number     Int        @id
+  type       RoomType   @relation(fields: [roomTypeId], references: [id])
+  status     RoomStatus @relation(fields: [statusId], references: [id])
+  statusId   Int
+  roomTypeId Int
+  minibar    MiniBar[]
+  history    RoomLog[]
+}
+
+model RoomLog {
+  id        Int      @id @default(autoincrement())
+  roomId    Int
+  timestamp DateTime @default(now())
+  room      Room     @relation(fields: [roomId], references: [number])
+}
+
+model RoomStatus {
+  id    Int    @id @default(autoincrement())
+  name  String
+  rooms Room[]
+}
+
+model RoomType {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price Float
+  pax   Int
+  Room  Room[]
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

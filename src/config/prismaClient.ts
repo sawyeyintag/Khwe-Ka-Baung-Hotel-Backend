@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import { RegisterSchema } from "../schema/admin";
+import { PrismaClient } from "../generated/client";
 
 const prismaClient = new PrismaClient({
   log: ["query"],

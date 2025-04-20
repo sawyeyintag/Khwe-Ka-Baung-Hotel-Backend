@@ -4,6 +4,9 @@ import rootRouter from "./routes";
 import { PORT } from "./secret";
 import { errorMiddleware } from "./middlewares/error";
 
+import swaggerDocs from "./utils/swagger";
+import log from "./utils/logger";
+
 const app: Express = express();
 
 // app.use(cors());
@@ -18,6 +21,10 @@ app.get("", (req: Request, res: Response) => {
   res.send("Hello, world!");
 });
 
-app.listen(PORT, () => console.log(`Port is running on localhost:${PORT}`));
+app.listen(PORT, async () => {
+  log.info(`App is running at http://localhost:${PORT}`);
+
+  swaggerDocs(app);
+});
 
 export default app;
