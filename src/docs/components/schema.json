@@ -1,0 +1,38 @@
+{
+  "User": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "User identifier"
+      },
+      "username": {
+        "type": "string",
+        "description": "User's username"
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "description": "User's email address"
+      },
+      "created_at": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Account creation timestamp"
+      }
+    }
+  },
+  "Admin": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Admin identifier"
+      },
+      "username": {
+        "type": "string",
+        "description": "Admin's username"
+      }
+    }
+  }
+}

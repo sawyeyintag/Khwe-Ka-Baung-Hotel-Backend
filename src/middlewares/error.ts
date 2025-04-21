@@ -9,7 +9,7 @@ export function errorMiddleware(
 ) {
   res.status(error.statusCode).json({
     message: error.message,
-    errorCode: error.errorCode,
+    statusCode: error.statusCode,
     errors: error.errors,
   });
 }

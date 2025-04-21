@@ -4,9 +4,9 @@ import { hash, compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../secret";
 import { BadRequestsException } from "../exceptions/bad-requests";
-import { ErrorCode } from "../exceptions/root";
 import { UnprocessableEntity } from "../exceptions/validation";
 import { RegisterSchema } from "../schema/admin";
+import { NotFoundException } from "../exceptions/not-found";
 
 class AuthController {
   login(req: Request, res: Response) {
@@ -20,12 +20,7 @@ class AuthController {
       where: { username },
     });
     if (admin) {
-      next(
-        new BadRequestsException(
-          "The account already exists",
-          ErrorCode.ACCOUNT_ALREADY_EXISTS
-        )
-      );
+      throw new BadRequestsException("The account already exists");
     }
     admin = await prismaClient.admin.create({
       data: {
@@ -42,11 +37,11 @@ class AuthController {
       where: { username: username },
     });
     if (!admin) {
-      throw Error("User not found");
+      throw new NotFoundException("User not found");
     }
     const isPasswordValid = await compare(password, admin.password);
     if (!isPasswordValid) {
-      throw Error("Invalid password");
+      throw new BadRequestsException("Invalid password");
     }
     const token = jwt.sign({ id: admin.id }, JWT_SECRET);
     res.json({ admin, token });
