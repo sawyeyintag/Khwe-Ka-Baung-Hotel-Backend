@@ -4,15 +4,10 @@ import { hash, compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../secret";
 import { BadRequestsException } from "../exceptions/bad-requests";
-import { UnprocessableEntity } from "../exceptions/validation";
 import { RegisterSchema } from "../schema/admin";
 import { NotFoundException } from "../exceptions/not-found";
 
 class AuthController {
-  login(req: Request, res: Response) {
-    res.send("Login Page");
-  }
-
   async registerAdmin(req: Request, res: Response, next: NextFunction) {
     RegisterSchema.parse(req.body);
     const { username, password } = req.body;

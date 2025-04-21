@@ -1,7 +1,8 @@
 import { HttpException } from "./root";
 
 export class BadRequestsException extends HttpException {
-  constructor(message: string) {
-    super(message, 400, null);
+  constructor(message: string, error?: any) {
+    super(message, 400, error);
+    Object.setPrototypeOf(this, new.target.prototype);
   }
 }

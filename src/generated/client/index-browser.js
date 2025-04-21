@@ -117,12 +117,50 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ItemScalarFieldEnum = {
+exports.Prisma.FloorScalarFieldEnum = {
+  floorNumber: 'floorNumber',
+  totalRooms: 'totalRooms'
+};
+
+exports.Prisma.RoomTypeScalarFieldEnum = {
   id: 'id',
   name: 'name',
   price: 'price',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  pax: 'pax'
+};
+
+exports.Prisma.RoomStatusScalarFieldEnum = {
+  id: 'id',
+  label: 'label'
+};
+
+exports.Prisma.RoomScalarFieldEnum = {
+  roomNumber: 'roomNumber',
+  floorNumber: 'floorNumber',
+  roomTypeId: 'roomTypeId',
+  statusId: 'statusId',
+  guestId: 'guestId',
+  numOfGuests: 'numOfGuests',
+  numExtraBed: 'numExtraBed',
+  actualCheckIn: 'actualCheckIn',
+  actualCheckOut: 'actualCheckOut'
+};
+
+exports.Prisma.MiniBarScalarFieldEnum = {
+  id: 'id',
+  roomNumber: 'roomNumber'
+};
+
+exports.Prisma.ItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price'
+};
+
+exports.Prisma.MiniBarItemScalarFieldEnum = {
+  miniBarId: 'miniBarId',
+  itemId: 'itemId',
+  quantity: 'quantity'
 };
 
 exports.Prisma.InventoryScalarFieldEnum = {
@@ -131,51 +169,62 @@ exports.Prisma.InventoryScalarFieldEnum = {
   quantity: 'quantity'
 };
 
-exports.Prisma.InventoryLogScalarFieldEnum = {
-  id: 'id',
-  inventoryId: 'inventoryId',
-  type: 'type',
-  quantity: 'quantity',
-  timestamp: 'timestamp'
-};
-
-exports.Prisma.MiniBarScalarFieldEnum = {
+exports.Prisma.BookingScalarFieldEnum = {
   id: 'id',
   roomNumber: 'roomNumber',
+  guestId: 'guestId',
+  contactName: 'contactName',
+  contactPhone: 'contactPhone',
+  estCheckIn: 'estCheckIn',
+  estCheckOut: 'estCheckOut'
+};
+
+exports.Prisma.GuestScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  address: 'address',
+  nicCardNum: 'nicCardNum'
+};
+
+exports.Prisma.ReceiptScalarFieldEnum = {
+  id: 'id',
+  roomNumber: 'roomNumber',
+  guestId: 'guestId',
+  totalPrice: 'totalPrice',
+  amountPaid: 'amountPaid',
+  paidBy: 'paidBy'
+};
+
+exports.Prisma.AdditionalChargeReceiptScalarFieldEnum = {
+  id: 'id',
+  receiptId: 'receiptId',
+  purchaseDate: 'purchaseDate'
+};
+
+exports.Prisma.RestaurantReceiptScalarFieldEnum = {
+  id: 'id',
+  addChargeId: 'addChargeId',
+  totalPrice: 'totalPrice',
+  purchaseDate: 'purchaseDate'
+};
+
+exports.Prisma.ServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price'
+};
+
+exports.Prisma.AddChargeItemScalarFieldEnum = {
+  addChargeId: 'addChargeId',
   itemId: 'itemId',
   quantity: 'quantity'
 };
 
-exports.Prisma.MiniBarLogScalarFieldEnum = {
-  id: 'id',
-  minibarId: 'minibarId',
-  type: 'type',
-  quantity: 'quantity',
-  timestamp: 'timestamp'
-};
-
-exports.Prisma.RoomScalarFieldEnum = {
-  number: 'number',
-  statusId: 'statusId',
-  roomTypeId: 'roomTypeId'
-};
-
-exports.Prisma.RoomLogScalarFieldEnum = {
-  id: 'id',
-  roomId: 'roomId',
-  timestamp: 'timestamp'
-};
-
-exports.Prisma.RoomStatusScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.RoomTypeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  price: 'price',
-  pax: 'pax'
+exports.Prisma.AddChargeServiceScalarFieldEnum = {
+  addChargeId: 'addChargeId',
+  serviceId: 'serviceId',
+  quantity: 'quantity'
 };
 
 exports.Prisma.AdminScalarFieldEnum = {
@@ -191,15 +240,47 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.ItemOrderByRelevanceFieldEnum = {
+exports.Prisma.RoomTypeOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
 exports.Prisma.RoomStatusOrderByRelevanceFieldEnum = {
+  label: 'label'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
+exports.Prisma.RoomOrderByRelevanceFieldEnum = {
+  guestId: 'guestId'
+};
+
+exports.Prisma.ItemOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
-exports.Prisma.RoomTypeOrderByRelevanceFieldEnum = {
+exports.Prisma.BookingOrderByRelevanceFieldEnum = {
+  guestId: 'guestId',
+  contactName: 'contactName',
+  contactPhone: 'contactPhone'
+};
+
+exports.Prisma.GuestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  address: 'address',
+  nicCardNum: 'nicCardNum'
+};
+
+exports.Prisma.ReceiptOrderByRelevanceFieldEnum = {
+  guestId: 'guestId',
+  paidBy: 'paidBy'
+};
+
+exports.Prisma.ServiceOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
@@ -208,21 +289,25 @@ exports.Prisma.AdminOrderByRelevanceFieldEnum = {
   username: 'username',
   password: 'password'
 };
-exports.InventoryAction = exports.$Enums.InventoryAction = {
-  ADD: 'ADD',
-  USE: 'USE'
-};
+
 
 exports.Prisma.ModelName = {
-  Item: 'Item',
-  Inventory: 'Inventory',
-  InventoryLog: 'InventoryLog',
-  MiniBar: 'MiniBar',
-  MiniBarLog: 'MiniBarLog',
-  Room: 'Room',
-  RoomLog: 'RoomLog',
-  RoomStatus: 'RoomStatus',
+  Floor: 'Floor',
   RoomType: 'RoomType',
+  RoomStatus: 'RoomStatus',
+  Room: 'Room',
+  MiniBar: 'MiniBar',
+  Item: 'Item',
+  MiniBarItem: 'MiniBarItem',
+  Inventory: 'Inventory',
+  Booking: 'Booking',
+  Guest: 'Guest',
+  Receipt: 'Receipt',
+  AdditionalChargeReceipt: 'AdditionalChargeReceipt',
+  RestaurantReceipt: 'RestaurantReceipt',
+  Service: 'Service',
+  AddChargeItem: 'AddChargeItem',
+  AddChargeService: 'AddChargeService',
   Admin: 'Admin'
 };
 
