@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const RegisterSchema = z.object({
+export const AdminCredentialsSchema = z.object({
   username: z.string(),
   password: z.string(),
 });
