@@ -1,5 +1,5 @@
 import { version } from "../../package.json";
-import { authPaths } from "./swagger/auth.path";
+import { authPaths } from "./swagger/paths/auth.path";
 
 // Combine all paths
 const paths = {

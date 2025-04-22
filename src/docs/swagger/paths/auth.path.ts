@@ -1,5 +1,5 @@
-import { AdminRegisterSchema } from "../../schema/auth.zod";
-import { zodSchemaConverter } from "./zodSchemaConverter";
+import { AdminRegisterSchema } from "../../../schema/auth.zod";
+import { zodSchemaConverter } from "../zodSchemaConverter";
 
 export const authPaths = {
   "/auth/admins": {
