@@ -1,9 +1,15 @@
 import { version } from "../../package.json";
 import { authPaths } from "./swagger/paths/auth.path";
+import { roomPaths } from "./swagger/paths/room.path";
+import { floorPaths } from "./swagger/paths/floor.path";
+import { roomTypePaths } from "./swagger/paths/room-type.path";
 
 // Combine all paths
 const paths = {
   ...authPaths,
+  ...roomPaths,
+  ...floorPaths,
+  ...roomTypePaths,
   // Add other path imports
 };
 
