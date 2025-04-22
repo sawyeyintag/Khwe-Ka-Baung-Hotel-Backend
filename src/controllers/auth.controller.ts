@@ -4,7 +4,6 @@ import { hash, compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../secret";
 import { BadRequestsException } from "../exceptions/bad-requests";
-import { AdminCredentialsSchema } from "../schema/auth.zod";
 import { NotFoundException } from "../exceptions/not-found";
 import { RegisterAdminRequest, LoginAdminRequest } from "../types/auth.types";
 
@@ -14,21 +13,20 @@ class AuthController {
     res: Response,
     next: NextFunction
   ) {
-    AdminCredentialsSchema.parse(req.body);
     const { username, password } = req.body;
-    let admin = await prismaClient.admin.findFirst({
+    const admin = await prismaClient.admin.findFirst({
       where: { username },
     });
     if (admin) {
       throw new BadRequestsException("The account already exists");
     }
-    admin = await prismaClient.admin.create({
+    await prismaClient.admin.create({
       data: {
         username: username,
         password: await hash(password, 10),
       },
     });
-    res.json(admin);
+    res.status(204).end();
   }
 
   async loginAdmin(req: LoginAdminRequest, res: Response) {

@@ -1,4 +1,4 @@
-import { AdminCredentialsSchema } from "../../schema/auth.zod";
+import { AdminRegisterSchema } from "../../schema/auth.zod";
 import { zodSchemaConverter } from "./zodSchemaConverter";
 
 export const authPaths = {
@@ -7,7 +7,8 @@ export const authPaths = {
       summary: "Register a new admin",
       description: "This endpoint allows an admin to be registered.",
       tags: ["Auth"],
-      ...zodSchemaConverter(AdminCredentialsSchema),
+      // This is a custom function to convert Zod schema to Swagger schema
+      ...zodSchemaConverter(AdminRegisterSchema),
       responses: {
         "201": {
           description: "Admin successfully registered",
@@ -27,7 +28,8 @@ export const authPaths = {
       description:
         "This endpoint allows an admin to log in and obtain a token.",
       tags: ["Auth"],
-      ...zodSchemaConverter(AdminCredentialsSchema),
+      // This is a custom function to convert Zod schema to Swagger schema
+      ...zodSchemaConverter(AdminRegisterSchema),
       responses: {
         "200": {
           description: "Successfully logged in, token returned",

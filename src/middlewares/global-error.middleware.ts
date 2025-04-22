@@ -1,15 +1,15 @@
 import { HttpException } from "../exceptions/root";
 import { Request, Response, NextFunction } from "express";
 
-export function errorMiddleware(
+export function globalErrorHandler(
   error: HttpException,
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   res.status(error.statusCode).json({
-    message: error.message,
     statusCode: error.statusCode,
+    message: error.message,
     errors: error.errors,
   });
 }

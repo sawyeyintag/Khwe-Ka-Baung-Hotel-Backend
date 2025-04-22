@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { Request } from "express";
-import { AdminCredentialsSchema } from "../schema/auth.zod";
+import { AdminRegisterSchema } from "../schema/auth.zod";
 
 // Data structures
-type AdminCredentials = z.infer<typeof AdminCredentialsSchema>;
+type AdminCredentials = z.infer<typeof AdminRegisterSchema>;
 
 // Request types
 export interface RegisterAdminRequest extends Request {
