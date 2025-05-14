@@ -39,17 +39,17 @@ model Room {
   roomNumber     Int       @id
   floorNumber    Int
   roomTypeId     Int
-  statusId       Int
+  statusId       Int?
   guestId        String?
   numOfGuests    Int?
   numExtraBed    Int?
   actualCheckIn  DateTime?
   actualCheckOut DateTime?
 
-  floor    Floor      @relation(fields: [floorNumber], references: [floorNumber])
-  roomType RoomType   @relation(fields: [roomTypeId], references: [id])
-  status   RoomStatus @relation(fields: [statusId], references: [id])
-  guest    Guest?     @relation(fields: [guestId], references: [id])
+  floor    Floor       @relation(fields: [floorNumber], references: [floorNumber])
+  roomType RoomType    @relation(fields: [roomTypeId], references: [id])
+  status   RoomStatus? @relation(fields: [statusId], references: [id])
+  guest    Guest?      @relation(fields: [guestId], references: [id])
   miniBar  MiniBar?
   bookings Booking[]
   receipts Receipt[]

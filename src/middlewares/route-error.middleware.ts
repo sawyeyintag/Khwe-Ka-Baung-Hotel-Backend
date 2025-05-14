@@ -12,8 +12,9 @@ export function routeErrorHandler(method: Function) {
       log.error(`Error caught: ${error}`);
       if (error instanceof HttpException) {
         exception = error;
+      } else {
+        exception = new InternalException("Something went wrong!", error);
       }
-      exception = new InternalException("Something went wrong!", error);
       next(exception);
     }
   };

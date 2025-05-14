@@ -1,6 +1,6 @@
 import { PrismaClient } from "../generated/client";
 
 const prismaClient = new PrismaClient({
-  log: ["query"],
+  log: [],
 });
 export default prismaClient;

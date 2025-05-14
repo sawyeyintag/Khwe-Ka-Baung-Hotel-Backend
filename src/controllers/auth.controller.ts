@@ -1,11 +1,11 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import prismaClient from "../config/prismaClient";
 import { hash, compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../secret";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import { NotFoundException } from "../exceptions/not-found";
-import { RegisterAdminRequest, LoginAdminRequest } from "../types/auth.types";
+import { RegisterAdminRequest, LoginAdminRequest } from "../types/auth.type";
 
 class AuthController {
   async registerAdmin(
