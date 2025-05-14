@@ -22,7 +22,7 @@ class AuthController {
     }
     await prismaClient.admin.create({
       data: {
-        username: username,
+        username,
         password: await hash(password, 10),
       },
     });
