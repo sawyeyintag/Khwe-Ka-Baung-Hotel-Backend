@@ -2566,54 +2566,44 @@ export namespace Prisma {
 
   export type FloorAvgAggregateOutputType = {
     floorNumber: number | null
-    totalRooms: number | null
   }
 
   export type FloorSumAggregateOutputType = {
     floorNumber: number | null
-    totalRooms: number | null
   }
 
   export type FloorMinAggregateOutputType = {
     floorNumber: number | null
-    totalRooms: number | null
   }
 
   export type FloorMaxAggregateOutputType = {
     floorNumber: number | null
-    totalRooms: number | null
   }
 
   export type FloorCountAggregateOutputType = {
     floorNumber: number
-    totalRooms: number
     _all: number
   }
 
 
   export type FloorAvgAggregateInputType = {
     floorNumber?: true
-    totalRooms?: true
   }
 
   export type FloorSumAggregateInputType = {
     floorNumber?: true
-    totalRooms?: true
   }
 
   export type FloorMinAggregateInputType = {
     floorNumber?: true
-    totalRooms?: true
   }
 
   export type FloorMaxAggregateInputType = {
     floorNumber?: true
-    totalRooms?: true
   }
 
   export type FloorCountAggregateInputType = {
     floorNumber?: true
-    totalRooms?: true
     _all?: true
   }
 
@@ -2705,7 +2695,6 @@ export namespace Prisma {
 
   export type FloorGroupByOutputType = {
     floorNumber: number
-    totalRooms: number
     _count: FloorCountAggregateOutputType | null
     _avg: FloorAvgAggregateOutputType | null
     _sum: FloorSumAggregateOutputType | null
@@ -2729,7 +2718,6 @@ export namespace Prisma {
 
   export type FloorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     floorNumber?: boolean
-    totalRooms?: boolean
     rooms?: boolean | Floor$roomsArgs<ExtArgs>
     _count?: boolean | FloorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["floor"]>
@@ -2738,10 +2726,9 @@ export namespace Prisma {
 
   export type FloorSelectScalar = {
     floorNumber?: boolean
-    totalRooms?: boolean
   }
 
-  export type FloorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"floorNumber" | "totalRooms", ExtArgs["result"]["floor"]>
+  export type FloorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"floorNumber", ExtArgs["result"]["floor"]>
   export type FloorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rooms?: boolean | Floor$roomsArgs<ExtArgs>
     _count?: boolean | FloorCountOutputTypeDefaultArgs<ExtArgs>
@@ -2754,7 +2741,6 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       floorNumber: number
-      totalRooms: number
     }, ExtArgs["result"]["floor"]>
     composites: {}
   }
@@ -3126,7 +3112,6 @@ export namespace Prisma {
    */
   interface FloorFieldRefs {
     readonly floorNumber: FieldRef<"Floor", 'Int'>
-    readonly totalRooms: FieldRef<"Floor", 'Int'>
   }
     
 
@@ -19289,8 +19274,7 @@ export namespace Prisma {
 
 
   export const FloorScalarFieldEnum: {
-    floorNumber: 'floorNumber',
-    totalRooms: 'totalRooms'
+    floorNumber: 'floorNumber'
   };
 
   export type FloorScalarFieldEnum = (typeof FloorScalarFieldEnum)[keyof typeof FloorScalarFieldEnum]
@@ -19586,13 +19570,11 @@ export namespace Prisma {
     OR?: FloorWhereInput[]
     NOT?: FloorWhereInput | FloorWhereInput[]
     floorNumber?: IntFilter<"Floor"> | number
-    totalRooms?: IntFilter<"Floor"> | number
     rooms?: RoomListRelationFilter
   }
 
   export type FloorOrderByWithRelationInput = {
     floorNumber?: SortOrder
-    totalRooms?: SortOrder
     rooms?: RoomOrderByRelationAggregateInput
   }
 
@@ -19601,13 +19583,11 @@ export namespace Prisma {
     AND?: FloorWhereInput | FloorWhereInput[]
     OR?: FloorWhereInput[]
     NOT?: FloorWhereInput | FloorWhereInput[]
-    totalRooms?: IntFilter<"Floor"> | number
     rooms?: RoomListRelationFilter
   }, "floorNumber">
 
   export type FloorOrderByWithAggregationInput = {
     floorNumber?: SortOrder
-    totalRooms?: SortOrder
     _count?: FloorCountOrderByAggregateInput
     _avg?: FloorAvgOrderByAggregateInput
     _max?: FloorMaxOrderByAggregateInput
@@ -19620,7 +19600,6 @@ export namespace Prisma {
     OR?: FloorScalarWhereWithAggregatesInput[]
     NOT?: FloorScalarWhereWithAggregatesInput | FloorScalarWhereWithAggregatesInput[]
     floorNumber?: IntWithAggregatesFilter<"Floor"> | number
-    totalRooms?: IntWithAggregatesFilter<"Floor"> | number
   }
 
   export type RoomTypeWhereInput = {
@@ -20527,41 +20506,34 @@ export namespace Prisma {
 
   export type FloorCreateInput = {
     floorNumber: number
-    totalRooms: number
     rooms?: RoomCreateNestedManyWithoutFloorInput
   }
 
   export type FloorUncheckedCreateInput = {
     floorNumber: number
-    totalRooms: number
     rooms?: RoomUncheckedCreateNestedManyWithoutFloorInput
   }
 
   export type FloorUpdateInput = {
     floorNumber?: IntFieldUpdateOperationsInput | number
-    totalRooms?: IntFieldUpdateOperationsInput | number
     rooms?: RoomUpdateManyWithoutFloorNestedInput
   }
 
   export type FloorUncheckedUpdateInput = {
     floorNumber?: IntFieldUpdateOperationsInput | number
-    totalRooms?: IntFieldUpdateOperationsInput | number
     rooms?: RoomUncheckedUpdateManyWithoutFloorNestedInput
   }
 
   export type FloorCreateManyInput = {
     floorNumber: number
-    totalRooms: number
   }
 
   export type FloorUpdateManyMutationInput = {
     floorNumber?: IntFieldUpdateOperationsInput | number
-    totalRooms?: IntFieldUpdateOperationsInput | number
   }
 
   export type FloorUncheckedUpdateManyInput = {
     floorNumber?: IntFieldUpdateOperationsInput | number
-    totalRooms?: IntFieldUpdateOperationsInput | number
   }
 
   export type RoomTypeCreateInput = {
@@ -21399,27 +21371,22 @@ export namespace Prisma {
 
   export type FloorCountOrderByAggregateInput = {
     floorNumber?: SortOrder
-    totalRooms?: SortOrder
   }
 
   export type FloorAvgOrderByAggregateInput = {
     floorNumber?: SortOrder
-    totalRooms?: SortOrder
   }
 
   export type FloorMaxOrderByAggregateInput = {
     floorNumber?: SortOrder
-    totalRooms?: SortOrder
   }
 
   export type FloorMinOrderByAggregateInput = {
     floorNumber?: SortOrder
-    totalRooms?: SortOrder
   }
 
   export type FloorSumOrderByAggregateInput = {
     floorNumber?: SortOrder
-    totalRooms?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -23737,12 +23704,10 @@ export namespace Prisma {
 
   export type FloorCreateWithoutRoomsInput = {
     floorNumber: number
-    totalRooms: number
   }
 
   export type FloorUncheckedCreateWithoutRoomsInput = {
     floorNumber: number
-    totalRooms: number
   }
 
   export type FloorCreateOrConnectWithoutRoomsInput = {
@@ -23888,12 +23853,10 @@ export namespace Prisma {
 
   export type FloorUpdateWithoutRoomsInput = {
     floorNumber?: IntFieldUpdateOperationsInput | number
-    totalRooms?: IntFieldUpdateOperationsInput | number
   }
 
   export type FloorUncheckedUpdateWithoutRoomsInput = {
     floorNumber?: IntFieldUpdateOperationsInput | number
-    totalRooms?: IntFieldUpdateOperationsInput | number
   }
 
   export type RoomTypeUpsertWithoutRoomsInput = {

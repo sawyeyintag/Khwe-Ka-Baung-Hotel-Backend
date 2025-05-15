@@ -118,8 +118,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 });
 
 exports.Prisma.FloorScalarFieldEnum = {
-  floorNumber: 'floorNumber',
-  totalRooms: 'totalRooms'
+  floorNumber: 'floorNumber'
 };
 
 exports.Prisma.RoomTypeScalarFieldEnum = {
