@@ -30,7 +30,7 @@ class RoomController {
     if (!rooms.length) {
       throw new NotFoundException("No rooms found");
     }
-    return res.json(201).json({
+    return res.json(200).json({
       data: rooms,
     });
   }
