@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { Request } from "express";
-import { FloorCreateSchema } from "../schema/floor.zod";
+import { FloorUpsertSchema } from "../schema/floor.zod";
 
-type FloorCreate = z.infer<typeof FloorCreateSchema>;
+type FloorUpsert = z.infer<typeof FloorUpsertSchema>;
 
 export interface FloorUpsertRequest extends Request {
-  body: FloorCreate;
+  body: FloorUpsert;
 }

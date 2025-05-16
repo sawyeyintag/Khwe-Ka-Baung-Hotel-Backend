@@ -93,14 +93,15 @@ model Inventory {
 model Booking {
   id           Int      @id @default(autoincrement())
   roomNumber   Int
-  guestId      String
+  guestId      String?
   contactName  String
   contactPhone String
+  contactEmail String?
   estCheckIn   DateTime
   estCheckOut  DateTime
 
-  room  Room  @relation(fields: [roomNumber], references: [roomNumber])
-  guest Guest @relation(fields: [guestId], references: [id])
+  room  Room   @relation(fields: [roomNumber], references: [roomNumber])
+  guest Guest? @relation(fields: [guestId], references: [id])
 }
 
 model Guest {

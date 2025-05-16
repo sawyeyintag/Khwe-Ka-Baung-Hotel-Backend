@@ -174,6 +174,7 @@ exports.Prisma.BookingScalarFieldEnum = {
   guestId: 'guestId',
   contactName: 'contactName',
   contactPhone: 'contactPhone',
+  contactEmail: 'contactEmail',
   estCheckIn: 'estCheckIn',
   estCheckOut: 'estCheckOut'
 };
@@ -263,7 +264,8 @@ exports.Prisma.ItemOrderByRelevanceFieldEnum = {
 exports.Prisma.BookingOrderByRelevanceFieldEnum = {
   guestId: 'guestId',
   contactName: 'contactName',
-  contactPhone: 'contactPhone'
+  contactPhone: 'contactPhone',
+  contactEmail: 'contactEmail'
 };
 
 exports.Prisma.GuestOrderByRelevanceFieldEnum = {

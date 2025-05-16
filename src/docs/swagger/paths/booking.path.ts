@@ -1,20 +1,20 @@
-import { RoomUpsertSchema } from "../../../schema/room.zod";
+import { BookingUpsertSchema } from "../../../schema/booking.zod";
 import { zodSchemaConverter } from "../zodSchemaConverter";
 
-const tags = ["Room"];
+const tags = ["Booking"];
 
-export const roomPaths = {
-  "/rooms": {
+export const bookingPaths = {
+  "/bookings": {
     get: {
-      summary: "Get all rooms",
-      description: "Retrieve a list of all rooms in the system",
+      summary: "Get all bookings",
+      description: "Retrieve a list of all bookings in the system",
       tags,
       responses: {
         "200": {
-          description: "List of rooms retrieved successfully",
+          description: "List of bookings retrieved successfully",
         },
         "404": {
-          description: "No rooms found",
+          description: "No bookings found",
         },
         "500": {
           description: "Internal server error",
@@ -22,14 +22,14 @@ export const roomPaths = {
       },
     },
     post: {
-      summary: "Create a new room",
-      description: "Create a new room in the system",
+      summary: "Create a new booking",
+      description: "Create a new booking in the system",
       tags,
       // This is a custom function to convert Zod schema to Swagger schema
-      ...zodSchemaConverter(RoomUpsertSchema),
+      ...zodSchemaConverter(BookingUpsertSchema),
       responses: {
         "201": {
-          description: "Room created successfully",
+          description: "Booking created successfully",
         },
         "400": {
           description: "Invalid input data",
@@ -40,20 +40,20 @@ export const roomPaths = {
       },
     },
     put: {
-      summary: "Update an existing room",
-      description: "Update an existing room in the system",
+      summary: "Update an existing booking",
+      description: "Update an existing booking in the system",
       tags,
       // This is a custom function to convert Zod schema to Swagger schema
-      ...zodSchemaConverter(RoomUpsertSchema),
+      ...zodSchemaConverter(BookingUpsertSchema),
       responses: {
         "200": {
-          description: "Room updated successfully",
+          description: "Booking updated successfully",
         },
         "400": {
           description: "Invalid input data",
         },
         "404": {
-          description: "Room not found",
+          description: "Booking not found",
         },
         "500": {
           description: "Internal server error",
@@ -61,15 +61,15 @@ export const roomPaths = {
       },
     },
     delete: {
-      summary: "Delete a room",
-      description: "Delete a room from the system",
+      summary: "Delete a booking",
+      description: "Delete a booking from the system",
       tags,
       parameters: [
         {
           name: "roomId",
           in: "query",
           required: true,
-          description: "ID of the room to delete",
+          description: "ID of the booking to delete",
           schema: {
             type: "string",
           },
@@ -77,10 +77,10 @@ export const roomPaths = {
       ],
       responses: {
         "200": {
-          description: "Room deleted successfully",
+          description: "Booking deleted successfully",
         },
         "404": {
-          description: "Room not found",
+          description: "Booking not found",
         },
         "500": {
           description: "Internal server error",

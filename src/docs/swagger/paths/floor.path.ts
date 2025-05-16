@@ -1,4 +1,4 @@
-import { FloorCreateSchema } from "../../../schema/floor.zod";
+import { FloorUpsertSchema } from "../../../schema/floor.zod";
 import { zodSchemaConverter } from "../zodSchemaConverter";
 
 const tags = ["Floor"];
@@ -26,7 +26,7 @@ export const floorPaths = {
       description: "Create a new floor in the system",
       tags,
       // This is a custom function to convert Zod schema to Swagger schema
-      ...zodSchemaConverter(FloorCreateSchema),
+      ...zodSchemaConverter(FloorUpsertSchema),
       responses: {
         "201": {
           description: "Floor created successfully",

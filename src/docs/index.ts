@@ -3,6 +3,8 @@ import { authPaths } from "./swagger/paths/auth.path";
 import { roomPaths } from "./swagger/paths/room.path";
 import { floorPaths } from "./swagger/paths/floor.path";
 import { roomTypePaths } from "./swagger/paths/room-type.path";
+import { bookingPaths } from "./swagger/paths/booking.path";
+import { roomStatusPaths } from "./swagger/paths/room-status.path";
 
 // Combine all paths
 const paths = {
@@ -10,6 +12,8 @@ const paths = {
   ...roomPaths,
   ...floorPaths,
   ...roomTypePaths,
+  ...bookingPaths,
+  ...roomStatusPaths,
   // Add other path imports
 };
 

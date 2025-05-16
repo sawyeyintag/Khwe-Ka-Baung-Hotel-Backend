@@ -1,4 +1,4 @@
-import { RoomTypeCreateSchema } from "../../../schema/room-type.zod";
+import { RoomTypeUpsertSchema } from "../../../schema/room-type.zod";
 import { zodSchemaConverter } from "../zodSchemaConverter";
 
 const tags = ["Room Type"];
@@ -25,7 +25,7 @@ export const roomTypePaths = {
       summary: "Create a new room type",
       description: "Create a new room type in the system",
       tags,
-      ...zodSchemaConverter(RoomTypeCreateSchema),
+      ...zodSchemaConverter(RoomTypeUpsertSchema),
       responses: {
         "201": {
           description: "Room Type created successfully",
@@ -55,7 +55,7 @@ export const roomTypePaths = {
           },
         },
       ],
-      ...zodSchemaConverter(RoomTypeCreateSchema),
+      ...zodSchemaConverter(RoomTypeUpsertSchema),
       responses: {
         "200": {
           description: "Room Type updated successfully",

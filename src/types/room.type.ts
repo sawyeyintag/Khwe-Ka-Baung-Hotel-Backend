@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { Request } from "express";
-import { RoomCreateSchema } from "../schema/room.zod";
+import { RoomUpsertSchema } from "../schema/room.zod";
 
-type RoomCreate = z.infer<typeof RoomCreateSchema>;
+type RoomUpsert = z.infer<typeof RoomUpsertSchema>;
 
 export interface RoomUpsertRequest extends Request {
-  body: RoomCreate;
+  body: RoomUpsert;
 }

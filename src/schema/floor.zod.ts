@@ -1,5 +1,5 @@
 import { z } from "zod";
 
-export const FloorCreateSchema = z.object({
+export const FloorUpsertSchema = z.object({
   floorNumber: z.number().int(),
 });

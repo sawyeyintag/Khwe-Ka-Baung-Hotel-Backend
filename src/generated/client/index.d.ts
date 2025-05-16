@@ -10518,6 +10518,7 @@ export namespace Prisma {
     guestId: string | null
     contactName: string | null
     contactPhone: string | null
+    contactEmail: string | null
     estCheckIn: Date | null
     estCheckOut: Date | null
   }
@@ -10528,6 +10529,7 @@ export namespace Prisma {
     guestId: string | null
     contactName: string | null
     contactPhone: string | null
+    contactEmail: string | null
     estCheckIn: Date | null
     estCheckOut: Date | null
   }
@@ -10538,6 +10540,7 @@ export namespace Prisma {
     guestId: number
     contactName: number
     contactPhone: number
+    contactEmail: number
     estCheckIn: number
     estCheckOut: number
     _all: number
@@ -10560,6 +10563,7 @@ export namespace Prisma {
     guestId?: true
     contactName?: true
     contactPhone?: true
+    contactEmail?: true
     estCheckIn?: true
     estCheckOut?: true
   }
@@ -10570,6 +10574,7 @@ export namespace Prisma {
     guestId?: true
     contactName?: true
     contactPhone?: true
+    contactEmail?: true
     estCheckIn?: true
     estCheckOut?: true
   }
@@ -10580,6 +10585,7 @@ export namespace Prisma {
     guestId?: true
     contactName?: true
     contactPhone?: true
+    contactEmail?: true
     estCheckIn?: true
     estCheckOut?: true
     _all?: true
@@ -10674,9 +10680,10 @@ export namespace Prisma {
   export type BookingGroupByOutputType = {
     id: number
     roomNumber: number
-    guestId: string
+    guestId: string | null
     contactName: string
     contactPhone: string
+    contactEmail: string | null
     estCheckIn: Date
     estCheckOut: Date
     _count: BookingCountAggregateOutputType | null
@@ -10706,10 +10713,11 @@ export namespace Prisma {
     guestId?: boolean
     contactName?: boolean
     contactPhone?: boolean
+    contactEmail?: boolean
     estCheckIn?: boolean
     estCheckOut?: boolean
     room?: boolean | RoomDefaultArgs<ExtArgs>
-    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    guest?: boolean | Booking$guestArgs<ExtArgs>
   }, ExtArgs["result"]["booking"]>
 
 
@@ -10720,28 +10728,30 @@ export namespace Prisma {
     guestId?: boolean
     contactName?: boolean
     contactPhone?: boolean
+    contactEmail?: boolean
     estCheckIn?: boolean
     estCheckOut?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomNumber" | "guestId" | "contactName" | "contactPhone" | "estCheckIn" | "estCheckOut", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomNumber" | "guestId" | "contactName" | "contactPhone" | "contactEmail" | "estCheckIn" | "estCheckOut", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     room?: boolean | RoomDefaultArgs<ExtArgs>
-    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    guest?: boolean | Booking$guestArgs<ExtArgs>
   }
 
   export type $BookingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Booking"
     objects: {
       room: Prisma.$RoomPayload<ExtArgs>
-      guest: Prisma.$GuestPayload<ExtArgs>
+      guest: Prisma.$GuestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       roomNumber: number
-      guestId: string
+      guestId: string | null
       contactName: string
       contactPhone: string
+      contactEmail: string | null
       estCheckIn: Date
       estCheckOut: Date
     }, ExtArgs["result"]["booking"]>
@@ -11085,7 +11095,7 @@ export namespace Prisma {
   export interface Prisma__BookingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     room<T extends RoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoomDefaultArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    guest<T extends GuestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuestDefaultArgs<ExtArgs>>): Prisma__GuestClient<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    guest<T extends Booking$guestArgs<ExtArgs> = {}>(args?: Subset<T, Booking$guestArgs<ExtArgs>>): Prisma__GuestClient<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11120,6 +11130,7 @@ export namespace Prisma {
     readonly guestId: FieldRef<"Booking", 'String'>
     readonly contactName: FieldRef<"Booking", 'String'>
     readonly contactPhone: FieldRef<"Booking", 'String'>
+    readonly contactEmail: FieldRef<"Booking", 'String'>
     readonly estCheckIn: FieldRef<"Booking", 'DateTime'>
     readonly estCheckOut: FieldRef<"Booking", 'DateTime'>
   }
@@ -11462,6 +11473,25 @@ export namespace Prisma {
      * Limit how many Bookings to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Booking.guest
+   */
+  export type Booking$guestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Guest
+     */
+    select?: GuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Guest
+     */
+    omit?: GuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GuestInclude<ExtArgs> | null
+    where?: GuestWhereInput
   }
 
   /**
@@ -19354,6 +19384,7 @@ export namespace Prisma {
     guestId: 'guestId',
     contactName: 'contactName',
     contactPhone: 'contactPhone',
+    contactEmail: 'contactEmail',
     estCheckIn: 'estCheckIn',
     estCheckOut: 'estCheckOut'
   };
@@ -19488,7 +19519,8 @@ export namespace Prisma {
   export const BookingOrderByRelevanceFieldEnum: {
     guestId: 'guestId',
     contactName: 'contactName',
-    contactPhone: 'contactPhone'
+    contactPhone: 'contactPhone',
+    contactEmail: 'contactEmail'
   };
 
   export type BookingOrderByRelevanceFieldEnum = (typeof BookingOrderByRelevanceFieldEnum)[keyof typeof BookingOrderByRelevanceFieldEnum]
@@ -19997,21 +20029,23 @@ export namespace Prisma {
     NOT?: BookingWhereInput | BookingWhereInput[]
     id?: IntFilter<"Booking"> | number
     roomNumber?: IntFilter<"Booking"> | number
-    guestId?: StringFilter<"Booking"> | string
+    guestId?: StringNullableFilter<"Booking"> | string | null
     contactName?: StringFilter<"Booking"> | string
     contactPhone?: StringFilter<"Booking"> | string
+    contactEmail?: StringNullableFilter<"Booking"> | string | null
     estCheckIn?: DateTimeFilter<"Booking"> | Date | string
     estCheckOut?: DateTimeFilter<"Booking"> | Date | string
     room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
-    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
+    guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
   }
 
   export type BookingOrderByWithRelationInput = {
     id?: SortOrder
     roomNumber?: SortOrder
-    guestId?: SortOrder
+    guestId?: SortOrderInput | SortOrder
     contactName?: SortOrder
     contactPhone?: SortOrder
+    contactEmail?: SortOrderInput | SortOrder
     estCheckIn?: SortOrder
     estCheckOut?: SortOrder
     room?: RoomOrderByWithRelationInput
@@ -20025,21 +20059,23 @@ export namespace Prisma {
     OR?: BookingWhereInput[]
     NOT?: BookingWhereInput | BookingWhereInput[]
     roomNumber?: IntFilter<"Booking"> | number
-    guestId?: StringFilter<"Booking"> | string
+    guestId?: StringNullableFilter<"Booking"> | string | null
     contactName?: StringFilter<"Booking"> | string
     contactPhone?: StringFilter<"Booking"> | string
+    contactEmail?: StringNullableFilter<"Booking"> | string | null
     estCheckIn?: DateTimeFilter<"Booking"> | Date | string
     estCheckOut?: DateTimeFilter<"Booking"> | Date | string
     room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
-    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
+    guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
   }, "id">
 
   export type BookingOrderByWithAggregationInput = {
     id?: SortOrder
     roomNumber?: SortOrder
-    guestId?: SortOrder
+    guestId?: SortOrderInput | SortOrder
     contactName?: SortOrder
     contactPhone?: SortOrder
+    contactEmail?: SortOrderInput | SortOrder
     estCheckIn?: SortOrder
     estCheckOut?: SortOrder
     _count?: BookingCountOrderByAggregateInput
@@ -20055,9 +20091,10 @@ export namespace Prisma {
     NOT?: BookingScalarWhereWithAggregatesInput | BookingScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Booking"> | number
     roomNumber?: IntWithAggregatesFilter<"Booking"> | number
-    guestId?: StringWithAggregatesFilter<"Booking"> | string
+    guestId?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     contactName?: StringWithAggregatesFilter<"Booking"> | string
     contactPhone?: StringWithAggregatesFilter<"Booking"> | string
+    contactEmail?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     estCheckIn?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
     estCheckOut?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
   }
@@ -20882,18 +20919,20 @@ export namespace Prisma {
   export type BookingCreateInput = {
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
     room: RoomCreateNestedOneWithoutBookingsInput
-    guest: GuestCreateNestedOneWithoutBookingsInput
+    guest?: GuestCreateNestedOneWithoutBookingsInput
   }
 
   export type BookingUncheckedCreateInput = {
     id?: number
     roomNumber: number
-    guestId: string
+    guestId?: string | null
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
   }
@@ -20901,18 +20940,20 @@ export namespace Prisma {
   export type BookingUpdateInput = {
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
     room?: RoomUpdateOneRequiredWithoutBookingsNestedInput
-    guest?: GuestUpdateOneRequiredWithoutBookingsNestedInput
+    guest?: GuestUpdateOneWithoutBookingsNestedInput
   }
 
   export type BookingUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     roomNumber?: IntFieldUpdateOperationsInput | number
-    guestId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20920,9 +20961,10 @@ export namespace Prisma {
   export type BookingCreateManyInput = {
     id?: number
     roomNumber: number
-    guestId: string
+    guestId?: string | null
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
   }
@@ -20930,6 +20972,7 @@ export namespace Prisma {
   export type BookingUpdateManyMutationInput = {
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20937,9 +20980,10 @@ export namespace Prisma {
   export type BookingUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     roomNumber?: IntFieldUpdateOperationsInput | number
-    guestId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21908,11 +21952,6 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type GuestScalarRelationFilter = {
-    is?: GuestWhereInput
-    isNot?: GuestWhereInput
-  }
-
   export type BookingOrderByRelevanceInput = {
     fields: BookingOrderByRelevanceFieldEnum | BookingOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -21925,6 +21964,7 @@ export namespace Prisma {
     guestId?: SortOrder
     contactName?: SortOrder
     contactPhone?: SortOrder
+    contactEmail?: SortOrder
     estCheckIn?: SortOrder
     estCheckOut?: SortOrder
   }
@@ -21940,6 +21980,7 @@ export namespace Prisma {
     guestId?: SortOrder
     contactName?: SortOrder
     contactPhone?: SortOrder
+    contactEmail?: SortOrder
     estCheckIn?: SortOrder
     estCheckOut?: SortOrder
   }
@@ -21950,6 +21991,7 @@ export namespace Prisma {
     guestId?: SortOrder
     contactName?: SortOrder
     contactPhone?: SortOrder
+    contactEmail?: SortOrder
     estCheckIn?: SortOrder
     estCheckOut?: SortOrder
   }
@@ -22001,6 +22043,11 @@ export namespace Prisma {
     phone?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrder
+  }
+
+  export type GuestScalarRelationFilter = {
+    is?: GuestWhereInput
+    isNot?: GuestWhereInput
   }
 
   export type AdditionalChargeReceiptListRelationFilter = {
@@ -22871,10 +22918,12 @@ export namespace Prisma {
     update?: XOR<XOR<RoomUpdateToOneWithWhereWithoutBookingsInput, RoomUpdateWithoutBookingsInput>, RoomUncheckedUpdateWithoutBookingsInput>
   }
 
-  export type GuestUpdateOneRequiredWithoutBookingsNestedInput = {
+  export type GuestUpdateOneWithoutBookingsNestedInput = {
     create?: XOR<GuestCreateWithoutBookingsInput, GuestUncheckedCreateWithoutBookingsInput>
     connectOrCreate?: GuestCreateOrConnectWithoutBookingsInput
     upsert?: GuestUpsertWithoutBookingsInput
+    disconnect?: GuestWhereInput | boolean
+    delete?: GuestWhereInput | boolean
     connect?: GuestWhereUniqueInput
     update?: XOR<XOR<GuestUpdateToOneWithWhereWithoutBookingsInput, GuestUpdateWithoutBookingsInput>, GuestUncheckedUpdateWithoutBookingsInput>
   }
@@ -23789,16 +23838,18 @@ export namespace Prisma {
   export type BookingCreateWithoutRoomInput = {
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
-    guest: GuestCreateNestedOneWithoutBookingsInput
+    guest?: GuestCreateNestedOneWithoutBookingsInput
   }
 
   export type BookingUncheckedCreateWithoutRoomInput = {
     id?: number
-    guestId: string
+    guestId?: string | null
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
   }
@@ -23976,9 +24027,10 @@ export namespace Prisma {
     NOT?: BookingScalarWhereInput | BookingScalarWhereInput[]
     id?: IntFilter<"Booking"> | number
     roomNumber?: IntFilter<"Booking"> | number
-    guestId?: StringFilter<"Booking"> | string
+    guestId?: StringNullableFilter<"Booking"> | string | null
     contactName?: StringFilter<"Booking"> | string
     contactPhone?: StringFilter<"Booking"> | string
+    contactEmail?: StringNullableFilter<"Booking"> | string | null
     estCheckIn?: DateTimeFilter<"Booking"> | Date | string
     estCheckOut?: DateTimeFilter<"Booking"> | Date | string
   }
@@ -24548,6 +24600,7 @@ export namespace Prisma {
   export type BookingCreateWithoutGuestInput = {
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
     room: RoomCreateNestedOneWithoutBookingsInput
@@ -24558,6 +24611,7 @@ export namespace Prisma {
     roomNumber: number
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
   }
@@ -25404,9 +25458,10 @@ export namespace Prisma {
 
   export type BookingCreateManyRoomInput = {
     id?: number
-    guestId: string
+    guestId?: string | null
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
   }
@@ -25422,25 +25477,28 @@ export namespace Prisma {
   export type BookingUpdateWithoutRoomInput = {
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
-    guest?: GuestUpdateOneRequiredWithoutBookingsNestedInput
+    guest?: GuestUpdateOneWithoutBookingsNestedInput
   }
 
   export type BookingUncheckedUpdateWithoutRoomInput = {
     id?: IntFieldUpdateOperationsInput | number
-    guestId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookingUncheckedUpdateManyWithoutRoomInput = {
     id?: IntFieldUpdateOperationsInput | number
-    guestId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25565,6 +25623,7 @@ export namespace Prisma {
     roomNumber: number
     contactName: string
     contactPhone: string
+    contactEmail?: string | null
     estCheckIn: Date | string
     estCheckOut: Date | string
   }
@@ -25619,6 +25678,7 @@ export namespace Prisma {
   export type BookingUpdateWithoutGuestInput = {
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
     room?: RoomUpdateOneRequiredWithoutBookingsNestedInput
@@ -25629,6 +25689,7 @@ export namespace Prisma {
     roomNumber?: IntFieldUpdateOperationsInput | number
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25638,6 +25699,7 @@ export namespace Prisma {
     roomNumber?: IntFieldUpdateOperationsInput | number
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     estCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     estCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
   }
