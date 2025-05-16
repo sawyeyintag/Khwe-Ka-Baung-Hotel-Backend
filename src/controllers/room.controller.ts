@@ -2,10 +2,10 @@ import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import { NotFoundException } from "../exceptions/not-found";
-import { RoomCreateRequest } from "../types/room.type";
+import { RoomUpsertRequest } from "../types/room.type";
 
 class RoomController {
-  async createRoom(req: RoomCreateRequest, res: Response) {
+  async createRoom(req: RoomUpsertRequest, res: Response) {
     const { roomNumber, floorNumber, roomTypeId } = req.body;
     const room = await prismaClient.room.findFirst({
       where: { roomNumber },
@@ -30,7 +30,7 @@ class RoomController {
     if (!rooms.length) {
       throw new NotFoundException("No rooms found");
     }
-    return res.json(200).json({
+    return res.status(200).json({
       data: rooms,
     });
   }

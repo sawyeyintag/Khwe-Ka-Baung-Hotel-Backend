@@ -25,7 +25,6 @@ export const roomTypePaths = {
       summary: "Create a new room type",
       description: "Create a new room type in the system",
       tags,
-      // This is a custom function to convert Zod schema to Swagger schema
       ...zodSchemaConverter(RoomTypeCreateSchema),
       responses: {
         "201": {
@@ -39,11 +38,23 @@ export const roomTypePaths = {
         },
       },
     },
+  },
+  "/room-types/{id}": {
     put: {
       summary: "Update an existing room type",
       description: "Update an existing room type in the system",
       tags,
-      // This is a custom function to convert Zod schema to Swagger schema
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+          required: true,
+          description: "ID of the room type to update",
+          schema: {
+            type: "integer",
+          },
+        },
+      ],
       ...zodSchemaConverter(RoomTypeCreateSchema),
       responses: {
         "200": {
@@ -51,33 +62,6 @@ export const roomTypePaths = {
         },
         "400": {
           description: "Invalid input data",
-        },
-        "404": {
-          description: "Room Type not found",
-        },
-        "500": {
-          description: "Internal server error",
-        },
-      },
-    },
-    delete: {
-      summary: "Delete a room type",
-      description: "Delete a room type from the system",
-      tags,
-      parameters: [
-        {
-          name: "roomId",
-          in: "query",
-          required: true,
-          description: "ID of the room type to delete",
-          schema: {
-            type: "string",
-          },
-        },
-      ],
-      responses: {
-        "200": {
-          description: "Room Type deleted successfully",
         },
         "404": {
           description: "Room Type not found",

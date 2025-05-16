@@ -2,10 +2,10 @@ import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import { NotFoundException } from "../exceptions/not-found";
-import { FloorCreateRequest } from "../types/floor.type";
+import { FloorUpsertRequest } from "../types/floor.type";
 
 class FloorController {
-  async createFloor(req: FloorCreateRequest, res: Response) {
+  async createFloor(req: FloorUpsertRequest, res: Response) {
     const { floorNumber } = req.body;
     const room = await prismaClient.floor.findFirst();
     if (room) {

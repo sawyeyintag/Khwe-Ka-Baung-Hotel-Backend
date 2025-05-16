@@ -13,5 +13,10 @@ roomTypeRouter.post(
   validateBody(RoomTypeCreateSchema),
   routeErrorHandler(roomTypeController.createRoomType)
 );
+roomTypeRouter.put(
+  "/:id",
+  validateBody(RoomTypeCreateSchema),
+  routeErrorHandler(roomTypeController.updateRoomType)
+);
 
 export default roomTypeRouter;

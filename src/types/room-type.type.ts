@@ -4,6 +4,6 @@ import { RoomTypeCreateSchema } from "../schema/room-type.zod";
 
 type RoomTypeCreate = z.infer<typeof RoomTypeCreateSchema>;
 
-export interface RoomTypeCreateRequest extends Request {
+export interface RoomTypeUpsertRequest extends Request {
   body: RoomTypeCreate;
 }

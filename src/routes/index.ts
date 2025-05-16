@@ -7,7 +7,6 @@ import floorRoutes from "./floor.routes";
 const rootRouter: Router = Router();
 
 rootRouter.use("/auth/admins", authRoutes);
-rootRouter.use("/rooms", authRoutes);
 rootRouter.use("/rooms", roomRoutes);
 rootRouter.use("/room-types", roomTypeRoutes);
 rootRouter.use("/floors", floorRoutes);

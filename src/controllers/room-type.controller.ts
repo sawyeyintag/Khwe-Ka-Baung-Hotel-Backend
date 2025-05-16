@@ -1,10 +1,10 @@
 import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
 import { NotFoundException } from "../exceptions/not-found";
-import { RoomTypeCreateRequest } from "../types/room-type.type";
+import { RoomTypeUpsertRequest } from "../types/room-type.type";
 
 class RoomTypeController {
-  async createRoomType(req: RoomTypeCreateRequest, res: Response) {
+  async createRoomType(req: RoomTypeUpsertRequest, res: Response) {
     const { name, pax, price } = req.body;
     const createdRoomType = await prismaClient.roomType.create({
       data: { name, pax, price },
@@ -23,8 +23,20 @@ class RoomTypeController {
     if (!roomTypes.length) {
       throw new NotFoundException("No room types found");
     }
-    return res.json(200).json({
+    return res.status(200).json({
       data: roomTypes,
+    });
+  }
+
+  async updateRoomType(req: RoomTypeUpsertRequest, res: Response) {
+    const { id } = req.params;
+    const { name, pax, price } = req.body;
+    const updatedRoomType = await prismaClient.roomType.update({
+      where: { id: Number(id) },
+      data: { name, pax, price },
+    });
+    return res.status(200).json({
+      data: updatedRoomType,
     });
   }
 }
