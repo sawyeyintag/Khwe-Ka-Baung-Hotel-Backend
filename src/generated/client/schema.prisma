@@ -48,7 +48,7 @@ model Room {
   floor    Floor       @relation(fields: [floorNumber], references: [floorNumber])
   roomType RoomType    @relation(fields: [roomTypeId], references: [id])
   status   RoomStatus? @relation(fields: [statusId], references: [id])
-  guest    Guest?      @relation(fields: [guestId], references: [id])
+  guest    Guest?      @relation(fields: [guestId], references: [uid])
   miniBar  MiniBar?
   bookings Booking[]
   receipts Receipt[]
@@ -101,15 +101,16 @@ model Booking {
   estCheckOut  DateTime
 
   room  Room   @relation(fields: [roomNumber], references: [roomNumber])
-  guest Guest? @relation(fields: [guestId], references: [id])
+  guest Guest? @relation(fields: [guestId], references: [uid])
 }
 
 model Guest {
-  id         String @id
+  uid        String  @id @default(uuid())
   name       String
   phone      String
+  email      String
   address    String
-  nicCardNum String
+  nicCardNum String?
 
   rooms    Room[]
   bookings Booking[]
@@ -125,7 +126,7 @@ model Receipt {
   paidBy     String
 
   room              Room                      @relation(fields: [roomNumber], references: [roomNumber])
-  guest             Guest                     @relation(fields: [guestId], references: [id])
+  guest             Guest                     @relation(fields: [guestId], references: [uid])
   additionalCharges AdditionalChargeReceipt[]
 }
 

@@ -451,8 +451,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -11524,25 +11524,28 @@ export namespace Prisma {
   }
 
   export type GuestMinAggregateOutputType = {
-    id: string | null
+    uid: string | null
     name: string | null
     phone: string | null
+    email: string | null
     address: string | null
     nicCardNum: string | null
   }
 
   export type GuestMaxAggregateOutputType = {
-    id: string | null
+    uid: string | null
     name: string | null
     phone: string | null
+    email: string | null
     address: string | null
     nicCardNum: string | null
   }
 
   export type GuestCountAggregateOutputType = {
-    id: number
+    uid: number
     name: number
     phone: number
+    email: number
     address: number
     nicCardNum: number
     _all: number
@@ -11550,25 +11553,28 @@ export namespace Prisma {
 
 
   export type GuestMinAggregateInputType = {
-    id?: true
+    uid?: true
     name?: true
     phone?: true
+    email?: true
     address?: true
     nicCardNum?: true
   }
 
   export type GuestMaxAggregateInputType = {
-    id?: true
+    uid?: true
     name?: true
     phone?: true
+    email?: true
     address?: true
     nicCardNum?: true
   }
 
   export type GuestCountAggregateInputType = {
-    id?: true
+    uid?: true
     name?: true
     phone?: true
+    email?: true
     address?: true
     nicCardNum?: true
     _all?: true
@@ -11647,11 +11653,12 @@ export namespace Prisma {
   }
 
   export type GuestGroupByOutputType = {
-    id: string
+    uid: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum: string | null
     _count: GuestCountAggregateOutputType | null
     _min: GuestMinAggregateOutputType | null
     _max: GuestMaxAggregateOutputType | null
@@ -11672,9 +11679,10 @@ export namespace Prisma {
 
 
   export type GuestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    uid?: boolean
     name?: boolean
     phone?: boolean
+    email?: boolean
     address?: boolean
     nicCardNum?: boolean
     rooms?: boolean | Guest$roomsArgs<ExtArgs>
@@ -11686,14 +11694,15 @@ export namespace Prisma {
 
 
   export type GuestSelectScalar = {
-    id?: boolean
+    uid?: boolean
     name?: boolean
     phone?: boolean
+    email?: boolean
     address?: boolean
     nicCardNum?: boolean
   }
 
-  export type GuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phone" | "address" | "nicCardNum", ExtArgs["result"]["guest"]>
+  export type GuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "name" | "phone" | "email" | "address" | "nicCardNum", ExtArgs["result"]["guest"]>
   export type GuestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rooms?: boolean | Guest$roomsArgs<ExtArgs>
     bookings?: boolean | Guest$bookingsArgs<ExtArgs>
@@ -11709,11 +11718,12 @@ export namespace Prisma {
       receipts: Prisma.$ReceiptPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      uid: string
       name: string
       phone: string
+      email: string
       address: string
-      nicCardNum: string
+      nicCardNum: string | null
     }, ExtArgs["result"]["guest"]>
     composites: {}
   }
@@ -11797,8 +11807,8 @@ export namespace Prisma {
      * // Get first 10 Guests
      * const guests = await prisma.guest.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const guestWithIdOnly = await prisma.guest.findMany({ select: { id: true } })
+     * // Only select the `uid`
+     * const guestWithUidOnly = await prisma.guest.findMany({ select: { uid: true } })
      * 
      */
     findMany<T extends GuestFindManyArgs>(args?: SelectSubset<T, GuestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -12086,9 +12096,10 @@ export namespace Prisma {
    * Fields of the Guest model
    */
   interface GuestFieldRefs {
-    readonly id: FieldRef<"Guest", 'String'>
+    readonly uid: FieldRef<"Guest", 'String'>
     readonly name: FieldRef<"Guest", 'String'>
     readonly phone: FieldRef<"Guest", 'String'>
+    readonly email: FieldRef<"Guest", 'String'>
     readonly address: FieldRef<"Guest", 'String'>
     readonly nicCardNum: FieldRef<"Guest", 'String'>
   }
@@ -19393,9 +19404,10 @@ export namespace Prisma {
 
 
   export const GuestScalarFieldEnum: {
-    id: 'id',
+    uid: 'uid',
     name: 'name',
     phone: 'phone',
+    email: 'email',
     address: 'address',
     nicCardNum: 'nicCardNum'
   };
@@ -19527,9 +19539,10 @@ export namespace Prisma {
 
 
   export const GuestOrderByRelevanceFieldEnum: {
-    id: 'id',
+    uid: 'uid',
     name: 'name',
     phone: 'phone',
+    email: 'email',
     address: 'address',
     nicCardNum: 'nicCardNum'
   };
@@ -20103,22 +20116,24 @@ export namespace Prisma {
     AND?: GuestWhereInput | GuestWhereInput[]
     OR?: GuestWhereInput[]
     NOT?: GuestWhereInput | GuestWhereInput[]
-    id?: StringFilter<"Guest"> | string
+    uid?: StringFilter<"Guest"> | string
     name?: StringFilter<"Guest"> | string
     phone?: StringFilter<"Guest"> | string
+    email?: StringFilter<"Guest"> | string
     address?: StringFilter<"Guest"> | string
-    nicCardNum?: StringFilter<"Guest"> | string
+    nicCardNum?: StringNullableFilter<"Guest"> | string | null
     rooms?: RoomListRelationFilter
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
   }
 
   export type GuestOrderByWithRelationInput = {
-    id?: SortOrder
+    uid?: SortOrder
     name?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
-    nicCardNum?: SortOrder
+    nicCardNum?: SortOrderInput | SortOrder
     rooms?: RoomOrderByRelationAggregateInput
     bookings?: BookingOrderByRelationAggregateInput
     receipts?: ReceiptOrderByRelationAggregateInput
@@ -20126,25 +20141,27 @@ export namespace Prisma {
   }
 
   export type GuestWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    uid?: string
     AND?: GuestWhereInput | GuestWhereInput[]
     OR?: GuestWhereInput[]
     NOT?: GuestWhereInput | GuestWhereInput[]
     name?: StringFilter<"Guest"> | string
     phone?: StringFilter<"Guest"> | string
+    email?: StringFilter<"Guest"> | string
     address?: StringFilter<"Guest"> | string
-    nicCardNum?: StringFilter<"Guest"> | string
+    nicCardNum?: StringNullableFilter<"Guest"> | string | null
     rooms?: RoomListRelationFilter
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
-  }, "id">
+  }, "uid">
 
   export type GuestOrderByWithAggregationInput = {
-    id?: SortOrder
+    uid?: SortOrder
     name?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
-    nicCardNum?: SortOrder
+    nicCardNum?: SortOrderInput | SortOrder
     _count?: GuestCountOrderByAggregateInput
     _max?: GuestMaxOrderByAggregateInput
     _min?: GuestMinOrderByAggregateInput
@@ -20154,11 +20171,12 @@ export namespace Prisma {
     AND?: GuestScalarWhereWithAggregatesInput | GuestScalarWhereWithAggregatesInput[]
     OR?: GuestScalarWhereWithAggregatesInput[]
     NOT?: GuestScalarWhereWithAggregatesInput | GuestScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Guest"> | string
+    uid?: StringWithAggregatesFilter<"Guest"> | string
     name?: StringWithAggregatesFilter<"Guest"> | string
     phone?: StringWithAggregatesFilter<"Guest"> | string
+    email?: StringWithAggregatesFilter<"Guest"> | string
     address?: StringWithAggregatesFilter<"Guest"> | string
-    nicCardNum?: StringWithAggregatesFilter<"Guest"> | string
+    nicCardNum?: StringNullableWithAggregatesFilter<"Guest"> | string | null
   }
 
   export type ReceiptWhereInput = {
@@ -20989,71 +21007,78 @@ export namespace Prisma {
   }
 
   export type GuestCreateInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     rooms?: RoomCreateNestedManyWithoutGuestInput
     bookings?: BookingCreateNestedManyWithoutGuestInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
 
   export type GuestUncheckedCreateInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     rooms?: RoomUncheckedCreateNestedManyWithoutGuestInput
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     rooms?: RoomUpdateManyWithoutGuestNestedInput
     bookings?: BookingUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     rooms?: RoomUncheckedUpdateManyWithoutGuestNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestCreateManyInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
   }
 
   export type GuestUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GuestUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReceiptCreateInput = {
@@ -22022,25 +22047,28 @@ export namespace Prisma {
   }
 
   export type GuestCountOrderByAggregateInput = {
-    id?: SortOrder
+    uid?: SortOrder
     name?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrder
   }
 
   export type GuestMaxOrderByAggregateInput = {
-    id?: SortOrder
+    uid?: SortOrder
     name?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrder
   }
 
   export type GuestMinOrderByAggregateInput = {
-    id?: SortOrder
+    uid?: SortOrder
     name?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrder
   }
@@ -23797,21 +23825,23 @@ export namespace Prisma {
   }
 
   export type GuestCreateWithoutRoomsInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     bookings?: BookingCreateNestedManyWithoutGuestInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
 
   export type GuestUncheckedCreateWithoutRoomsInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
@@ -23966,21 +23996,23 @@ export namespace Prisma {
   }
 
   export type GuestUpdateWithoutRoomsInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     bookings?: BookingUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestUncheckedUpdateWithoutRoomsInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
   }
@@ -24465,21 +24497,23 @@ export namespace Prisma {
   }
 
   export type GuestCreateWithoutBookingsInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     rooms?: RoomCreateNestedManyWithoutGuestInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
 
   export type GuestUncheckedCreateWithoutBookingsInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     rooms?: RoomUncheckedCreateNestedManyWithoutGuestInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
@@ -24540,21 +24574,23 @@ export namespace Prisma {
   }
 
   export type GuestUpdateWithoutBookingsInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     rooms?: RoomUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestUncheckedUpdateWithoutBookingsInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     rooms?: RoomUncheckedUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
   }
@@ -24735,21 +24771,23 @@ export namespace Prisma {
   }
 
   export type GuestCreateWithoutReceiptsInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     rooms?: RoomCreateNestedManyWithoutGuestInput
     bookings?: BookingCreateNestedManyWithoutGuestInput
   }
 
   export type GuestUncheckedCreateWithoutReceiptsInput = {
-    id: string
+    uid?: string
     name: string
     phone: string
+    email: string
     address: string
-    nicCardNum: string
+    nicCardNum?: string | null
     rooms?: RoomUncheckedCreateNestedManyWithoutGuestInput
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
   }
@@ -24835,21 +24873,23 @@ export namespace Prisma {
   }
 
   export type GuestUpdateWithoutReceiptsInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     rooms?: RoomUpdateManyWithoutGuestNestedInput
     bookings?: BookingUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestUncheckedUpdateWithoutReceiptsInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    uid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     rooms?: RoomUncheckedUpdateManyWithoutGuestNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
   }

@@ -5,6 +5,7 @@ import { floorPaths } from "./swagger/paths/floor.path";
 import { roomTypePaths } from "./swagger/paths/room-type.path";
 import { bookingPaths } from "./swagger/paths/booking.path";
 import { roomStatusPaths } from "./swagger/paths/room-status.path";
+import { guestPaths } from "./swagger/paths/guest.path";
 
 // Combine all paths
 const paths = {
@@ -14,6 +15,7 @@ const paths = {
   ...roomTypePaths,
   ...bookingPaths,
   ...roomStatusPaths,
+  ...guestPaths,
   // Add other path imports
 };
 
