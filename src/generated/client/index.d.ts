@@ -451,8 +451,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.6.0
+   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
    */
   export type PrismaVersion = {
     client: string
@@ -11530,6 +11530,8 @@ export namespace Prisma {
     email: string | null
     address: string | null
     nicCardNum: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GuestMaxAggregateOutputType = {
@@ -11539,6 +11541,8 @@ export namespace Prisma {
     email: string | null
     address: string | null
     nicCardNum: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GuestCountAggregateOutputType = {
@@ -11548,6 +11552,8 @@ export namespace Prisma {
     email: number
     address: number
     nicCardNum: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -11559,6 +11565,8 @@ export namespace Prisma {
     email?: true
     address?: true
     nicCardNum?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type GuestMaxAggregateInputType = {
@@ -11568,6 +11576,8 @@ export namespace Prisma {
     email?: true
     address?: true
     nicCardNum?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type GuestCountAggregateInputType = {
@@ -11577,6 +11587,8 @@ export namespace Prisma {
     email?: true
     address?: true
     nicCardNum?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -11659,6 +11671,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: GuestCountAggregateOutputType | null
     _min: GuestMinAggregateOutputType | null
     _max: GuestMaxAggregateOutputType | null
@@ -11685,6 +11699,8 @@ export namespace Prisma {
     email?: boolean
     address?: boolean
     nicCardNum?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     rooms?: boolean | Guest$roomsArgs<ExtArgs>
     bookings?: boolean | Guest$bookingsArgs<ExtArgs>
     receipts?: boolean | Guest$receiptsArgs<ExtArgs>
@@ -11700,9 +11716,11 @@ export namespace Prisma {
     email?: boolean
     address?: boolean
     nicCardNum?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type GuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "name" | "phone" | "email" | "address" | "nicCardNum", ExtArgs["result"]["guest"]>
+  export type GuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "name" | "phone" | "email" | "address" | "nicCardNum" | "createdAt" | "updatedAt", ExtArgs["result"]["guest"]>
   export type GuestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rooms?: boolean | Guest$roomsArgs<ExtArgs>
     bookings?: boolean | Guest$bookingsArgs<ExtArgs>
@@ -11724,6 +11742,8 @@ export namespace Prisma {
       email: string
       address: string
       nicCardNum: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["guest"]>
     composites: {}
   }
@@ -12102,6 +12122,8 @@ export namespace Prisma {
     readonly email: FieldRef<"Guest", 'String'>
     readonly address: FieldRef<"Guest", 'String'>
     readonly nicCardNum: FieldRef<"Guest", 'String'>
+    readonly createdAt: FieldRef<"Guest", 'DateTime'>
+    readonly updatedAt: FieldRef<"Guest", 'DateTime'>
   }
     
 
@@ -19409,7 +19431,9 @@ export namespace Prisma {
     phone: 'phone',
     email: 'email',
     address: 'address',
-    nicCardNum: 'nicCardNum'
+    nicCardNum: 'nicCardNum',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type GuestScalarFieldEnum = (typeof GuestScalarFieldEnum)[keyof typeof GuestScalarFieldEnum]
@@ -20122,6 +20146,8 @@ export namespace Prisma {
     email?: StringFilter<"Guest"> | string
     address?: StringFilter<"Guest"> | string
     nicCardNum?: StringNullableFilter<"Guest"> | string | null
+    createdAt?: DateTimeFilter<"Guest"> | Date | string
+    updatedAt?: DateTimeFilter<"Guest"> | Date | string
     rooms?: RoomListRelationFilter
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
@@ -20134,6 +20160,8 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     rooms?: RoomOrderByRelationAggregateInput
     bookings?: BookingOrderByRelationAggregateInput
     receipts?: ReceiptOrderByRelationAggregateInput
@@ -20150,6 +20178,8 @@ export namespace Prisma {
     email?: StringFilter<"Guest"> | string
     address?: StringFilter<"Guest"> | string
     nicCardNum?: StringNullableFilter<"Guest"> | string | null
+    createdAt?: DateTimeFilter<"Guest"> | Date | string
+    updatedAt?: DateTimeFilter<"Guest"> | Date | string
     rooms?: RoomListRelationFilter
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
@@ -20162,6 +20192,8 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: GuestCountOrderByAggregateInput
     _max?: GuestMaxOrderByAggregateInput
     _min?: GuestMinOrderByAggregateInput
@@ -20177,6 +20209,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Guest"> | string
     address?: StringWithAggregatesFilter<"Guest"> | string
     nicCardNum?: StringNullableWithAggregatesFilter<"Guest"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Guest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Guest"> | Date | string
   }
 
   export type ReceiptWhereInput = {
@@ -21013,6 +21047,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     rooms?: RoomCreateNestedManyWithoutGuestInput
     bookings?: BookingCreateNestedManyWithoutGuestInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
@@ -21025,6 +21061,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     rooms?: RoomUncheckedCreateNestedManyWithoutGuestInput
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
@@ -21037,6 +21075,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rooms?: RoomUpdateManyWithoutGuestNestedInput
     bookings?: BookingUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
@@ -21049,6 +21089,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rooms?: RoomUncheckedUpdateManyWithoutGuestNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
@@ -21061,6 +21103,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GuestUpdateManyMutationInput = {
@@ -21070,6 +21114,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GuestUncheckedUpdateManyInput = {
@@ -21079,6 +21125,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReceiptCreateInput = {
@@ -22053,6 +22101,8 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GuestMaxOrderByAggregateInput = {
@@ -22062,6 +22112,8 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GuestMinOrderByAggregateInput = {
@@ -22071,6 +22123,8 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     nicCardNum?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GuestScalarRelationFilter = {
@@ -23831,6 +23885,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     bookings?: BookingCreateNestedManyWithoutGuestInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
@@ -23842,6 +23898,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
@@ -24002,6 +24060,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bookings?: BookingUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
   }
@@ -24013,6 +24073,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
   }
@@ -24503,6 +24565,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     rooms?: RoomCreateNestedManyWithoutGuestInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
@@ -24514,6 +24578,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     rooms?: RoomUncheckedCreateNestedManyWithoutGuestInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
@@ -24580,6 +24646,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rooms?: RoomUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
   }
@@ -24591,6 +24659,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rooms?: RoomUncheckedUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
   }
@@ -24777,6 +24847,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     rooms?: RoomCreateNestedManyWithoutGuestInput
     bookings?: BookingCreateNestedManyWithoutGuestInput
   }
@@ -24788,6 +24860,8 @@ export namespace Prisma {
     email: string
     address: string
     nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     rooms?: RoomUncheckedCreateNestedManyWithoutGuestInput
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
   }
@@ -24879,6 +24953,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rooms?: RoomUpdateManyWithoutGuestNestedInput
     bookings?: BookingUpdateManyWithoutGuestNestedInput
   }
@@ -24890,6 +24966,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rooms?: RoomUncheckedUpdateManyWithoutGuestNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
   }

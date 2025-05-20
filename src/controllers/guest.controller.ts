@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import { NotFoundException } from "../exceptions/not-found";
 import { GuestUpsertRequest } from "../types/guest.type";
+import log from "../utils/logger";
 
 class GuestController {
   async createGuest(req: GuestUpsertRequest, res: Response) {
@@ -26,6 +27,7 @@ class GuestController {
     if (!guests.length) {
       throw new NotFoundException("No guests found");
     }
+    log.info(guests);
     return res.status(200).json({
       data: guests,
     });
