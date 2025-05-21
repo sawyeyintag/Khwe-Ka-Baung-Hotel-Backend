@@ -27,9 +27,7 @@ class RoomController {
         roomType: true,
       },
     });
-    if (!rooms.length) {
-      throw new NotFoundException("No rooms found");
-    }
+
     return res.status(200).json({
       data: rooms,
     });

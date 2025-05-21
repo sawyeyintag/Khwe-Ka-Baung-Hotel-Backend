@@ -24,10 +24,6 @@ class GuestController {
 
   async getAllGuests(req: Request, res: Response) {
     const guests = await prismaClient.guest.findMany();
-    if (!guests.length) {
-      throw new NotFoundException("No guests found");
-    }
-    log.info(guests);
     return res.status(200).json({
       data: guests,
     });
