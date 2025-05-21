@@ -7,8 +7,10 @@ import { FloorUpsertRequest } from "../types/floor.type";
 class FloorController {
   async createFloor(req: FloorUpsertRequest, res: Response) {
     const { floorNumber } = req.body;
-    const room = await prismaClient.floor.findFirst();
-    if (room) {
+    const floor = await prismaClient.floor.findFirst({
+      where: { floorNumber },
+    });
+    if (floor) {
       throw new BadRequestsException("The floor already exists");
     }
     const createdFloor = await prismaClient.floor.create({
