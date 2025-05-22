@@ -138,11 +138,33 @@ exports.Prisma.RoomScalarFieldEnum = {
   floorNumber: 'floorNumber',
   roomTypeId: 'roomTypeId',
   statusId: 'statusId',
-  guestId: 'guestId',
-  numOfGuests: 'numOfGuests',
-  numExtraBed: 'numExtraBed',
+  sessionId: 'sessionId'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  roomStatusId: 'roomStatusId',
+  numberOfGuests: 'numberOfGuests',
+  numberOfExtraBeds: 'numberOfExtraBeds',
   actualCheckIn: 'actualCheckIn',
-  actualCheckOut: 'actualCheckOut'
+  actualCheckOut: 'actualCheckOut',
+  roomNumber: 'roomNumber'
+};
+
+exports.Prisma.GuestScalarFieldEnum = {
+  uid: 'uid',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  address: 'address',
+  nicCardNum: 'nicCardNum',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SessionGuestScalarFieldEnum = {
+  sessionId: 'sessionId',
+  guestId: 'guestId'
 };
 
 exports.Prisma.MiniBarScalarFieldEnum = {
@@ -177,17 +199,6 @@ exports.Prisma.BookingScalarFieldEnum = {
   contactEmail: 'contactEmail',
   estCheckIn: 'estCheckIn',
   estCheckOut: 'estCheckOut'
-};
-
-exports.Prisma.GuestScalarFieldEnum = {
-  uid: 'uid',
-  name: 'name',
-  phone: 'phone',
-  email: 'email',
-  address: 'address',
-  nicCardNum: 'nicCardNum',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ReceiptScalarFieldEnum = {
@@ -256,7 +267,16 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
-exports.Prisma.RoomOrderByRelevanceFieldEnum = {
+exports.Prisma.GuestOrderByRelevanceFieldEnum = {
+  uid: 'uid',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  address: 'address',
+  nicCardNum: 'nicCardNum'
+};
+
+exports.Prisma.SessionGuestOrderByRelevanceFieldEnum = {
   guestId: 'guestId'
 };
 
@@ -269,15 +289,6 @@ exports.Prisma.BookingOrderByRelevanceFieldEnum = {
   contactName: 'contactName',
   contactPhone: 'contactPhone',
   contactEmail: 'contactEmail'
-};
-
-exports.Prisma.GuestOrderByRelevanceFieldEnum = {
-  uid: 'uid',
-  name: 'name',
-  phone: 'phone',
-  email: 'email',
-  address: 'address',
-  nicCardNum: 'nicCardNum'
 };
 
 exports.Prisma.ReceiptOrderByRelevanceFieldEnum = {
@@ -301,12 +312,14 @@ exports.Prisma.ModelName = {
   RoomType: 'RoomType',
   RoomStatus: 'RoomStatus',
   Room: 'Room',
+  Session: 'Session',
+  Guest: 'Guest',
+  SessionGuest: 'SessionGuest',
   MiniBar: 'MiniBar',
   Item: 'Item',
   MiniBarItem: 'MiniBarItem',
   Inventory: 'Inventory',
   Booking: 'Booking',
-  Guest: 'Guest',
   Receipt: 'Receipt',
   AdditionalChargeReceipt: 'AdditionalChargeReceipt',
   RestaurantReceipt: 'RestaurantReceipt',

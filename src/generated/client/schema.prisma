@@ -35,23 +35,62 @@ model RoomStatus {
 }
 
 model Room {
-  roomNumber     Int       @id
-  floorNumber    Int
-  roomTypeId     Int
-  statusId       Int?
-  guestId        String?
-  numOfGuests    Int?
-  numExtraBed    Int?
-  actualCheckIn  DateTime?
-  actualCheckOut DateTime?
+  roomNumber  Int  @id
+  floorNumber Int
+  roomTypeId  Int
+  statusId    Int?
+  sessionId   Int? @unique
 
   floor    Floor       @relation(fields: [floorNumber], references: [floorNumber])
   roomType RoomType    @relation(fields: [roomTypeId], references: [id])
   status   RoomStatus? @relation(fields: [statusId], references: [id])
-  guest    Guest?      @relation(fields: [guestId], references: [uid])
   miniBar  MiniBar?
   bookings Booking[]
   receipts Receipt[]
+  Session  Session?
+}
+
+model Session {
+  id                Int      @id @default(autoincrement())
+  roomStatusId      Int
+  numberOfGuests    Int
+  numberOfExtraBeds Int
+  actualCheckIn     DateTime
+  actualCheckOut    DateTime
+
+  // One-to-one with Room (required)
+  roomNumber Int  @unique
+  room       Room @relation(fields: [roomNumber], references: [roomNumber])
+
+  // Many-to-many with Guest (via join table)
+  guests SessionGuest[]
+}
+
+model Guest {
+  uid        String   @id @default(uuid())
+  name       String
+  phone      String
+  email      String
+  address    String
+  nicCardNum String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Each guest can only be in one session
+  sessionGuest SessionGuest?
+
+  bookings Booking[]
+  receipts Receipt[]
+}
+
+model SessionGuest {
+  sessionId Int
+  guestId   String @unique // Each guest can only belong to one session
+
+  session Session @relation(fields: [sessionId], references: [id])
+  guest   Guest   @relation(fields: [guestId], references: [uid])
+
+  @@id([sessionId, guestId])
 }
 
 model MiniBar {
@@ -102,21 +141,6 @@ model Booking {
 
   room  Room   @relation(fields: [roomNumber], references: [roomNumber])
   guest Guest? @relation(fields: [guestId], references: [uid])
-}
-
-model Guest {
-  uid        String   @id @default(uuid())
-  name       String
-  phone      String
-  email      String
-  address    String
-  nicCardNum String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  rooms    Room[]
-  bookings Booking[]
-  receipts Receipt[]
 }
 
 model Receipt {
