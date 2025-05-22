@@ -14,7 +14,7 @@ class RoomController {
       throw new BadRequestsException("The room already exists");
     }
     const createdRoom = await prismaClient.room.create({
-      data: { roomNumber, floorNumber, roomTypeId },
+      data: { roomNumber, floorNumber, roomTypeId, statusId: 2 },
     });
     return res.status(201).json({
       data: createdRoom,
