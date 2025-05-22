@@ -47,7 +47,7 @@ model Room {
   miniBar  MiniBar?
   bookings Booking[]
   receipts Receipt[]
-  Session  Session?
+  session  Session?
 }
 
 model Session {

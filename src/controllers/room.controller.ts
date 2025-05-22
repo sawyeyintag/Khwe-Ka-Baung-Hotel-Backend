@@ -25,11 +25,17 @@ class RoomController {
     const rooms = await prismaClient.room.findMany({
       include: {
         roomType: true,
+        status: true,
+        session: true,
       },
     });
 
+    const sanitizedRooms = rooms.map(
+      ({ roomTypeId, statusId, sessionId, ...rest }) => rest
+    );
+
     return res.status(200).json({
-      data: rooms,
+      data: sanitizedRooms,
     });
   }
 }

@@ -5847,7 +5847,7 @@ export namespace Prisma {
     miniBar?: boolean | Room$miniBarArgs<ExtArgs>
     bookings?: boolean | Room$bookingsArgs<ExtArgs>
     receipts?: boolean | Room$receiptsArgs<ExtArgs>
-    Session?: boolean | Room$SessionArgs<ExtArgs>
+    session?: boolean | Room$sessionArgs<ExtArgs>
     _count?: boolean | RoomCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["room"]>
 
@@ -5869,7 +5869,7 @@ export namespace Prisma {
     miniBar?: boolean | Room$miniBarArgs<ExtArgs>
     bookings?: boolean | Room$bookingsArgs<ExtArgs>
     receipts?: boolean | Room$receiptsArgs<ExtArgs>
-    Session?: boolean | Room$SessionArgs<ExtArgs>
+    session?: boolean | Room$sessionArgs<ExtArgs>
     _count?: boolean | RoomCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5882,7 +5882,7 @@ export namespace Prisma {
       miniBar: Prisma.$MiniBarPayload<ExtArgs> | null
       bookings: Prisma.$BookingPayload<ExtArgs>[]
       receipts: Prisma.$ReceiptPayload<ExtArgs>[]
-      Session: Prisma.$SessionPayload<ExtArgs> | null
+      session: Prisma.$SessionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       roomNumber: number
@@ -6236,7 +6236,7 @@ export namespace Prisma {
     miniBar<T extends Room$miniBarArgs<ExtArgs> = {}>(args?: Subset<T, Room$miniBarArgs<ExtArgs>>): Prisma__MiniBarClient<$Result.GetResult<Prisma.$MiniBarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     bookings<T extends Room$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, Room$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     receipts<T extends Room$receiptsArgs<ExtArgs> = {}>(args?: Subset<T, Room$receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Session<T extends Room$SessionArgs<ExtArgs> = {}>(args?: Subset<T, Room$SessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    session<T extends Room$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Room$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6700,9 +6700,9 @@ export namespace Prisma {
   }
 
   /**
-   * Room.Session
+   * Room.session
    */
-  export type Room$SessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Room$sessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Session
      */
@@ -21899,7 +21899,7 @@ export namespace Prisma {
     miniBar?: XOR<MiniBarNullableScalarRelationFilter, MiniBarWhereInput> | null
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
-    Session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
   }
 
   export type RoomOrderByWithRelationInput = {
@@ -21914,7 +21914,7 @@ export namespace Prisma {
     miniBar?: MiniBarOrderByWithRelationInput
     bookings?: BookingOrderByRelationAggregateInput
     receipts?: ReceiptOrderByRelationAggregateInput
-    Session?: SessionOrderByWithRelationInput
+    session?: SessionOrderByWithRelationInput
   }
 
   export type RoomWhereUniqueInput = Prisma.AtLeast<{
@@ -21932,7 +21932,7 @@ export namespace Prisma {
     miniBar?: XOR<MiniBarNullableScalarRelationFilter, MiniBarWhereInput> | null
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
-    Session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
   }, "roomNumber" | "sessionId">
 
   export type RoomOrderByWithAggregationInput = {
@@ -22933,7 +22933,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    Session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUncheckedCreateInput = {
@@ -22945,7 +22945,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    Session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUpdateInput = {
@@ -22957,7 +22957,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    Session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateInput = {
@@ -22969,7 +22969,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    Session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomCreateManyInput = {
@@ -26079,7 +26079,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    Session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutFloorInput = {
@@ -26090,7 +26090,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    Session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutFloorInput = {
@@ -26138,7 +26138,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    Session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutRoomTypeInput = {
@@ -26149,7 +26149,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    Session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutRoomTypeInput = {
@@ -26186,7 +26186,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    Session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutStatusInput = {
@@ -26197,7 +26197,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    Session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutStatusInput = {
@@ -26888,7 +26888,7 @@ export namespace Prisma {
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    Session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutMiniBarInput = {
@@ -26899,7 +26899,7 @@ export namespace Prisma {
     sessionId?: number | null
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    Session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutMiniBarInput = {
@@ -26946,7 +26946,7 @@ export namespace Prisma {
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    Session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutMiniBarInput = {
@@ -26957,7 +26957,7 @@ export namespace Prisma {
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    Session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
   }
 
   export type MiniBarItemUpsertWithWhereUniqueWithoutMiniBarInput = {
@@ -27244,7 +27244,7 @@ export namespace Prisma {
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    Session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutBookingsInput = {
@@ -27255,7 +27255,7 @@ export namespace Prisma {
     sessionId?: number | null
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    Session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutBookingsInput = {
@@ -27313,7 +27313,7 @@ export namespace Prisma {
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    Session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutBookingsInput = {
@@ -27324,7 +27324,7 @@ export namespace Prisma {
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    Session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
   }
 
   export type GuestUpsertWithoutBookingsInput = {
@@ -27372,7 +27372,7 @@ export namespace Prisma {
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
-    Session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedOneWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutReceiptsInput = {
@@ -27383,7 +27383,7 @@ export namespace Prisma {
     sessionId?: number | null
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
-    Session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutReceiptsInput = {
@@ -27466,7 +27466,7 @@ export namespace Prisma {
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
-    Session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutReceiptsInput = {
@@ -27477,7 +27477,7 @@ export namespace Prisma {
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
-    Session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
   }
 
   export type GuestUpsertWithoutReceiptsInput = {
@@ -27984,7 +27984,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    Session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutFloorInput = {
@@ -27995,7 +27995,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    Session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateManyWithoutFloorInput = {
@@ -28020,7 +28020,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    Session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutRoomTypeInput = {
@@ -28031,7 +28031,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    Session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateManyWithoutRoomTypeInput = {
@@ -28056,7 +28056,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    Session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutStatusInput = {
@@ -28067,7 +28067,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    Session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateManyWithoutStatusInput = {
