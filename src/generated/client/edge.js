@@ -314,7 +314,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\sawye\\OneDrive\\Documents\\GitHub\\Personal\\Khwe-Ka-Baung-Hotel-Backend\\src\\generated\\client",
+      "value": "C:\\Users\\sawye\\OneDrive\\Documents\\GitHub\\Khwe-Ka-Baung-Hotel-Backend\\src\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -328,12 +328,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\sawye\\OneDrive\\Documents\\GitHub\\Personal\\Khwe-Ka-Baung-Hotel-Backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\sawye\\OneDrive\\Documents\\GitHub\\Khwe-Ka-Baung-Hotel-Backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.8.2",
@@ -342,6 +341,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
