@@ -47,23 +47,21 @@ model Room {
   miniBar  MiniBar?
   bookings Booking[]
   receipts Receipt[]
-  session  Session?
+  session  Session[]
 }
 
 model Session {
-  id                Int      @id @default(autoincrement())
-  roomStatusId      Int
-  numberOfGuests    Int
+  id                Int       @id @default(autoincrement())
+  roomNumber        Int       @unique
   numberOfExtraBeds Int
   actualCheckIn     DateTime
-  actualCheckOut    DateTime
+  actualCheckOut    DateTime?
+  isActive          Boolean   @default(true)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
-  // One-to-one with Room (required)
-  roomNumber Int  @unique
-  room       Room @relation(fields: [roomNumber], references: [roomNumber])
-
-  // Many-to-many with Guest (via join table)
-  guests SessionGuest[]
+  room   Room    @relation(fields: [roomNumber], references: [roomNumber])
+  guests Guest[]
 }
 
 model Guest {
@@ -76,21 +74,9 @@ model Guest {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  // Each guest can only be in one session
-  sessionGuest SessionGuest?
-
+  sessions Session[]
   bookings Booking[]
   receipts Receipt[]
-}
-
-model SessionGuest {
-  sessionId Int
-  guestId   String @unique // Each guest can only belong to one session
-
-  session Session @relation(fields: [sessionId], references: [id])
-  guest   Guest   @relation(fields: [guestId], references: [uid])
-
-  @@id([sessionId, guestId])
 }
 
 model MiniBar {

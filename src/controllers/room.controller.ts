@@ -1,7 +1,6 @@
 import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
 import { BadRequestsException } from "../exceptions/bad-requests";
-import { NotFoundException } from "../exceptions/not-found";
 import { RoomUpsertRequest } from "../types/room.type";
 
 class RoomController {

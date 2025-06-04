@@ -146,12 +146,13 @@ exports.Prisma.RoomScalarFieldEnum = {
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
-  roomStatusId: 'roomStatusId',
-  numberOfGuests: 'numberOfGuests',
+  roomNumber: 'roomNumber',
   numberOfExtraBeds: 'numberOfExtraBeds',
   actualCheckIn: 'actualCheckIn',
   actualCheckOut: 'actualCheckOut',
-  roomNumber: 'roomNumber'
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.GuestScalarFieldEnum = {
@@ -163,11 +164,6 @@ exports.Prisma.GuestScalarFieldEnum = {
   nicCardNum: 'nicCardNum',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
-};
-
-exports.Prisma.SessionGuestScalarFieldEnum = {
-  sessionId: 'sessionId',
-  guestId: 'guestId'
 };
 
 exports.Prisma.MiniBarScalarFieldEnum = {
@@ -279,10 +275,6 @@ exports.Prisma.GuestOrderByRelevanceFieldEnum = {
   nicCardNum: 'nicCardNum'
 };
 
-exports.Prisma.SessionGuestOrderByRelevanceFieldEnum = {
-  guestId: 'guestId'
-};
-
 exports.Prisma.ItemOrderByRelevanceFieldEnum = {
   name: 'name'
 };
@@ -317,7 +309,6 @@ exports.Prisma.ModelName = {
   Room: 'Room',
   Session: 'Session',
   Guest: 'Guest',
-  SessionGuest: 'SessionGuest',
   MiniBar: 'MiniBar',
   Item: 'Item',
   MiniBarItem: 'MiniBarItem',

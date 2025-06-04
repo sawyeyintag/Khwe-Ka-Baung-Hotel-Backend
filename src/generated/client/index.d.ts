@@ -44,11 +44,6 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  */
 export type Guest = $Result.DefaultSelection<Prisma.$GuestPayload>
 /**
- * Model SessionGuest
- * 
- */
-export type SessionGuest = $Result.DefaultSelection<Prisma.$SessionGuestPayload>
-/**
  * Model MiniBar
  * 
  */
@@ -293,16 +288,6 @@ export class PrismaClient<
     * ```
     */
   get guest(): Prisma.GuestDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.sessionGuest`: Exposes CRUD operations for the **SessionGuest** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more SessionGuests
-    * const sessionGuests = await prisma.sessionGuest.findMany()
-    * ```
-    */
-  get sessionGuest(): Prisma.SessionGuestDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.miniBar`: Exposes CRUD operations for the **MiniBar** model.
@@ -869,7 +854,6 @@ export namespace Prisma {
     Room: 'Room',
     Session: 'Session',
     Guest: 'Guest',
-    SessionGuest: 'SessionGuest',
     MiniBar: 'MiniBar',
     Item: 'Item',
     MiniBarItem: 'MiniBarItem',
@@ -900,7 +884,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "floor" | "roomType" | "roomStatus" | "room" | "session" | "guest" | "sessionGuest" | "miniBar" | "item" | "miniBarItem" | "inventory" | "booking" | "receipt" | "additionalChargeReceipt" | "restaurantReceipt" | "service" | "addChargeItem" | "addChargeService" | "admin"
+      modelProps: "floor" | "roomType" | "roomStatus" | "room" | "session" | "guest" | "miniBar" | "item" | "miniBarItem" | "inventory" | "booking" | "receipt" | "additionalChargeReceipt" | "restaurantReceipt" | "service" | "addChargeItem" | "addChargeService" | "admin"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1297,72 +1281,6 @@ export namespace Prisma {
           count: {
             args: Prisma.GuestCountArgs<ExtArgs>
             result: $Utils.Optional<GuestCountAggregateOutputType> | number
-          }
-        }
-      }
-      SessionGuest: {
-        payload: Prisma.$SessionGuestPayload<ExtArgs>
-        fields: Prisma.SessionGuestFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SessionGuestFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SessionGuestFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload>
-          }
-          findFirst: {
-            args: Prisma.SessionGuestFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SessionGuestFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload>
-          }
-          findMany: {
-            args: Prisma.SessionGuestFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload>[]
-          }
-          create: {
-            args: Prisma.SessionGuestCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload>
-          }
-          createMany: {
-            args: Prisma.SessionGuestCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.SessionGuestDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload>
-          }
-          update: {
-            args: Prisma.SessionGuestUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload>
-          }
-          deleteMany: {
-            args: Prisma.SessionGuestDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SessionGuestUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.SessionGuestUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionGuestPayload>
-          }
-          aggregate: {
-            args: Prisma.SessionGuestAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSessionGuest>
-          }
-          groupBy: {
-            args: Prisma.SessionGuestGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SessionGuestGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SessionGuestCountArgs<ExtArgs>
-            result: $Utils.Optional<SessionGuestCountAggregateOutputType> | number
           }
         }
       }
@@ -2248,7 +2166,6 @@ export namespace Prisma {
     room?: RoomOmit
     session?: SessionOmit
     guest?: GuestOmit
-    sessionGuest?: SessionGuestOmit
     miniBar?: MiniBarOmit
     item?: ItemOmit
     miniBarItem?: MiniBarItemOmit
@@ -2450,11 +2367,13 @@ export namespace Prisma {
   export type RoomCountOutputType = {
     bookings: number
     receipts: number
+    session: number
   }
 
   export type RoomCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookings?: boolean | RoomCountOutputTypeCountBookingsArgs
     receipts?: boolean | RoomCountOutputTypeCountReceiptsArgs
+    session?: boolean | RoomCountOutputTypeCountSessionArgs
   }
 
   // Custom InputTypes
@@ -2480,6 +2399,13 @@ export namespace Prisma {
    */
   export type RoomCountOutputTypeCountReceiptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReceiptWhereInput
+  }
+
+  /**
+   * RoomCountOutputType without action
+   */
+  export type RoomCountOutputTypeCountSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
 
@@ -2510,7 +2436,7 @@ export namespace Prisma {
    * SessionCountOutputType without action
    */
   export type SessionCountOutputTypeCountGuestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionGuestWhereInput
+    where?: GuestWhereInput
   }
 
 
@@ -2519,11 +2445,13 @@ export namespace Prisma {
    */
 
   export type GuestCountOutputType = {
+    sessions: number
     bookings: number
     receipts: number
   }
 
   export type GuestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | GuestCountOutputTypeCountSessionsArgs
     bookings?: boolean | GuestCountOutputTypeCountBookingsArgs
     receipts?: boolean | GuestCountOutputTypeCountReceiptsArgs
   }
@@ -2537,6 +2465,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the GuestCountOutputType
      */
     select?: GuestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GuestCountOutputType without action
+   */
+  export type GuestCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
   /**
@@ -5882,7 +5817,7 @@ export namespace Prisma {
       miniBar: Prisma.$MiniBarPayload<ExtArgs> | null
       bookings: Prisma.$BookingPayload<ExtArgs>[]
       receipts: Prisma.$ReceiptPayload<ExtArgs>[]
-      session: Prisma.$SessionPayload<ExtArgs> | null
+      session: Prisma.$SessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       roomNumber: number
@@ -6236,7 +6171,7 @@ export namespace Prisma {
     miniBar<T extends Room$miniBarArgs<ExtArgs> = {}>(args?: Subset<T, Room$miniBarArgs<ExtArgs>>): Prisma__MiniBarClient<$Result.GetResult<Prisma.$MiniBarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     bookings<T extends Room$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, Room$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     receipts<T extends Room$receiptsArgs<ExtArgs> = {}>(args?: Subset<T, Room$receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    session<T extends Room$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Room$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    session<T extends Room$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Room$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6716,6 +6651,11 @@ export namespace Prisma {
      */
     include?: SessionInclude<ExtArgs> | null
     where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -6751,96 +6691,94 @@ export namespace Prisma {
 
   export type SessionAvgAggregateOutputType = {
     id: number | null
-    roomStatusId: number | null
-    numberOfGuests: number | null
-    numberOfExtraBeds: number | null
     roomNumber: number | null
+    numberOfExtraBeds: number | null
   }
 
   export type SessionSumAggregateOutputType = {
     id: number | null
-    roomStatusId: number | null
-    numberOfGuests: number | null
-    numberOfExtraBeds: number | null
     roomNumber: number | null
+    numberOfExtraBeds: number | null
   }
 
   export type SessionMinAggregateOutputType = {
     id: number | null
-    roomStatusId: number | null
-    numberOfGuests: number | null
+    roomNumber: number | null
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
     actualCheckOut: Date | null
-    roomNumber: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SessionMaxAggregateOutputType = {
     id: number | null
-    roomStatusId: number | null
-    numberOfGuests: number | null
+    roomNumber: number | null
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
     actualCheckOut: Date | null
-    roomNumber: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type SessionCountAggregateOutputType = {
     id: number
-    roomStatusId: number
-    numberOfGuests: number
+    roomNumber: number
     numberOfExtraBeds: number
     actualCheckIn: number
     actualCheckOut: number
-    roomNumber: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type SessionAvgAggregateInputType = {
     id?: true
-    roomStatusId?: true
-    numberOfGuests?: true
-    numberOfExtraBeds?: true
     roomNumber?: true
+    numberOfExtraBeds?: true
   }
 
   export type SessionSumAggregateInputType = {
     id?: true
-    roomStatusId?: true
-    numberOfGuests?: true
-    numberOfExtraBeds?: true
     roomNumber?: true
+    numberOfExtraBeds?: true
   }
 
   export type SessionMinAggregateInputType = {
     id?: true
-    roomStatusId?: true
-    numberOfGuests?: true
+    roomNumber?: true
     numberOfExtraBeds?: true
     actualCheckIn?: true
     actualCheckOut?: true
-    roomNumber?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type SessionMaxAggregateInputType = {
     id?: true
-    roomStatusId?: true
-    numberOfGuests?: true
+    roomNumber?: true
     numberOfExtraBeds?: true
     actualCheckIn?: true
     actualCheckOut?: true
-    roomNumber?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type SessionCountAggregateInputType = {
     id?: true
-    roomStatusId?: true
-    numberOfGuests?: true
+    roomNumber?: true
     numberOfExtraBeds?: true
     actualCheckIn?: true
     actualCheckOut?: true
-    roomNumber?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6932,12 +6870,13 @@ export namespace Prisma {
 
   export type SessionGroupByOutputType = {
     id: number
-    roomStatusId: number
-    numberOfGuests: number
+    roomNumber: number
     numberOfExtraBeds: number
     actualCheckIn: Date
-    actualCheckOut: Date
-    roomNumber: number
+    actualCheckOut: Date | null
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
     _count: SessionCountAggregateOutputType | null
     _avg: SessionAvgAggregateOutputType | null
     _sum: SessionSumAggregateOutputType | null
@@ -6961,12 +6900,13 @@ export namespace Prisma {
 
   export type SessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    roomStatusId?: boolean
-    numberOfGuests?: boolean
+    roomNumber?: boolean
     numberOfExtraBeds?: boolean
     actualCheckIn?: boolean
     actualCheckOut?: boolean
-    roomNumber?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     room?: boolean | RoomDefaultArgs<ExtArgs>
     guests?: boolean | Session$guestsArgs<ExtArgs>
     _count?: boolean | SessionCountOutputTypeDefaultArgs<ExtArgs>
@@ -6976,15 +6916,16 @@ export namespace Prisma {
 
   export type SessionSelectScalar = {
     id?: boolean
-    roomStatusId?: boolean
-    numberOfGuests?: boolean
+    roomNumber?: boolean
     numberOfExtraBeds?: boolean
     actualCheckIn?: boolean
     actualCheckOut?: boolean
-    roomNumber?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomStatusId" | "numberOfGuests" | "numberOfExtraBeds" | "actualCheckIn" | "actualCheckOut" | "roomNumber", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomNumber" | "numberOfExtraBeds" | "actualCheckIn" | "actualCheckOut" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     room?: boolean | RoomDefaultArgs<ExtArgs>
     guests?: boolean | Session$guestsArgs<ExtArgs>
@@ -6995,16 +6936,17 @@ export namespace Prisma {
     name: "Session"
     objects: {
       room: Prisma.$RoomPayload<ExtArgs>
-      guests: Prisma.$SessionGuestPayload<ExtArgs>[]
+      guests: Prisma.$GuestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      roomStatusId: number
-      numberOfGuests: number
+      roomNumber: number
       numberOfExtraBeds: number
       actualCheckIn: Date
-      actualCheckOut: Date
-      roomNumber: number
+      actualCheckOut: Date | null
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["session"]>
     composites: {}
   }
@@ -7346,7 +7288,7 @@ export namespace Prisma {
   export interface Prisma__SessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     room<T extends RoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoomDefaultArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    guests<T extends Session$guestsArgs<ExtArgs> = {}>(args?: Subset<T, Session$guestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    guests<T extends Session$guestsArgs<ExtArgs> = {}>(args?: Subset<T, Session$guestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7377,12 +7319,13 @@ export namespace Prisma {
    */
   interface SessionFieldRefs {
     readonly id: FieldRef<"Session", 'Int'>
-    readonly roomStatusId: FieldRef<"Session", 'Int'>
-    readonly numberOfGuests: FieldRef<"Session", 'Int'>
+    readonly roomNumber: FieldRef<"Session", 'Int'>
     readonly numberOfExtraBeds: FieldRef<"Session", 'Int'>
     readonly actualCheckIn: FieldRef<"Session", 'DateTime'>
     readonly actualCheckOut: FieldRef<"Session", 'DateTime'>
-    readonly roomNumber: FieldRef<"Session", 'Int'>
+    readonly isActive: FieldRef<"Session", 'Boolean'>
+    readonly createdAt: FieldRef<"Session", 'DateTime'>
+    readonly updatedAt: FieldRef<"Session", 'DateTime'>
   }
     
 
@@ -7730,23 +7673,23 @@ export namespace Prisma {
    */
   export type Session$guestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionGuest
+     * Select specific fields to fetch from the Guest
      */
-    select?: SessionGuestSelect<ExtArgs> | null
+    select?: GuestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionGuest
+     * Omit specific fields from the Guest
      */
-    omit?: SessionGuestOmit<ExtArgs> | null
+    omit?: GuestOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SessionGuestInclude<ExtArgs> | null
-    where?: SessionGuestWhereInput
-    orderBy?: SessionGuestOrderByWithRelationInput | SessionGuestOrderByWithRelationInput[]
-    cursor?: SessionGuestWhereUniqueInput
+    include?: GuestInclude<ExtArgs> | null
+    where?: GuestWhereInput
+    orderBy?: GuestOrderByWithRelationInput | GuestOrderByWithRelationInput[]
+    cursor?: GuestWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SessionGuestScalarFieldEnum | SessionGuestScalarFieldEnum[]
+    distinct?: GuestScalarFieldEnum | GuestScalarFieldEnum[]
   }
 
   /**
@@ -7956,7 +7899,7 @@ export namespace Prisma {
     nicCardNum?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    sessionGuest?: boolean | Guest$sessionGuestArgs<ExtArgs>
+    sessions?: boolean | Guest$sessionsArgs<ExtArgs>
     bookings?: boolean | Guest$bookingsArgs<ExtArgs>
     receipts?: boolean | Guest$receiptsArgs<ExtArgs>
     _count?: boolean | GuestCountOutputTypeDefaultArgs<ExtArgs>
@@ -7977,7 +7920,7 @@ export namespace Prisma {
 
   export type GuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "name" | "phone" | "email" | "address" | "nicCardNum" | "createdAt" | "updatedAt", ExtArgs["result"]["guest"]>
   export type GuestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessionGuest?: boolean | Guest$sessionGuestArgs<ExtArgs>
+    sessions?: boolean | Guest$sessionsArgs<ExtArgs>
     bookings?: boolean | Guest$bookingsArgs<ExtArgs>
     receipts?: boolean | Guest$receiptsArgs<ExtArgs>
     _count?: boolean | GuestCountOutputTypeDefaultArgs<ExtArgs>
@@ -7986,7 +7929,7 @@ export namespace Prisma {
   export type $GuestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Guest"
     objects: {
-      sessionGuest: Prisma.$SessionGuestPayload<ExtArgs> | null
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
       bookings: Prisma.$BookingPayload<ExtArgs>[]
       receipts: Prisma.$ReceiptPayload<ExtArgs>[]
     }
@@ -8339,7 +8282,7 @@ export namespace Prisma {
    */
   export interface Prisma__GuestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    sessionGuest<T extends Guest$sessionGuestArgs<ExtArgs> = {}>(args?: Subset<T, Guest$sessionGuestArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    sessions<T extends Guest$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, Guest$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     bookings<T extends Guest$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, Guest$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     receipts<T extends Guest$receiptsArgs<ExtArgs> = {}>(args?: Subset<T, Guest$receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -8722,22 +8665,27 @@ export namespace Prisma {
   }
 
   /**
-   * Guest.sessionGuest
+   * Guest.sessions
    */
-  export type Guest$sessionGuestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Guest$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionGuest
+     * Select specific fields to fetch from the Session
      */
-    select?: SessionGuestSelect<ExtArgs> | null
+    select?: SessionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionGuest
+     * Omit specific fields from the Session
      */
-    omit?: SessionGuestOmit<ExtArgs> | null
+    omit?: SessionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SessionGuestInclude<ExtArgs> | null
-    where?: SessionGuestWhereInput
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -8804,940 +8752,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: GuestInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model SessionGuest
-   */
-
-  export type AggregateSessionGuest = {
-    _count: SessionGuestCountAggregateOutputType | null
-    _avg: SessionGuestAvgAggregateOutputType | null
-    _sum: SessionGuestSumAggregateOutputType | null
-    _min: SessionGuestMinAggregateOutputType | null
-    _max: SessionGuestMaxAggregateOutputType | null
-  }
-
-  export type SessionGuestAvgAggregateOutputType = {
-    sessionId: number | null
-  }
-
-  export type SessionGuestSumAggregateOutputType = {
-    sessionId: number | null
-  }
-
-  export type SessionGuestMinAggregateOutputType = {
-    sessionId: number | null
-    guestId: string | null
-  }
-
-  export type SessionGuestMaxAggregateOutputType = {
-    sessionId: number | null
-    guestId: string | null
-  }
-
-  export type SessionGuestCountAggregateOutputType = {
-    sessionId: number
-    guestId: number
-    _all: number
-  }
-
-
-  export type SessionGuestAvgAggregateInputType = {
-    sessionId?: true
-  }
-
-  export type SessionGuestSumAggregateInputType = {
-    sessionId?: true
-  }
-
-  export type SessionGuestMinAggregateInputType = {
-    sessionId?: true
-    guestId?: true
-  }
-
-  export type SessionGuestMaxAggregateInputType = {
-    sessionId?: true
-    guestId?: true
-  }
-
-  export type SessionGuestCountAggregateInputType = {
-    sessionId?: true
-    guestId?: true
-    _all?: true
-  }
-
-  export type SessionGuestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SessionGuest to aggregate.
-     */
-    where?: SessionGuestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SessionGuests to fetch.
-     */
-    orderBy?: SessionGuestOrderByWithRelationInput | SessionGuestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SessionGuestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SessionGuests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SessionGuests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned SessionGuests
-    **/
-    _count?: true | SessionGuestCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: SessionGuestAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: SessionGuestSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SessionGuestMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SessionGuestMaxAggregateInputType
-  }
-
-  export type GetSessionGuestAggregateType<T extends SessionGuestAggregateArgs> = {
-        [P in keyof T & keyof AggregateSessionGuest]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSessionGuest[P]>
-      : GetScalarType<T[P], AggregateSessionGuest[P]>
-  }
-
-
-
-
-  export type SessionGuestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionGuestWhereInput
-    orderBy?: SessionGuestOrderByWithAggregationInput | SessionGuestOrderByWithAggregationInput[]
-    by: SessionGuestScalarFieldEnum[] | SessionGuestScalarFieldEnum
-    having?: SessionGuestScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SessionGuestCountAggregateInputType | true
-    _avg?: SessionGuestAvgAggregateInputType
-    _sum?: SessionGuestSumAggregateInputType
-    _min?: SessionGuestMinAggregateInputType
-    _max?: SessionGuestMaxAggregateInputType
-  }
-
-  export type SessionGuestGroupByOutputType = {
-    sessionId: number
-    guestId: string
-    _count: SessionGuestCountAggregateOutputType | null
-    _avg: SessionGuestAvgAggregateOutputType | null
-    _sum: SessionGuestSumAggregateOutputType | null
-    _min: SessionGuestMinAggregateOutputType | null
-    _max: SessionGuestMaxAggregateOutputType | null
-  }
-
-  type GetSessionGuestGroupByPayload<T extends SessionGuestGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SessionGuestGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SessionGuestGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SessionGuestGroupByOutputType[P]>
-            : GetScalarType<T[P], SessionGuestGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SessionGuestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    sessionId?: boolean
-    guestId?: boolean
-    session?: boolean | SessionDefaultArgs<ExtArgs>
-    guest?: boolean | GuestDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["sessionGuest"]>
-
-
-
-  export type SessionGuestSelectScalar = {
-    sessionId?: boolean
-    guestId?: boolean
-  }
-
-  export type SessionGuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sessionId" | "guestId", ExtArgs["result"]["sessionGuest"]>
-  export type SessionGuestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    session?: boolean | SessionDefaultArgs<ExtArgs>
-    guest?: boolean | GuestDefaultArgs<ExtArgs>
-  }
-
-  export type $SessionGuestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "SessionGuest"
-    objects: {
-      session: Prisma.$SessionPayload<ExtArgs>
-      guest: Prisma.$GuestPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      sessionId: number
-      guestId: string
-    }, ExtArgs["result"]["sessionGuest"]>
-    composites: {}
-  }
-
-  type SessionGuestGetPayload<S extends boolean | null | undefined | SessionGuestDefaultArgs> = $Result.GetResult<Prisma.$SessionGuestPayload, S>
-
-  type SessionGuestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SessionGuestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SessionGuestCountAggregateInputType | true
-    }
-
-  export interface SessionGuestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SessionGuest'], meta: { name: 'SessionGuest' } }
-    /**
-     * Find zero or one SessionGuest that matches the filter.
-     * @param {SessionGuestFindUniqueArgs} args - Arguments to find a SessionGuest
-     * @example
-     * // Get one SessionGuest
-     * const sessionGuest = await prisma.sessionGuest.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SessionGuestFindUniqueArgs>(args: SelectSubset<T, SessionGuestFindUniqueArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one SessionGuest that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SessionGuestFindUniqueOrThrowArgs} args - Arguments to find a SessionGuest
-     * @example
-     * // Get one SessionGuest
-     * const sessionGuest = await prisma.sessionGuest.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SessionGuestFindUniqueOrThrowArgs>(args: SelectSubset<T, SessionGuestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first SessionGuest that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGuestFindFirstArgs} args - Arguments to find a SessionGuest
-     * @example
-     * // Get one SessionGuest
-     * const sessionGuest = await prisma.sessionGuest.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SessionGuestFindFirstArgs>(args?: SelectSubset<T, SessionGuestFindFirstArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first SessionGuest that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGuestFindFirstOrThrowArgs} args - Arguments to find a SessionGuest
-     * @example
-     * // Get one SessionGuest
-     * const sessionGuest = await prisma.sessionGuest.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SessionGuestFindFirstOrThrowArgs>(args?: SelectSubset<T, SessionGuestFindFirstOrThrowArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more SessionGuests that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGuestFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all SessionGuests
-     * const sessionGuests = await prisma.sessionGuest.findMany()
-     * 
-     * // Get first 10 SessionGuests
-     * const sessionGuests = await prisma.sessionGuest.findMany({ take: 10 })
-     * 
-     * // Only select the `sessionId`
-     * const sessionGuestWithSessionIdOnly = await prisma.sessionGuest.findMany({ select: { sessionId: true } })
-     * 
-     */
-    findMany<T extends SessionGuestFindManyArgs>(args?: SelectSubset<T, SessionGuestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a SessionGuest.
-     * @param {SessionGuestCreateArgs} args - Arguments to create a SessionGuest.
-     * @example
-     * // Create one SessionGuest
-     * const SessionGuest = await prisma.sessionGuest.create({
-     *   data: {
-     *     // ... data to create a SessionGuest
-     *   }
-     * })
-     * 
-     */
-    create<T extends SessionGuestCreateArgs>(args: SelectSubset<T, SessionGuestCreateArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many SessionGuests.
-     * @param {SessionGuestCreateManyArgs} args - Arguments to create many SessionGuests.
-     * @example
-     * // Create many SessionGuests
-     * const sessionGuest = await prisma.sessionGuest.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SessionGuestCreateManyArgs>(args?: SelectSubset<T, SessionGuestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a SessionGuest.
-     * @param {SessionGuestDeleteArgs} args - Arguments to delete one SessionGuest.
-     * @example
-     * // Delete one SessionGuest
-     * const SessionGuest = await prisma.sessionGuest.delete({
-     *   where: {
-     *     // ... filter to delete one SessionGuest
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SessionGuestDeleteArgs>(args: SelectSubset<T, SessionGuestDeleteArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one SessionGuest.
-     * @param {SessionGuestUpdateArgs} args - Arguments to update one SessionGuest.
-     * @example
-     * // Update one SessionGuest
-     * const sessionGuest = await prisma.sessionGuest.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SessionGuestUpdateArgs>(args: SelectSubset<T, SessionGuestUpdateArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more SessionGuests.
-     * @param {SessionGuestDeleteManyArgs} args - Arguments to filter SessionGuests to delete.
-     * @example
-     * // Delete a few SessionGuests
-     * const { count } = await prisma.sessionGuest.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SessionGuestDeleteManyArgs>(args?: SelectSubset<T, SessionGuestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more SessionGuests.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGuestUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many SessionGuests
-     * const sessionGuest = await prisma.sessionGuest.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SessionGuestUpdateManyArgs>(args: SelectSubset<T, SessionGuestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one SessionGuest.
-     * @param {SessionGuestUpsertArgs} args - Arguments to update or create a SessionGuest.
-     * @example
-     * // Update or create a SessionGuest
-     * const sessionGuest = await prisma.sessionGuest.upsert({
-     *   create: {
-     *     // ... data to create a SessionGuest
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the SessionGuest we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SessionGuestUpsertArgs>(args: SelectSubset<T, SessionGuestUpsertArgs<ExtArgs>>): Prisma__SessionGuestClient<$Result.GetResult<Prisma.$SessionGuestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of SessionGuests.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGuestCountArgs} args - Arguments to filter SessionGuests to count.
-     * @example
-     * // Count the number of SessionGuests
-     * const count = await prisma.sessionGuest.count({
-     *   where: {
-     *     // ... the filter for the SessionGuests we want to count
-     *   }
-     * })
-    **/
-    count<T extends SessionGuestCountArgs>(
-      args?: Subset<T, SessionGuestCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SessionGuestCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a SessionGuest.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGuestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SessionGuestAggregateArgs>(args: Subset<T, SessionGuestAggregateArgs>): Prisma.PrismaPromise<GetSessionGuestAggregateType<T>>
-
-    /**
-     * Group by SessionGuest.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGuestGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SessionGuestGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SessionGuestGroupByArgs['orderBy'] }
-        : { orderBy?: SessionGuestGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SessionGuestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionGuestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the SessionGuest model
-   */
-  readonly fields: SessionGuestFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for SessionGuest.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SessionGuestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    session<T extends SessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SessionDefaultArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    guest<T extends GuestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuestDefaultArgs<ExtArgs>>): Prisma__GuestClient<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the SessionGuest model
-   */
-  interface SessionGuestFieldRefs {
-    readonly sessionId: FieldRef<"SessionGuest", 'Int'>
-    readonly guestId: FieldRef<"SessionGuest", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * SessionGuest findUnique
-   */
-  export type SessionGuestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionGuest to fetch.
-     */
-    where: SessionGuestWhereUniqueInput
-  }
-
-  /**
-   * SessionGuest findUniqueOrThrow
-   */
-  export type SessionGuestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionGuest to fetch.
-     */
-    where: SessionGuestWhereUniqueInput
-  }
-
-  /**
-   * SessionGuest findFirst
-   */
-  export type SessionGuestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionGuest to fetch.
-     */
-    where?: SessionGuestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SessionGuests to fetch.
-     */
-    orderBy?: SessionGuestOrderByWithRelationInput | SessionGuestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SessionGuests.
-     */
-    cursor?: SessionGuestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SessionGuests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SessionGuests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SessionGuests.
-     */
-    distinct?: SessionGuestScalarFieldEnum | SessionGuestScalarFieldEnum[]
-  }
-
-  /**
-   * SessionGuest findFirstOrThrow
-   */
-  export type SessionGuestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionGuest to fetch.
-     */
-    where?: SessionGuestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SessionGuests to fetch.
-     */
-    orderBy?: SessionGuestOrderByWithRelationInput | SessionGuestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SessionGuests.
-     */
-    cursor?: SessionGuestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SessionGuests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SessionGuests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SessionGuests.
-     */
-    distinct?: SessionGuestScalarFieldEnum | SessionGuestScalarFieldEnum[]
-  }
-
-  /**
-   * SessionGuest findMany
-   */
-  export type SessionGuestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionGuests to fetch.
-     */
-    where?: SessionGuestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SessionGuests to fetch.
-     */
-    orderBy?: SessionGuestOrderByWithRelationInput | SessionGuestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing SessionGuests.
-     */
-    cursor?: SessionGuestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SessionGuests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SessionGuests.
-     */
-    skip?: number
-    distinct?: SessionGuestScalarFieldEnum | SessionGuestScalarFieldEnum[]
-  }
-
-  /**
-   * SessionGuest create
-   */
-  export type SessionGuestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * The data needed to create a SessionGuest.
-     */
-    data: XOR<SessionGuestCreateInput, SessionGuestUncheckedCreateInput>
-  }
-
-  /**
-   * SessionGuest createMany
-   */
-  export type SessionGuestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many SessionGuests.
-     */
-    data: SessionGuestCreateManyInput | SessionGuestCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * SessionGuest update
-   */
-  export type SessionGuestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * The data needed to update a SessionGuest.
-     */
-    data: XOR<SessionGuestUpdateInput, SessionGuestUncheckedUpdateInput>
-    /**
-     * Choose, which SessionGuest to update.
-     */
-    where: SessionGuestWhereUniqueInput
-  }
-
-  /**
-   * SessionGuest updateMany
-   */
-  export type SessionGuestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update SessionGuests.
-     */
-    data: XOR<SessionGuestUpdateManyMutationInput, SessionGuestUncheckedUpdateManyInput>
-    /**
-     * Filter which SessionGuests to update
-     */
-    where?: SessionGuestWhereInput
-    /**
-     * Limit how many SessionGuests to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * SessionGuest upsert
-   */
-  export type SessionGuestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * The filter to search for the SessionGuest to update in case it exists.
-     */
-    where: SessionGuestWhereUniqueInput
-    /**
-     * In case the SessionGuest found by the `where` argument doesn't exist, create a new SessionGuest with this data.
-     */
-    create: XOR<SessionGuestCreateInput, SessionGuestUncheckedCreateInput>
-    /**
-     * In case the SessionGuest was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SessionGuestUpdateInput, SessionGuestUncheckedUpdateInput>
-  }
-
-  /**
-   * SessionGuest delete
-   */
-  export type SessionGuestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
-    /**
-     * Filter which SessionGuest to delete.
-     */
-    where: SessionGuestWhereUniqueInput
-  }
-
-  /**
-   * SessionGuest deleteMany
-   */
-  export type SessionGuestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SessionGuests to delete
-     */
-    where?: SessionGuestWhereInput
-    /**
-     * Limit how many SessionGuests to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * SessionGuest without action
-   */
-  export type SessionGuestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionGuest
-     */
-    select?: SessionGuestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionGuest
-     */
-    omit?: SessionGuestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionGuestInclude<ExtArgs> | null
   }
 
 
@@ -21474,12 +20488,13 @@ export namespace Prisma {
 
   export const SessionScalarFieldEnum: {
     id: 'id',
-    roomStatusId: 'roomStatusId',
-    numberOfGuests: 'numberOfGuests',
+    roomNumber: 'roomNumber',
     numberOfExtraBeds: 'numberOfExtraBeds',
     actualCheckIn: 'actualCheckIn',
     actualCheckOut: 'actualCheckOut',
-    roomNumber: 'roomNumber'
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -21497,14 +20512,6 @@ export namespace Prisma {
   };
 
   export type GuestScalarFieldEnum = (typeof GuestScalarFieldEnum)[keyof typeof GuestScalarFieldEnum]
-
-
-  export const SessionGuestScalarFieldEnum: {
-    sessionId: 'sessionId',
-    guestId: 'guestId'
-  };
-
-  export type SessionGuestScalarFieldEnum = (typeof SessionGuestScalarFieldEnum)[keyof typeof SessionGuestScalarFieldEnum]
 
 
   export const MiniBarScalarFieldEnum: {
@@ -21667,13 +20674,6 @@ export namespace Prisma {
   export type GuestOrderByRelevanceFieldEnum = (typeof GuestOrderByRelevanceFieldEnum)[keyof typeof GuestOrderByRelevanceFieldEnum]
 
 
-  export const SessionGuestOrderByRelevanceFieldEnum: {
-    guestId: 'guestId'
-  };
-
-  export type SessionGuestOrderByRelevanceFieldEnum = (typeof SessionGuestOrderByRelevanceFieldEnum)[keyof typeof SessionGuestOrderByRelevanceFieldEnum]
-
-
   export const ItemOrderByRelevanceFieldEnum: {
     name: 'name'
   };
@@ -21745,6 +20745,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -21899,7 +20906,7 @@ export namespace Prisma {
     miniBar?: XOR<MiniBarNullableScalarRelationFilter, MiniBarWhereInput> | null
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
-    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    session?: SessionListRelationFilter
   }
 
   export type RoomOrderByWithRelationInput = {
@@ -21914,7 +20921,7 @@ export namespace Prisma {
     miniBar?: MiniBarOrderByWithRelationInput
     bookings?: BookingOrderByRelationAggregateInput
     receipts?: ReceiptOrderByRelationAggregateInput
-    session?: SessionOrderByWithRelationInput
+    session?: SessionOrderByRelationAggregateInput
   }
 
   export type RoomWhereUniqueInput = Prisma.AtLeast<{
@@ -21932,7 +20939,7 @@ export namespace Prisma {
     miniBar?: XOR<MiniBarNullableScalarRelationFilter, MiniBarWhereInput> | null
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
-    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    session?: SessionListRelationFilter
   }, "roomNumber" | "sessionId">
 
   export type RoomOrderByWithAggregationInput = {
@@ -21964,26 +20971,28 @@ export namespace Prisma {
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
     id?: IntFilter<"Session"> | number
-    roomStatusId?: IntFilter<"Session"> | number
-    numberOfGuests?: IntFilter<"Session"> | number
+    roomNumber?: IntFilter<"Session"> | number
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
-    actualCheckOut?: DateTimeFilter<"Session"> | Date | string
-    roomNumber?: IntFilter<"Session"> | number
+    actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
+    isActive?: BoolFilter<"Session"> | boolean
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
     room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
-    guests?: SessionGuestListRelationFilter
+    guests?: GuestListRelationFilter
   }
 
   export type SessionOrderByWithRelationInput = {
     id?: SortOrder
-    roomStatusId?: SortOrder
-    numberOfGuests?: SortOrder
+    roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
-    actualCheckOut?: SortOrder
-    roomNumber?: SortOrder
+    actualCheckOut?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     room?: RoomOrderByWithRelationInput
-    guests?: SessionGuestOrderByRelationAggregateInput
+    guests?: GuestOrderByRelationAggregateInput
   }
 
   export type SessionWhereUniqueInput = Prisma.AtLeast<{
@@ -21992,23 +21001,25 @@ export namespace Prisma {
     AND?: SessionWhereInput | SessionWhereInput[]
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
-    roomStatusId?: IntFilter<"Session"> | number
-    numberOfGuests?: IntFilter<"Session"> | number
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
-    actualCheckOut?: DateTimeFilter<"Session"> | Date | string
+    actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
+    isActive?: BoolFilter<"Session"> | boolean
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
     room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
-    guests?: SessionGuestListRelationFilter
+    guests?: GuestListRelationFilter
   }, "id" | "roomNumber">
 
   export type SessionOrderByWithAggregationInput = {
     id?: SortOrder
-    roomStatusId?: SortOrder
-    numberOfGuests?: SortOrder
+    roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
-    actualCheckOut?: SortOrder
-    roomNumber?: SortOrder
+    actualCheckOut?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: SessionCountOrderByAggregateInput
     _avg?: SessionAvgOrderByAggregateInput
     _max?: SessionMaxOrderByAggregateInput
@@ -22021,12 +21032,13 @@ export namespace Prisma {
     OR?: SessionScalarWhereWithAggregatesInput[]
     NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Session"> | number
-    roomStatusId?: IntWithAggregatesFilter<"Session"> | number
-    numberOfGuests?: IntWithAggregatesFilter<"Session"> | number
+    roomNumber?: IntWithAggregatesFilter<"Session"> | number
     numberOfExtraBeds?: IntWithAggregatesFilter<"Session"> | number
     actualCheckIn?: DateTimeWithAggregatesFilter<"Session"> | Date | string
-    actualCheckOut?: DateTimeWithAggregatesFilter<"Session"> | Date | string
-    roomNumber?: IntWithAggregatesFilter<"Session"> | number
+    actualCheckOut?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
+    isActive?: BoolWithAggregatesFilter<"Session"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
   }
 
   export type GuestWhereInput = {
@@ -22041,7 +21053,7 @@ export namespace Prisma {
     nicCardNum?: StringNullableFilter<"Guest"> | string | null
     createdAt?: DateTimeFilter<"Guest"> | Date | string
     updatedAt?: DateTimeFilter<"Guest"> | Date | string
-    sessionGuest?: XOR<SessionGuestNullableScalarRelationFilter, SessionGuestWhereInput> | null
+    sessions?: SessionListRelationFilter
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
   }
@@ -22055,7 +21067,7 @@ export namespace Prisma {
     nicCardNum?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    sessionGuest?: SessionGuestOrderByWithRelationInput
+    sessions?: SessionOrderByRelationAggregateInput
     bookings?: BookingOrderByRelationAggregateInput
     receipts?: ReceiptOrderByRelationAggregateInput
     _relevance?: GuestOrderByRelevanceInput
@@ -22073,7 +21085,7 @@ export namespace Prisma {
     nicCardNum?: StringNullableFilter<"Guest"> | string | null
     createdAt?: DateTimeFilter<"Guest"> | Date | string
     updatedAt?: DateTimeFilter<"Guest"> | Date | string
-    sessionGuest?: XOR<SessionGuestNullableScalarRelationFilter, SessionGuestWhereInput> | null
+    sessions?: SessionListRelationFilter
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
   }, "uid">
@@ -22104,53 +21116,6 @@ export namespace Prisma {
     nicCardNum?: StringNullableWithAggregatesFilter<"Guest"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Guest"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Guest"> | Date | string
-  }
-
-  export type SessionGuestWhereInput = {
-    AND?: SessionGuestWhereInput | SessionGuestWhereInput[]
-    OR?: SessionGuestWhereInput[]
-    NOT?: SessionGuestWhereInput | SessionGuestWhereInput[]
-    sessionId?: IntFilter<"SessionGuest"> | number
-    guestId?: StringFilter<"SessionGuest"> | string
-    session?: XOR<SessionScalarRelationFilter, SessionWhereInput>
-    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
-  }
-
-  export type SessionGuestOrderByWithRelationInput = {
-    sessionId?: SortOrder
-    guestId?: SortOrder
-    session?: SessionOrderByWithRelationInput
-    guest?: GuestOrderByWithRelationInput
-    _relevance?: SessionGuestOrderByRelevanceInput
-  }
-
-  export type SessionGuestWhereUniqueInput = Prisma.AtLeast<{
-    guestId?: string
-    sessionId_guestId?: SessionGuestSessionIdGuestIdCompoundUniqueInput
-    AND?: SessionGuestWhereInput | SessionGuestWhereInput[]
-    OR?: SessionGuestWhereInput[]
-    NOT?: SessionGuestWhereInput | SessionGuestWhereInput[]
-    sessionId?: IntFilter<"SessionGuest"> | number
-    session?: XOR<SessionScalarRelationFilter, SessionWhereInput>
-    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
-  }, "sessionId_guestId" | "guestId">
-
-  export type SessionGuestOrderByWithAggregationInput = {
-    sessionId?: SortOrder
-    guestId?: SortOrder
-    _count?: SessionGuestCountOrderByAggregateInput
-    _avg?: SessionGuestAvgOrderByAggregateInput
-    _max?: SessionGuestMaxOrderByAggregateInput
-    _min?: SessionGuestMinOrderByAggregateInput
-    _sum?: SessionGuestSumOrderByAggregateInput
-  }
-
-  export type SessionGuestScalarWhereWithAggregatesInput = {
-    AND?: SessionGuestScalarWhereWithAggregatesInput | SessionGuestScalarWhereWithAggregatesInput[]
-    OR?: SessionGuestScalarWhereWithAggregatesInput[]
-    NOT?: SessionGuestScalarWhereWithAggregatesInput | SessionGuestScalarWhereWithAggregatesInput[]
-    sessionId?: IntWithAggregatesFilter<"SessionGuest"> | number
-    guestId?: StringWithAggregatesFilter<"SessionGuest"> | string
   }
 
   export type MiniBarWhereInput = {
@@ -22933,7 +21898,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateInput = {
@@ -22945,7 +21910,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUpdateInput = {
@@ -22957,7 +21922,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateInput = {
@@ -22969,7 +21934,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomCreateManyInput = {
@@ -22994,73 +21959,80 @@ export namespace Prisma {
   }
 
   export type SessionCreateInput = {
-    roomStatusId: number
-    numberOfGuests: number
     numberOfExtraBeds: number
     actualCheckIn: Date | string
-    actualCheckOut: Date | string
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     room: RoomCreateNestedOneWithoutSessionInput
-    guests?: SessionGuestCreateNestedManyWithoutSessionInput
+    guests?: GuestCreateNestedManyWithoutSessionsInput
   }
 
   export type SessionUncheckedCreateInput = {
     id?: number
-    roomStatusId: number
-    numberOfGuests: number
+    roomNumber: number
     numberOfExtraBeds: number
     actualCheckIn: Date | string
-    actualCheckOut: Date | string
-    roomNumber: number
-    guests?: SessionGuestUncheckedCreateNestedManyWithoutSessionInput
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: GuestUncheckedCreateNestedManyWithoutSessionsInput
   }
 
   export type SessionUpdateInput = {
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     room?: RoomUpdateOneRequiredWithoutSessionNestedInput
-    guests?: SessionGuestUpdateManyWithoutSessionNestedInput
+    guests?: GuestUpdateManyWithoutSessionsNestedInput
   }
 
   export type SessionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
+    roomNumber?: IntFieldUpdateOperationsInput | number
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
-    roomNumber?: IntFieldUpdateOperationsInput | number
-    guests?: SessionGuestUncheckedUpdateManyWithoutSessionNestedInput
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: GuestUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
   export type SessionCreateManyInput = {
     id?: number
-    roomStatusId: number
-    numberOfGuests: number
+    roomNumber: number
     numberOfExtraBeds: number
     actualCheckIn: Date | string
-    actualCheckOut: Date | string
-    roomNumber: number
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SessionUpdateManyMutationInput = {
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
+    roomNumber?: IntFieldUpdateOperationsInput | number
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GuestCreateInput = {
@@ -23072,7 +22044,7 @@ export namespace Prisma {
     nicCardNum?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionGuest?: SessionGuestCreateNestedOneWithoutGuestInput
+    sessions?: SessionCreateNestedManyWithoutGuestsInput
     bookings?: BookingCreateNestedManyWithoutGuestInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
@@ -23086,7 +22058,7 @@ export namespace Prisma {
     nicCardNum?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionGuest?: SessionGuestUncheckedCreateNestedOneWithoutGuestInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutGuestsInput
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
@@ -23100,7 +22072,7 @@ export namespace Prisma {
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionGuest?: SessionGuestUpdateOneWithoutGuestNestedInput
+    sessions?: SessionUpdateManyWithoutGuestsNestedInput
     bookings?: BookingUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
   }
@@ -23114,7 +22086,7 @@ export namespace Prisma {
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionGuest?: SessionGuestUncheckedUpdateOneWithoutGuestNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutGuestsNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
   }
@@ -23150,40 +22122,6 @@ export namespace Prisma {
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SessionGuestCreateInput = {
-    session: SessionCreateNestedOneWithoutGuestsInput
-    guest: GuestCreateNestedOneWithoutSessionGuestInput
-  }
-
-  export type SessionGuestUncheckedCreateInput = {
-    sessionId: number
-    guestId: string
-  }
-
-  export type SessionGuestUpdateInput = {
-    session?: SessionUpdateOneRequiredWithoutGuestsNestedInput
-    guest?: GuestUpdateOneRequiredWithoutSessionGuestNestedInput
-  }
-
-  export type SessionGuestUncheckedUpdateInput = {
-    sessionId?: IntFieldUpdateOperationsInput | number
-    guestId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SessionGuestCreateManyInput = {
-    sessionId: number
-    guestId: string
-  }
-
-  export type SessionGuestUpdateManyMutationInput = {
-
-  }
-
-  export type SessionGuestUncheckedUpdateManyInput = {
-    sessionId?: IntFieldUpdateOperationsInput | number
-    guestId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MiniBarCreateInput = {
@@ -23987,9 +22925,10 @@ export namespace Prisma {
     none?: ReceiptWhereInput
   }
 
-  export type SessionNullableScalarRelationFilter = {
-    is?: SessionWhereInput | null
-    isNot?: SessionWhereInput | null
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
   }
 
   export type SortOrderInput = {
@@ -24002,6 +22941,10 @@ export namespace Prisma {
   }
 
   export type ReceiptOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24072,65 +23015,80 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type RoomScalarRelationFilter = {
     is?: RoomWhereInput
     isNot?: RoomWhereInput
   }
 
-  export type SessionGuestListRelationFilter = {
-    every?: SessionGuestWhereInput
-    some?: SessionGuestWhereInput
-    none?: SessionGuestWhereInput
+  export type GuestListRelationFilter = {
+    every?: GuestWhereInput
+    some?: GuestWhereInput
+    none?: GuestWhereInput
   }
 
-  export type SessionGuestOrderByRelationAggregateInput = {
+  export type GuestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
-    roomStatusId?: SortOrder
-    numberOfGuests?: SortOrder
+    roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     actualCheckOut?: SortOrder
-    roomNumber?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SessionAvgOrderByAggregateInput = {
     id?: SortOrder
-    roomStatusId?: SortOrder
-    numberOfGuests?: SortOrder
-    numberOfExtraBeds?: SortOrder
     roomNumber?: SortOrder
+    numberOfExtraBeds?: SortOrder
   }
 
   export type SessionMaxOrderByAggregateInput = {
     id?: SortOrder
-    roomStatusId?: SortOrder
-    numberOfGuests?: SortOrder
+    roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     actualCheckOut?: SortOrder
-    roomNumber?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SessionMinOrderByAggregateInput = {
     id?: SortOrder
-    roomStatusId?: SortOrder
-    numberOfGuests?: SortOrder
+    roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     actualCheckOut?: SortOrder
-    roomNumber?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type SessionSumOrderByAggregateInput = {
     id?: SortOrder
-    roomStatusId?: SortOrder
-    numberOfGuests?: SortOrder
-    numberOfExtraBeds?: SortOrder
     roomNumber?: SortOrder
+    numberOfExtraBeds?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -24147,6 +23105,28 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -24160,11 +23140,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SessionGuestNullableScalarRelationFilter = {
-    is?: SessionGuestWhereInput | null
-    isNot?: SessionGuestWhereInput | null
   }
 
   export type GuestOrderByRelevanceInput = {
@@ -24222,50 +23197,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type SessionScalarRelationFilter = {
-    is?: SessionWhereInput
-    isNot?: SessionWhereInput
-  }
-
-  export type GuestScalarRelationFilter = {
-    is?: GuestWhereInput
-    isNot?: GuestWhereInput
-  }
-
-  export type SessionGuestOrderByRelevanceInput = {
-    fields: SessionGuestOrderByRelevanceFieldEnum | SessionGuestOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type SessionGuestSessionIdGuestIdCompoundUniqueInput = {
-    sessionId: number
-    guestId: string
-  }
-
-  export type SessionGuestCountOrderByAggregateInput = {
-    sessionId?: SortOrder
-    guestId?: SortOrder
-  }
-
-  export type SessionGuestAvgOrderByAggregateInput = {
-    sessionId?: SortOrder
-  }
-
-  export type SessionGuestMaxOrderByAggregateInput = {
-    sessionId?: SortOrder
-    guestId?: SortOrder
-  }
-
-  export type SessionGuestMinOrderByAggregateInput = {
-    sessionId?: SortOrder
-    guestId?: SortOrder
-  }
-
-  export type SessionGuestSumOrderByAggregateInput = {
-    sessionId?: SortOrder
   }
 
   export type MiniBarItemListRelationFilter = {
@@ -24484,6 +23415,11 @@ export namespace Prisma {
   export type BookingSumOrderByAggregateInput = {
     id?: SortOrder
     roomNumber?: SortOrder
+  }
+
+  export type GuestScalarRelationFilter = {
+    is?: GuestWhereInput
+    isNot?: GuestWhereInput
   }
 
   export type AdditionalChargeReceiptListRelationFilter = {
@@ -24952,10 +23888,11 @@ export namespace Prisma {
     connect?: ReceiptWhereUniqueInput | ReceiptWhereUniqueInput[]
   }
 
-  export type SessionCreateNestedOneWithoutRoomInput = {
-    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput
-    connect?: SessionWhereUniqueInput
+  export type SessionCreateNestedManyWithoutRoomInput = {
+    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput> | SessionCreateWithoutRoomInput[] | SessionUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput | SessionCreateOrConnectWithoutRoomInput[]
+    createMany?: SessionCreateManyRoomInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type MiniBarUncheckedCreateNestedOneWithoutRoomInput = {
@@ -24978,10 +23915,11 @@ export namespace Prisma {
     connect?: ReceiptWhereUniqueInput | ReceiptWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedOneWithoutRoomInput = {
-    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput
-    connect?: SessionWhereUniqueInput
+  export type SessionUncheckedCreateNestedManyWithoutRoomInput = {
+    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput> | SessionCreateWithoutRoomInput[] | SessionUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput | SessionCreateOrConnectWithoutRoomInput[]
+    createMany?: SessionCreateManyRoomInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -25056,14 +23994,18 @@ export namespace Prisma {
     deleteMany?: ReceiptScalarWhereInput | ReceiptScalarWhereInput[]
   }
 
-  export type SessionUpdateOneWithoutRoomNestedInput = {
-    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput
-    upsert?: SessionUpsertWithoutRoomInput
-    disconnect?: SessionWhereInput | boolean
-    delete?: SessionWhereInput | boolean
-    connect?: SessionWhereUniqueInput
-    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutRoomInput, SessionUpdateWithoutRoomInput>, SessionUncheckedUpdateWithoutRoomInput>
+  export type SessionUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput> | SessionCreateWithoutRoomInput[] | SessionUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput | SessionCreateOrConnectWithoutRoomInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutRoomInput | SessionUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: SessionCreateManyRoomInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutRoomInput | SessionUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutRoomInput | SessionUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type MiniBarUncheckedUpdateOneWithoutRoomNestedInput = {
@@ -25104,14 +24046,18 @@ export namespace Prisma {
     deleteMany?: ReceiptScalarWhereInput | ReceiptScalarWhereInput[]
   }
 
-  export type SessionUncheckedUpdateOneWithoutRoomNestedInput = {
-    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput
-    upsert?: SessionUpsertWithoutRoomInput
-    disconnect?: SessionWhereInput | boolean
-    delete?: SessionWhereInput | boolean
-    connect?: SessionWhereUniqueInput
-    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutRoomInput, SessionUpdateWithoutRoomInput>, SessionUncheckedUpdateWithoutRoomInput>
+  export type SessionUncheckedUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput> | SessionCreateWithoutRoomInput[] | SessionUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutRoomInput | SessionCreateOrConnectWithoutRoomInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutRoomInput | SessionUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: SessionCreateManyRoomInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutRoomInput | SessionUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutRoomInput | SessionUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type RoomCreateNestedOneWithoutSessionInput = {
@@ -25120,22 +24066,28 @@ export namespace Prisma {
     connect?: RoomWhereUniqueInput
   }
 
-  export type SessionGuestCreateNestedManyWithoutSessionInput = {
-    create?: XOR<SessionGuestCreateWithoutSessionInput, SessionGuestUncheckedCreateWithoutSessionInput> | SessionGuestCreateWithoutSessionInput[] | SessionGuestUncheckedCreateWithoutSessionInput[]
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutSessionInput | SessionGuestCreateOrConnectWithoutSessionInput[]
-    createMany?: SessionGuestCreateManySessionInputEnvelope
-    connect?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
+  export type GuestCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<GuestCreateWithoutSessionsInput, GuestUncheckedCreateWithoutSessionsInput> | GuestCreateWithoutSessionsInput[] | GuestUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: GuestCreateOrConnectWithoutSessionsInput | GuestCreateOrConnectWithoutSessionsInput[]
+    connect?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
   }
 
-  export type SessionGuestUncheckedCreateNestedManyWithoutSessionInput = {
-    create?: XOR<SessionGuestCreateWithoutSessionInput, SessionGuestUncheckedCreateWithoutSessionInput> | SessionGuestCreateWithoutSessionInput[] | SessionGuestUncheckedCreateWithoutSessionInput[]
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutSessionInput | SessionGuestCreateOrConnectWithoutSessionInput[]
-    createMany?: SessionGuestCreateManySessionInputEnvelope
-    connect?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
+  export type GuestUncheckedCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<GuestCreateWithoutSessionsInput, GuestUncheckedCreateWithoutSessionsInput> | GuestCreateWithoutSessionsInput[] | GuestUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: GuestCreateOrConnectWithoutSessionsInput | GuestCreateOrConnectWithoutSessionsInput[]
+    connect?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type RoomUpdateOneRequiredWithoutSessionNestedInput = {
@@ -25146,38 +24098,36 @@ export namespace Prisma {
     update?: XOR<XOR<RoomUpdateToOneWithWhereWithoutSessionInput, RoomUpdateWithoutSessionInput>, RoomUncheckedUpdateWithoutSessionInput>
   }
 
-  export type SessionGuestUpdateManyWithoutSessionNestedInput = {
-    create?: XOR<SessionGuestCreateWithoutSessionInput, SessionGuestUncheckedCreateWithoutSessionInput> | SessionGuestCreateWithoutSessionInput[] | SessionGuestUncheckedCreateWithoutSessionInput[]
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutSessionInput | SessionGuestCreateOrConnectWithoutSessionInput[]
-    upsert?: SessionGuestUpsertWithWhereUniqueWithoutSessionInput | SessionGuestUpsertWithWhereUniqueWithoutSessionInput[]
-    createMany?: SessionGuestCreateManySessionInputEnvelope
-    set?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    disconnect?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    delete?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    connect?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    update?: SessionGuestUpdateWithWhereUniqueWithoutSessionInput | SessionGuestUpdateWithWhereUniqueWithoutSessionInput[]
-    updateMany?: SessionGuestUpdateManyWithWhereWithoutSessionInput | SessionGuestUpdateManyWithWhereWithoutSessionInput[]
-    deleteMany?: SessionGuestScalarWhereInput | SessionGuestScalarWhereInput[]
+  export type GuestUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<GuestCreateWithoutSessionsInput, GuestUncheckedCreateWithoutSessionsInput> | GuestCreateWithoutSessionsInput[] | GuestUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: GuestCreateOrConnectWithoutSessionsInput | GuestCreateOrConnectWithoutSessionsInput[]
+    upsert?: GuestUpsertWithWhereUniqueWithoutSessionsInput | GuestUpsertWithWhereUniqueWithoutSessionsInput[]
+    set?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    disconnect?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    delete?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    connect?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    update?: GuestUpdateWithWhereUniqueWithoutSessionsInput | GuestUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: GuestUpdateManyWithWhereWithoutSessionsInput | GuestUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: GuestScalarWhereInput | GuestScalarWhereInput[]
   }
 
-  export type SessionGuestUncheckedUpdateManyWithoutSessionNestedInput = {
-    create?: XOR<SessionGuestCreateWithoutSessionInput, SessionGuestUncheckedCreateWithoutSessionInput> | SessionGuestCreateWithoutSessionInput[] | SessionGuestUncheckedCreateWithoutSessionInput[]
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutSessionInput | SessionGuestCreateOrConnectWithoutSessionInput[]
-    upsert?: SessionGuestUpsertWithWhereUniqueWithoutSessionInput | SessionGuestUpsertWithWhereUniqueWithoutSessionInput[]
-    createMany?: SessionGuestCreateManySessionInputEnvelope
-    set?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    disconnect?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    delete?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    connect?: SessionGuestWhereUniqueInput | SessionGuestWhereUniqueInput[]
-    update?: SessionGuestUpdateWithWhereUniqueWithoutSessionInput | SessionGuestUpdateWithWhereUniqueWithoutSessionInput[]
-    updateMany?: SessionGuestUpdateManyWithWhereWithoutSessionInput | SessionGuestUpdateManyWithWhereWithoutSessionInput[]
-    deleteMany?: SessionGuestScalarWhereInput | SessionGuestScalarWhereInput[]
+  export type GuestUncheckedUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<GuestCreateWithoutSessionsInput, GuestUncheckedCreateWithoutSessionsInput> | GuestCreateWithoutSessionsInput[] | GuestUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: GuestCreateOrConnectWithoutSessionsInput | GuestCreateOrConnectWithoutSessionsInput[]
+    upsert?: GuestUpsertWithWhereUniqueWithoutSessionsInput | GuestUpsertWithWhereUniqueWithoutSessionsInput[]
+    set?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    disconnect?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    delete?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    connect?: GuestWhereUniqueInput | GuestWhereUniqueInput[]
+    update?: GuestUpdateWithWhereUniqueWithoutSessionsInput | GuestUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: GuestUpdateManyWithWhereWithoutSessionsInput | GuestUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: GuestScalarWhereInput | GuestScalarWhereInput[]
   }
 
-  export type SessionGuestCreateNestedOneWithoutGuestInput = {
-    create?: XOR<SessionGuestCreateWithoutGuestInput, SessionGuestUncheckedCreateWithoutGuestInput>
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutGuestInput
-    connect?: SessionGuestWhereUniqueInput
+  export type SessionCreateNestedManyWithoutGuestsInput = {
+    create?: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput> | SessionCreateWithoutGuestsInput[] | SessionUncheckedCreateWithoutGuestsInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutGuestsInput | SessionCreateOrConnectWithoutGuestsInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type BookingCreateNestedManyWithoutGuestInput = {
@@ -25194,10 +24144,10 @@ export namespace Prisma {
     connect?: ReceiptWhereUniqueInput | ReceiptWhereUniqueInput[]
   }
 
-  export type SessionGuestUncheckedCreateNestedOneWithoutGuestInput = {
-    create?: XOR<SessionGuestCreateWithoutGuestInput, SessionGuestUncheckedCreateWithoutGuestInput>
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutGuestInput
-    connect?: SessionGuestWhereUniqueInput
+  export type SessionUncheckedCreateNestedManyWithoutGuestsInput = {
+    create?: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput> | SessionCreateWithoutGuestsInput[] | SessionUncheckedCreateWithoutGuestsInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutGuestsInput | SessionCreateOrConnectWithoutGuestsInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type BookingUncheckedCreateNestedManyWithoutGuestInput = {
@@ -25218,14 +24168,17 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type SessionGuestUpdateOneWithoutGuestNestedInput = {
-    create?: XOR<SessionGuestCreateWithoutGuestInput, SessionGuestUncheckedCreateWithoutGuestInput>
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutGuestInput
-    upsert?: SessionGuestUpsertWithoutGuestInput
-    disconnect?: SessionGuestWhereInput | boolean
-    delete?: SessionGuestWhereInput | boolean
-    connect?: SessionGuestWhereUniqueInput
-    update?: XOR<XOR<SessionGuestUpdateToOneWithWhereWithoutGuestInput, SessionGuestUpdateWithoutGuestInput>, SessionGuestUncheckedUpdateWithoutGuestInput>
+  export type SessionUpdateManyWithoutGuestsNestedInput = {
+    create?: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput> | SessionCreateWithoutGuestsInput[] | SessionUncheckedCreateWithoutGuestsInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutGuestsInput | SessionCreateOrConnectWithoutGuestsInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutGuestsInput | SessionUpsertWithWhereUniqueWithoutGuestsInput[]
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutGuestsInput | SessionUpdateWithWhereUniqueWithoutGuestsInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutGuestsInput | SessionUpdateManyWithWhereWithoutGuestsInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type BookingUpdateManyWithoutGuestNestedInput = {
@@ -25256,14 +24209,17 @@ export namespace Prisma {
     deleteMany?: ReceiptScalarWhereInput | ReceiptScalarWhereInput[]
   }
 
-  export type SessionGuestUncheckedUpdateOneWithoutGuestNestedInput = {
-    create?: XOR<SessionGuestCreateWithoutGuestInput, SessionGuestUncheckedCreateWithoutGuestInput>
-    connectOrCreate?: SessionGuestCreateOrConnectWithoutGuestInput
-    upsert?: SessionGuestUpsertWithoutGuestInput
-    disconnect?: SessionGuestWhereInput | boolean
-    delete?: SessionGuestWhereInput | boolean
-    connect?: SessionGuestWhereUniqueInput
-    update?: XOR<XOR<SessionGuestUpdateToOneWithWhereWithoutGuestInput, SessionGuestUpdateWithoutGuestInput>, SessionGuestUncheckedUpdateWithoutGuestInput>
+  export type SessionUncheckedUpdateManyWithoutGuestsNestedInput = {
+    create?: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput> | SessionCreateWithoutGuestsInput[] | SessionUncheckedCreateWithoutGuestsInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutGuestsInput | SessionCreateOrConnectWithoutGuestsInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutGuestsInput | SessionUpsertWithWhereUniqueWithoutGuestsInput[]
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutGuestsInput | SessionUpdateWithWhereUniqueWithoutGuestsInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutGuestsInput | SessionUpdateManyWithWhereWithoutGuestsInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type BookingUncheckedUpdateManyWithoutGuestNestedInput = {
@@ -25292,34 +24248,6 @@ export namespace Prisma {
     update?: ReceiptUpdateWithWhereUniqueWithoutGuestInput | ReceiptUpdateWithWhereUniqueWithoutGuestInput[]
     updateMany?: ReceiptUpdateManyWithWhereWithoutGuestInput | ReceiptUpdateManyWithWhereWithoutGuestInput[]
     deleteMany?: ReceiptScalarWhereInput | ReceiptScalarWhereInput[]
-  }
-
-  export type SessionCreateNestedOneWithoutGuestsInput = {
-    create?: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutGuestsInput
-    connect?: SessionWhereUniqueInput
-  }
-
-  export type GuestCreateNestedOneWithoutSessionGuestInput = {
-    create?: XOR<GuestCreateWithoutSessionGuestInput, GuestUncheckedCreateWithoutSessionGuestInput>
-    connectOrCreate?: GuestCreateOrConnectWithoutSessionGuestInput
-    connect?: GuestWhereUniqueInput
-  }
-
-  export type SessionUpdateOneRequiredWithoutGuestsNestedInput = {
-    create?: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutGuestsInput
-    upsert?: SessionUpsertWithoutGuestsInput
-    connect?: SessionWhereUniqueInput
-    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutGuestsInput, SessionUpdateWithoutGuestsInput>, SessionUncheckedUpdateWithoutGuestsInput>
-  }
-
-  export type GuestUpdateOneRequiredWithoutSessionGuestNestedInput = {
-    create?: XOR<GuestCreateWithoutSessionGuestInput, GuestUncheckedCreateWithoutSessionGuestInput>
-    connectOrCreate?: GuestCreateOrConnectWithoutSessionGuestInput
-    upsert?: GuestUpsertWithoutSessionGuestInput
-    connect?: GuestWhereUniqueInput
-    update?: XOR<XOR<GuestUpdateToOneWithWhereWithoutSessionGuestInput, GuestUpdateWithoutSessionGuestInput>, GuestUncheckedUpdateWithoutSessionGuestInput>
   }
 
   export type RoomCreateNestedOneWithoutMiniBarInput = {
@@ -26024,6 +24952,22 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -26036,6 +24980,28 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -26079,7 +25045,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutFloorInput = {
@@ -26090,7 +25056,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutFloorInput = {
@@ -26138,7 +25104,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutRoomTypeInput = {
@@ -26149,7 +25115,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutRoomTypeInput = {
@@ -26186,7 +25152,7 @@ export namespace Prisma {
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutStatusInput = {
@@ -26197,7 +25163,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutStatusInput = {
@@ -26342,27 +25308,34 @@ export namespace Prisma {
   }
 
   export type SessionCreateWithoutRoomInput = {
-    roomStatusId: number
-    numberOfGuests: number
     numberOfExtraBeds: number
     actualCheckIn: Date | string
-    actualCheckOut: Date | string
-    guests?: SessionGuestCreateNestedManyWithoutSessionInput
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: GuestCreateNestedManyWithoutSessionsInput
   }
 
   export type SessionUncheckedCreateWithoutRoomInput = {
     id?: number
-    roomStatusId: number
-    numberOfGuests: number
     numberOfExtraBeds: number
     actualCheckIn: Date | string
-    actualCheckOut: Date | string
-    guests?: SessionGuestUncheckedCreateNestedManyWithoutSessionInput
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: GuestUncheckedCreateNestedManyWithoutSessionsInput
   }
 
   export type SessionCreateOrConnectWithoutRoomInput = {
     where: SessionWhereUniqueInput
     create: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput>
+  }
+
+  export type SessionCreateManyRoomInputEnvelope = {
+    data: SessionCreateManyRoomInput | SessionCreateManyRoomInput[]
+    skipDuplicates?: boolean
   }
 
   export type FloorUpsertWithoutRoomsInput = {
@@ -26506,34 +25479,34 @@ export namespace Prisma {
     paidBy?: StringFilter<"Receipt"> | string
   }
 
-  export type SessionUpsertWithoutRoomInput = {
+  export type SessionUpsertWithWhereUniqueWithoutRoomInput = {
+    where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutRoomInput, SessionUncheckedUpdateWithoutRoomInput>
     create: XOR<SessionCreateWithoutRoomInput, SessionUncheckedCreateWithoutRoomInput>
-    where?: SessionWhereInput
   }
 
-  export type SessionUpdateToOneWithWhereWithoutRoomInput = {
-    where?: SessionWhereInput
+  export type SessionUpdateWithWhereUniqueWithoutRoomInput = {
+    where: SessionWhereUniqueInput
     data: XOR<SessionUpdateWithoutRoomInput, SessionUncheckedUpdateWithoutRoomInput>
   }
 
-  export type SessionUpdateWithoutRoomInput = {
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
-    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
-    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
-    guests?: SessionGuestUpdateManyWithoutSessionNestedInput
+  export type SessionUpdateManyWithWhereWithoutRoomInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutRoomInput>
   }
 
-  export type SessionUncheckedUpdateWithoutRoomInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
-    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
-    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
-    guests?: SessionGuestUncheckedUpdateManyWithoutSessionNestedInput
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: IntFilter<"Session"> | number
+    roomNumber?: IntFilter<"Session"> | number
+    numberOfExtraBeds?: IntFilter<"Session"> | number
+    actualCheckIn?: DateTimeFilter<"Session"> | Date | string
+    actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
+    isActive?: BoolFilter<"Session"> | boolean
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
   }
 
   export type RoomCreateWithoutSessionInput = {
@@ -26563,22 +25536,35 @@ export namespace Prisma {
     create: XOR<RoomCreateWithoutSessionInput, RoomUncheckedCreateWithoutSessionInput>
   }
 
-  export type SessionGuestCreateWithoutSessionInput = {
-    guest: GuestCreateNestedOneWithoutSessionGuestInput
+  export type GuestCreateWithoutSessionsInput = {
+    uid?: string
+    name: string
+    phone: string
+    email: string
+    address: string
+    nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingCreateNestedManyWithoutGuestInput
+    receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
 
-  export type SessionGuestUncheckedCreateWithoutSessionInput = {
-    guestId: string
+  export type GuestUncheckedCreateWithoutSessionsInput = {
+    uid?: string
+    name: string
+    phone: string
+    email: string
+    address: string
+    nicCardNum?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
+    receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
 
-  export type SessionGuestCreateOrConnectWithoutSessionInput = {
-    where: SessionGuestWhereUniqueInput
-    create: XOR<SessionGuestCreateWithoutSessionInput, SessionGuestUncheckedCreateWithoutSessionInput>
-  }
-
-  export type SessionGuestCreateManySessionInputEnvelope = {
-    data: SessionGuestCreateManySessionInput | SessionGuestCreateManySessionInput[]
-    skipDuplicates?: boolean
+  export type GuestCreateOrConnectWithoutSessionsInput = {
+    where: GuestWhereUniqueInput
+    create: XOR<GuestCreateWithoutSessionsInput, GuestUncheckedCreateWithoutSessionsInput>
   }
 
   export type RoomUpsertWithoutSessionInput = {
@@ -26614,41 +25600,60 @@ export namespace Prisma {
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
   }
 
-  export type SessionGuestUpsertWithWhereUniqueWithoutSessionInput = {
-    where: SessionGuestWhereUniqueInput
-    update: XOR<SessionGuestUpdateWithoutSessionInput, SessionGuestUncheckedUpdateWithoutSessionInput>
-    create: XOR<SessionGuestCreateWithoutSessionInput, SessionGuestUncheckedCreateWithoutSessionInput>
+  export type GuestUpsertWithWhereUniqueWithoutSessionsInput = {
+    where: GuestWhereUniqueInput
+    update: XOR<GuestUpdateWithoutSessionsInput, GuestUncheckedUpdateWithoutSessionsInput>
+    create: XOR<GuestCreateWithoutSessionsInput, GuestUncheckedCreateWithoutSessionsInput>
   }
 
-  export type SessionGuestUpdateWithWhereUniqueWithoutSessionInput = {
-    where: SessionGuestWhereUniqueInput
-    data: XOR<SessionGuestUpdateWithoutSessionInput, SessionGuestUncheckedUpdateWithoutSessionInput>
+  export type GuestUpdateWithWhereUniqueWithoutSessionsInput = {
+    where: GuestWhereUniqueInput
+    data: XOR<GuestUpdateWithoutSessionsInput, GuestUncheckedUpdateWithoutSessionsInput>
   }
 
-  export type SessionGuestUpdateManyWithWhereWithoutSessionInput = {
-    where: SessionGuestScalarWhereInput
-    data: XOR<SessionGuestUpdateManyMutationInput, SessionGuestUncheckedUpdateManyWithoutSessionInput>
+  export type GuestUpdateManyWithWhereWithoutSessionsInput = {
+    where: GuestScalarWhereInput
+    data: XOR<GuestUpdateManyMutationInput, GuestUncheckedUpdateManyWithoutSessionsInput>
   }
 
-  export type SessionGuestScalarWhereInput = {
-    AND?: SessionGuestScalarWhereInput | SessionGuestScalarWhereInput[]
-    OR?: SessionGuestScalarWhereInput[]
-    NOT?: SessionGuestScalarWhereInput | SessionGuestScalarWhereInput[]
-    sessionId?: IntFilter<"SessionGuest"> | number
-    guestId?: StringFilter<"SessionGuest"> | string
+  export type GuestScalarWhereInput = {
+    AND?: GuestScalarWhereInput | GuestScalarWhereInput[]
+    OR?: GuestScalarWhereInput[]
+    NOT?: GuestScalarWhereInput | GuestScalarWhereInput[]
+    uid?: StringFilter<"Guest"> | string
+    name?: StringFilter<"Guest"> | string
+    phone?: StringFilter<"Guest"> | string
+    email?: StringFilter<"Guest"> | string
+    address?: StringFilter<"Guest"> | string
+    nicCardNum?: StringNullableFilter<"Guest"> | string | null
+    createdAt?: DateTimeFilter<"Guest"> | Date | string
+    updatedAt?: DateTimeFilter<"Guest"> | Date | string
   }
 
-  export type SessionGuestCreateWithoutGuestInput = {
-    session: SessionCreateNestedOneWithoutGuestsInput
+  export type SessionCreateWithoutGuestsInput = {
+    numberOfExtraBeds: number
+    actualCheckIn: Date | string
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    room: RoomCreateNestedOneWithoutSessionInput
   }
 
-  export type SessionGuestUncheckedCreateWithoutGuestInput = {
-    sessionId: number
+  export type SessionUncheckedCreateWithoutGuestsInput = {
+    id?: number
+    roomNumber: number
+    numberOfExtraBeds: number
+    actualCheckIn: Date | string
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type SessionGuestCreateOrConnectWithoutGuestInput = {
-    where: SessionGuestWhereUniqueInput
-    create: XOR<SessionGuestCreateWithoutGuestInput, SessionGuestUncheckedCreateWithoutGuestInput>
+  export type SessionCreateOrConnectWithoutGuestsInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput>
   }
 
   export type BookingCreateWithoutGuestInput = {
@@ -26707,23 +25712,20 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SessionGuestUpsertWithoutGuestInput = {
-    update: XOR<SessionGuestUpdateWithoutGuestInput, SessionGuestUncheckedUpdateWithoutGuestInput>
-    create: XOR<SessionGuestCreateWithoutGuestInput, SessionGuestUncheckedCreateWithoutGuestInput>
-    where?: SessionGuestWhereInput
+  export type SessionUpsertWithWhereUniqueWithoutGuestsInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutGuestsInput, SessionUncheckedUpdateWithoutGuestsInput>
+    create: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput>
   }
 
-  export type SessionGuestUpdateToOneWithWhereWithoutGuestInput = {
-    where?: SessionGuestWhereInput
-    data: XOR<SessionGuestUpdateWithoutGuestInput, SessionGuestUncheckedUpdateWithoutGuestInput>
+  export type SessionUpdateWithWhereUniqueWithoutGuestsInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutGuestsInput, SessionUncheckedUpdateWithoutGuestsInput>
   }
 
-  export type SessionGuestUpdateWithoutGuestInput = {
-    session?: SessionUpdateOneRequiredWithoutGuestsNestedInput
-  }
-
-  export type SessionGuestUncheckedUpdateWithoutGuestInput = {
-    sessionId?: IntFieldUpdateOperationsInput | number
+  export type SessionUpdateManyWithWhereWithoutGuestsInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutGuestsInput>
   }
 
   export type BookingUpsertWithWhereUniqueWithoutGuestInput = {
@@ -26758,128 +25760,6 @@ export namespace Prisma {
     data: XOR<ReceiptUpdateManyMutationInput, ReceiptUncheckedUpdateManyWithoutGuestInput>
   }
 
-  export type SessionCreateWithoutGuestsInput = {
-    roomStatusId: number
-    numberOfGuests: number
-    numberOfExtraBeds: number
-    actualCheckIn: Date | string
-    actualCheckOut: Date | string
-    room: RoomCreateNestedOneWithoutSessionInput
-  }
-
-  export type SessionUncheckedCreateWithoutGuestsInput = {
-    id?: number
-    roomStatusId: number
-    numberOfGuests: number
-    numberOfExtraBeds: number
-    actualCheckIn: Date | string
-    actualCheckOut: Date | string
-    roomNumber: number
-  }
-
-  export type SessionCreateOrConnectWithoutGuestsInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput>
-  }
-
-  export type GuestCreateWithoutSessionGuestInput = {
-    uid?: string
-    name: string
-    phone: string
-    email: string
-    address: string
-    nicCardNum?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    bookings?: BookingCreateNestedManyWithoutGuestInput
-    receipts?: ReceiptCreateNestedManyWithoutGuestInput
-  }
-
-  export type GuestUncheckedCreateWithoutSessionGuestInput = {
-    uid?: string
-    name: string
-    phone: string
-    email: string
-    address: string
-    nicCardNum?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
-    receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
-  }
-
-  export type GuestCreateOrConnectWithoutSessionGuestInput = {
-    where: GuestWhereUniqueInput
-    create: XOR<GuestCreateWithoutSessionGuestInput, GuestUncheckedCreateWithoutSessionGuestInput>
-  }
-
-  export type SessionUpsertWithoutGuestsInput = {
-    update: XOR<SessionUpdateWithoutGuestsInput, SessionUncheckedUpdateWithoutGuestsInput>
-    create: XOR<SessionCreateWithoutGuestsInput, SessionUncheckedCreateWithoutGuestsInput>
-    where?: SessionWhereInput
-  }
-
-  export type SessionUpdateToOneWithWhereWithoutGuestsInput = {
-    where?: SessionWhereInput
-    data: XOR<SessionUpdateWithoutGuestsInput, SessionUncheckedUpdateWithoutGuestsInput>
-  }
-
-  export type SessionUpdateWithoutGuestsInput = {
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
-    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
-    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
-    room?: RoomUpdateOneRequiredWithoutSessionNestedInput
-  }
-
-  export type SessionUncheckedUpdateWithoutGuestsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    roomStatusId?: IntFieldUpdateOperationsInput | number
-    numberOfGuests?: IntFieldUpdateOperationsInput | number
-    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
-    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
-    actualCheckOut?: DateTimeFieldUpdateOperationsInput | Date | string
-    roomNumber?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type GuestUpsertWithoutSessionGuestInput = {
-    update: XOR<GuestUpdateWithoutSessionGuestInput, GuestUncheckedUpdateWithoutSessionGuestInput>
-    create: XOR<GuestCreateWithoutSessionGuestInput, GuestUncheckedCreateWithoutSessionGuestInput>
-    where?: GuestWhereInput
-  }
-
-  export type GuestUpdateToOneWithWhereWithoutSessionGuestInput = {
-    where?: GuestWhereInput
-    data: XOR<GuestUpdateWithoutSessionGuestInput, GuestUncheckedUpdateWithoutSessionGuestInput>
-  }
-
-  export type GuestUpdateWithoutSessionGuestInput = {
-    uid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bookings?: BookingUpdateManyWithoutGuestNestedInput
-    receipts?: ReceiptUpdateManyWithoutGuestNestedInput
-  }
-
-  export type GuestUncheckedUpdateWithoutSessionGuestInput = {
-    uid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
-    receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
-  }
-
   export type RoomCreateWithoutMiniBarInput = {
     roomNumber: number
     sessionId?: number | null
@@ -26888,7 +25768,7 @@ export namespace Prisma {
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutMiniBarInput = {
@@ -26899,7 +25779,7 @@ export namespace Prisma {
     sessionId?: number | null
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutMiniBarInput = {
@@ -26946,7 +25826,7 @@ export namespace Prisma {
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutMiniBarInput = {
@@ -26957,7 +25837,7 @@ export namespace Prisma {
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type MiniBarItemUpsertWithWhereUniqueWithoutMiniBarInput = {
@@ -27244,7 +26124,7 @@ export namespace Prisma {
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     receipts?: ReceiptCreateNestedManyWithoutRoomInput
-    session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutBookingsInput = {
@@ -27255,7 +26135,7 @@ export namespace Prisma {
     sessionId?: number | null
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutRoomInput
-    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutBookingsInput = {
@@ -27272,7 +26152,7 @@ export namespace Prisma {
     nicCardNum?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionGuest?: SessionGuestCreateNestedOneWithoutGuestInput
+    sessions?: SessionCreateNestedManyWithoutGuestsInput
     receipts?: ReceiptCreateNestedManyWithoutGuestInput
   }
 
@@ -27285,7 +26165,7 @@ export namespace Prisma {
     nicCardNum?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionGuest?: SessionGuestUncheckedCreateNestedOneWithoutGuestInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutGuestsInput
     receipts?: ReceiptUncheckedCreateNestedManyWithoutGuestInput
   }
 
@@ -27313,7 +26193,7 @@ export namespace Prisma {
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutBookingsInput = {
@@ -27324,7 +26204,7 @@ export namespace Prisma {
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type GuestUpsertWithoutBookingsInput = {
@@ -27347,7 +26227,7 @@ export namespace Prisma {
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionGuest?: SessionGuestUpdateOneWithoutGuestNestedInput
+    sessions?: SessionUpdateManyWithoutGuestsNestedInput
     receipts?: ReceiptUpdateManyWithoutGuestNestedInput
   }
 
@@ -27360,7 +26240,7 @@ export namespace Prisma {
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionGuest?: SessionGuestUncheckedUpdateOneWithoutGuestNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutGuestsNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
   }
 
@@ -27372,7 +26252,7 @@ export namespace Prisma {
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
     miniBar?: MiniBarCreateNestedOneWithoutRoomInput
     bookings?: BookingCreateNestedManyWithoutRoomInput
-    session?: SessionCreateNestedOneWithoutRoomInput
+    session?: SessionCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutReceiptsInput = {
@@ -27383,7 +26263,7 @@ export namespace Prisma {
     sessionId?: number | null
     miniBar?: MiniBarUncheckedCreateNestedOneWithoutRoomInput
     bookings?: BookingUncheckedCreateNestedManyWithoutRoomInput
-    session?: SessionUncheckedCreateNestedOneWithoutRoomInput
+    session?: SessionUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutReceiptsInput = {
@@ -27400,7 +26280,7 @@ export namespace Prisma {
     nicCardNum?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionGuest?: SessionGuestCreateNestedOneWithoutGuestInput
+    sessions?: SessionCreateNestedManyWithoutGuestsInput
     bookings?: BookingCreateNestedManyWithoutGuestInput
   }
 
@@ -27413,7 +26293,7 @@ export namespace Prisma {
     nicCardNum?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionGuest?: SessionGuestUncheckedCreateNestedOneWithoutGuestInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutGuestsInput
     bookings?: BookingUncheckedCreateNestedManyWithoutGuestInput
   }
 
@@ -27466,7 +26346,7 @@ export namespace Prisma {
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
-    session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutReceiptsInput = {
@@ -27477,7 +26357,7 @@ export namespace Prisma {
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
-    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type GuestUpsertWithoutReceiptsInput = {
@@ -27500,7 +26380,7 @@ export namespace Prisma {
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionGuest?: SessionGuestUpdateOneWithoutGuestNestedInput
+    sessions?: SessionUpdateManyWithoutGuestsNestedInput
     bookings?: BookingUpdateManyWithoutGuestNestedInput
   }
 
@@ -27513,7 +26393,7 @@ export namespace Prisma {
     nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionGuest?: SessionGuestUncheckedUpdateOneWithoutGuestNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutGuestsNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
   }
 
@@ -27984,7 +26864,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutFloorInput = {
@@ -27995,7 +26875,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateManyWithoutFloorInput = {
@@ -28020,7 +26900,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutRoomTypeInput = {
@@ -28031,7 +26911,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateManyWithoutRoomTypeInput = {
@@ -28056,7 +26936,7 @@ export namespace Prisma {
     miniBar?: MiniBarUpdateOneWithoutRoomNestedInput
     bookings?: BookingUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUpdateManyWithoutRoomNestedInput
-    session?: SessionUpdateOneWithoutRoomNestedInput
+    session?: SessionUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutStatusInput = {
@@ -28067,7 +26947,7 @@ export namespace Prisma {
     miniBar?: MiniBarUncheckedUpdateOneWithoutRoomNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutRoomNestedInput
     receipts?: ReceiptUncheckedUpdateManyWithoutRoomNestedInput
-    session?: SessionUncheckedUpdateOneWithoutRoomNestedInput
+    session?: SessionUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateManyWithoutStatusInput = {
@@ -28093,6 +26973,16 @@ export namespace Prisma {
     totalPrice: number
     amountPaid: number
     paidBy: string
+  }
+
+  export type SessionCreateManyRoomInput = {
+    id?: number
+    numberOfExtraBeds: number
+    actualCheckIn: Date | string
+    actualCheckOut?: Date | string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BookingUpdateWithoutRoomInput = {
@@ -28149,20 +27039,72 @@ export namespace Prisma {
     paidBy?: StringFieldUpdateOperationsInput | string
   }
 
-  export type SessionGuestCreateManySessionInput = {
-    guestId: string
+  export type SessionUpdateWithoutRoomInput = {
+    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
+    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: GuestUpdateManyWithoutSessionsNestedInput
   }
 
-  export type SessionGuestUpdateWithoutSessionInput = {
-    guest?: GuestUpdateOneRequiredWithoutSessionGuestNestedInput
+  export type SessionUncheckedUpdateWithoutRoomInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
+    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: GuestUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
-  export type SessionGuestUncheckedUpdateWithoutSessionInput = {
-    guestId?: StringFieldUpdateOperationsInput | string
+  export type SessionUncheckedUpdateManyWithoutRoomInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
+    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SessionGuestUncheckedUpdateManyWithoutSessionInput = {
-    guestId?: StringFieldUpdateOperationsInput | string
+  export type GuestUpdateWithoutSessionsInput = {
+    uid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUpdateManyWithoutGuestNestedInput
+    receipts?: ReceiptUpdateManyWithoutGuestNestedInput
+  }
+
+  export type GuestUncheckedUpdateWithoutSessionsInput = {
+    uid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: BookingUncheckedUpdateManyWithoutGuestNestedInput
+    receipts?: ReceiptUncheckedUpdateManyWithoutGuestNestedInput
+  }
+
+  export type GuestUncheckedUpdateManyWithoutSessionsInput = {
+    uid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    nicCardNum?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookingCreateManyGuestInput = {
@@ -28181,6 +27123,38 @@ export namespace Prisma {
     totalPrice: number
     amountPaid: number
     paidBy: string
+  }
+
+  export type SessionUpdateWithoutGuestsInput = {
+    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
+    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: RoomUpdateOneRequiredWithoutSessionNestedInput
+  }
+
+  export type SessionUncheckedUpdateWithoutGuestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    roomNumber?: IntFieldUpdateOperationsInput | number
+    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
+    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateManyWithoutGuestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    roomNumber?: IntFieldUpdateOperationsInput | number
+    numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
+    actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookingUpdateWithoutGuestInput = {
