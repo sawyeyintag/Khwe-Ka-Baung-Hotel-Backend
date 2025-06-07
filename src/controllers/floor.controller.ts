@@ -27,9 +27,6 @@ class FloorController {
         rooms: true,
       },
     });
-    if (!floors.length) {
-      throw new NotFoundException("No floors found");
-    }
     return res.status(200).json({
       data: floors,
     });
