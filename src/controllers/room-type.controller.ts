@@ -20,9 +20,6 @@ class RoomTypeController {
         rooms: true,
       },
     });
-    if (!roomTypes.length) {
-      throw new NotFoundException("No room types found");
-    }
     return res.status(200).json({
       data: roomTypes,
     });

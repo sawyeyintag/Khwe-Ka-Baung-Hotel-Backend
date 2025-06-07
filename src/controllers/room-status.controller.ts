@@ -23,9 +23,6 @@ class RoomStatusController {
 
   async getAllRoomStatuses(req: Request, res: Response) {
     const roomStatuses = await prismaClient.roomStatus.findMany();
-    if (!roomStatuses.length) {
-      throw new NotFoundException("No room statuses found");
-    }
     return res.status(200).json({
       data: roomStatuses,
     });

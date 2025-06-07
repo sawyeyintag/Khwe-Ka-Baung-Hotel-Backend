@@ -81,9 +81,6 @@ class BookingController {
         guest: true,
       },
     });
-    if (!bookings.length) {
-      throw new NotFoundException("No booking found");
-    }
     return res.status(200).json({
       data: bookings,
     });
