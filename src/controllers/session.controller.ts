@@ -4,7 +4,7 @@ import { BadRequestsException } from "../exceptions/bad-requests";
 import { SessionCreateRequest, SessionEndRequest } from "../types/session.type";
 import { Session } from "../generated/client";
 
-import sessionService from "../service/sessionService";
+import sessionService from "../service/session.service";
 
 class SessionController {
   async createSession(req: SessionCreateRequest, res: Response) {

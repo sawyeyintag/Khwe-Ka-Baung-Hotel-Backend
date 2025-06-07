@@ -40,4 +40,34 @@ export const floorPaths = {
       },
     },
   },
+  "/floors/{floorNumber}": {
+    delete: {
+      summary: "Delete a floor",
+      description: "Delete a specific floor by its number",
+      tags,
+      parameters: [
+        {
+          name: "floorNumber",
+          in: "path",
+          required: true,
+          schema: {
+            type: "integer",
+            format: "int32",
+          },
+          description: "The number of the floor to delete",
+        },
+      ],
+      responses: {
+        "204": {
+          description: "Floor deleted successfully",
+        },
+        "404": {
+          description: "Floor not found",
+        },
+        "500": {
+          description: "Internal server error",
+        },
+      },
+    },
+  },
 };
