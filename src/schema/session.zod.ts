@@ -10,3 +10,7 @@ export const SessionCreateSchema = z.object({
   numberOfExtraBeds: z.number().int(),
   actualCheckIn: z.date(),
 });
+
+export const SessionEndSchema = z.object({
+  actualCheckOut: z.date(),
+});

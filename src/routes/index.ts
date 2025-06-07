@@ -6,6 +6,7 @@ import floorRoutes from "./floor.routes";
 import roomStatusRoutes from "./room-status.routes";
 import bookingRoutes from "./booking.routes";
 import guestRoutes from "./guest.routes";
+import sessionRoutes from "./session.routes";
 
 const rootRouter: Router = Router();
 
@@ -16,5 +17,7 @@ rootRouter.use("/floors", floorRoutes);
 rootRouter.use("/room-statuses", roomStatusRoutes);
 rootRouter.use("/bookings", bookingRoutes);
 rootRouter.use("/guests", guestRoutes);
+rootRouter.use("/guests", guestRoutes);
+rootRouter.use("/sessions", sessionRoutes);
 
 export default rootRouter;

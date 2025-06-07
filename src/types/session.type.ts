@@ -1,10 +1,15 @@
 import { z } from "zod";
 import { Request } from "express";
-import { SessionCreateSchema } from "../schema/session.zod";
-import { Guest } from "../generated/client";
+import { SessionCreateSchema, SessionEndSchema } from "../schema/session.zod";
 
-type SessionCreate = z.infer<typeof SessionCreateSchema>;
+export type SessionCreate = z.infer<typeof SessionCreateSchema>;
+
+export type SessionEnd = z.infer<typeof SessionEndSchema>;
 
 export interface SessionCreateRequest extends Request {
   body: SessionCreate;
+}
+
+export interface SessionEndRequest extends Request {
+  body: SessionEnd;
 }
