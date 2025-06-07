@@ -1,4 +1,4 @@
-import { RoomUpsertSchema } from "../../../schema/room.zod";
+import { RoomCreateSchema } from "../../../schema/room.zod";
 import { zodSchemaConverter } from "../zodSchemaConverter";
 
 const tags = ["Room"];
@@ -26,7 +26,7 @@ export const roomPaths = {
       description: "Create a new room in the system",
       tags,
       // This is a custom function to convert Zod schema to Swagger schema
-      ...zodSchemaConverter(RoomUpsertSchema),
+      ...zodSchemaConverter(RoomCreateSchema),
       responses: {
         "201": {
           description: "Room created successfully",
@@ -39,12 +39,24 @@ export const roomPaths = {
         },
       },
     },
+  },
+  "/rooms/{roomNumber}": {
     put: {
-      summary: "Update an existing room",
-      description: "Update an existing room in the system",
+      summary: "Update a room by room number",
+      description: "Update an existing room using its room number",
       tags,
-      // This is a custom function to convert Zod schema to Swagger schema
-      ...zodSchemaConverter(RoomUpsertSchema),
+      parameters: [
+        {
+          name: "roomNumber",
+          in: "path",
+          required: true,
+          description: "Room number of the room to update",
+          schema: {
+            type: "string",
+          },
+        },
+      ],
+      ...zodSchemaConverter(RoomCreateSchema),
       responses: {
         "200": {
           description: "Room updated successfully",
@@ -61,15 +73,15 @@ export const roomPaths = {
       },
     },
     delete: {
-      summary: "Delete a room",
-      description: "Delete a room from the system",
+      summary: "Delete a room by room number",
+      description: "Delete a room using its room number",
       tags,
       parameters: [
         {
-          name: "roomId",
-          in: "query",
+          name: "roomNumber",
+          in: "path",
           required: true,
-          description: "ID of the room to delete",
+          description: "Room number of the room to delete",
           schema: {
             type: "string",
           },

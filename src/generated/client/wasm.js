@@ -266,6 +266,14 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.RoomOrderByRelevanceFieldEnum = {
+  roomNumber: 'roomNumber'
+};
+
+exports.Prisma.SessionOrderByRelevanceFieldEnum = {
+  roomNumber: 'roomNumber'
+};
+
 exports.Prisma.GuestOrderByRelevanceFieldEnum = {
   uid: 'uid',
   name: 'name',
@@ -275,11 +283,16 @@ exports.Prisma.GuestOrderByRelevanceFieldEnum = {
   nicCardNum: 'nicCardNum'
 };
 
+exports.Prisma.MiniBarOrderByRelevanceFieldEnum = {
+  roomNumber: 'roomNumber'
+};
+
 exports.Prisma.ItemOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
 exports.Prisma.BookingOrderByRelevanceFieldEnum = {
+  roomNumber: 'roomNumber',
   guestId: 'guestId',
   contactName: 'contactName',
   contactPhone: 'contactPhone',
@@ -287,6 +300,7 @@ exports.Prisma.BookingOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.ReceiptOrderByRelevanceFieldEnum = {
+  roomNumber: 'roomNumber',
   guestId: 'guestId',
   paidBy: 'paidBy'
 };

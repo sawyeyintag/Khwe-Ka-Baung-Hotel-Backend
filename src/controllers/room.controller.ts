@@ -1,10 +1,27 @@
 import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
 import { BadRequestsException } from "../exceptions/bad-requests";
-import { RoomUpsertRequest } from "../types/room.type";
+import {
+  RoomCreateSchemaRequest,
+  RoomEditSchemaRequest,
+} from "../types/room.type";
 
 class RoomController {
-  async createRoom(req: RoomUpsertRequest, res: Response) {
+  async getAllRooms(req: Request, res: Response) {
+    const rooms = await prismaClient.room.findMany({
+      include: {
+        roomType: true,
+        status: true,
+        session: true,
+      },
+    });
+
+    return res.status(200).json({
+      data: rooms,
+    });
+  }
+
+  async createRoom(req: RoomCreateSchemaRequest, res: Response) {
     const { roomNumber, floorNumber, roomTypeId } = req.body;
     const room = await prismaClient.room.findFirst({
       where: { roomNumber },
@@ -20,22 +37,42 @@ class RoomController {
     });
   }
 
-  async getAllRooms(req: Request, res: Response) {
-    const rooms = await prismaClient.room.findMany({
-      include: {
-        roomType: true,
-        status: true,
-        session: true,
-      },
-    });
+  async updateRoom(req: RoomEditSchemaRequest, res: Response) {
+    const { floorNumber, roomTypeId } = req.body;
+    const { roomNumber } = req.params;
 
-    const sanitizedRooms = rooms.map(
-      ({ roomTypeId, statusId, sessionId, ...rest }) => rest
-    );
+    const room = await prismaClient.room.findUnique({
+      where: { roomNumber },
+    });
+    if (!room) {
+      throw new BadRequestsException("Room not found");
+    }
+
+    const updatedRoom = await prismaClient.room.update({
+      where: { roomNumber },
+      data: { roomNumber, floorNumber, roomTypeId },
+    });
 
     return res.status(200).json({
-      data: sanitizedRooms,
+      data: updatedRoom,
     });
+  }
+
+  async deleteRoom(req: Request, res: Response) {
+    const { roomNumber } = req.params;
+
+    const room = await prismaClient.room.findUnique({
+      where: { roomNumber },
+    });
+    if (!room) {
+      throw new BadRequestsException("Room not found");
+    }
+
+    await prismaClient.room.delete({
+      where: { roomNumber },
+    });
+
+    return res.status(204).send();
   }
 }
 

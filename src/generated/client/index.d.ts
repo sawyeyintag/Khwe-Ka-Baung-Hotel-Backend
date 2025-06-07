@@ -5575,7 +5575,6 @@ export namespace Prisma {
   }
 
   export type RoomAvgAggregateOutputType = {
-    roomNumber: number | null
     floorNumber: number | null
     roomTypeId: number | null
     statusId: number | null
@@ -5583,7 +5582,6 @@ export namespace Prisma {
   }
 
   export type RoomSumAggregateOutputType = {
-    roomNumber: number | null
     floorNumber: number | null
     roomTypeId: number | null
     statusId: number | null
@@ -5591,7 +5589,7 @@ export namespace Prisma {
   }
 
   export type RoomMinAggregateOutputType = {
-    roomNumber: number | null
+    roomNumber: string | null
     floorNumber: number | null
     roomTypeId: number | null
     statusId: number | null
@@ -5599,7 +5597,7 @@ export namespace Prisma {
   }
 
   export type RoomMaxAggregateOutputType = {
-    roomNumber: number | null
+    roomNumber: string | null
     floorNumber: number | null
     roomTypeId: number | null
     statusId: number | null
@@ -5617,7 +5615,6 @@ export namespace Prisma {
 
 
   export type RoomAvgAggregateInputType = {
-    roomNumber?: true
     floorNumber?: true
     roomTypeId?: true
     statusId?: true
@@ -5625,7 +5622,6 @@ export namespace Prisma {
   }
 
   export type RoomSumAggregateInputType = {
-    roomNumber?: true
     floorNumber?: true
     roomTypeId?: true
     statusId?: true
@@ -5744,7 +5740,7 @@ export namespace Prisma {
   }
 
   export type RoomGroupByOutputType = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     statusId: number | null
@@ -5820,7 +5816,7 @@ export namespace Prisma {
       session: Prisma.$SessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      roomNumber: number
+      roomNumber: string
       floorNumber: number
       roomTypeId: number
       statusId: number | null
@@ -6201,7 +6197,7 @@ export namespace Prisma {
    * Fields of the Room model
    */
   interface RoomFieldRefs {
-    readonly roomNumber: FieldRef<"Room", 'Int'>
+    readonly roomNumber: FieldRef<"Room", 'String'>
     readonly floorNumber: FieldRef<"Room", 'Int'>
     readonly roomTypeId: FieldRef<"Room", 'Int'>
     readonly statusId: FieldRef<"Room", 'Int'>
@@ -6691,19 +6687,17 @@ export namespace Prisma {
 
   export type SessionAvgAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
     numberOfExtraBeds: number | null
   }
 
   export type SessionSumAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
     numberOfExtraBeds: number | null
   }
 
   export type SessionMinAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
     actualCheckOut: Date | null
@@ -6714,7 +6708,7 @@ export namespace Prisma {
 
   export type SessionMaxAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
     actualCheckOut: Date | null
@@ -6738,13 +6732,11 @@ export namespace Prisma {
 
   export type SessionAvgAggregateInputType = {
     id?: true
-    roomNumber?: true
     numberOfExtraBeds?: true
   }
 
   export type SessionSumAggregateInputType = {
     id?: true
-    roomNumber?: true
     numberOfExtraBeds?: true
   }
 
@@ -6870,7 +6862,7 @@ export namespace Prisma {
 
   export type SessionGroupByOutputType = {
     id: number
-    roomNumber: number
+    roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date
     actualCheckOut: Date | null
@@ -6940,7 +6932,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      roomNumber: number
+      roomNumber: string
       numberOfExtraBeds: number
       actualCheckIn: Date
       actualCheckOut: Date | null
@@ -7319,7 +7311,7 @@ export namespace Prisma {
    */
   interface SessionFieldRefs {
     readonly id: FieldRef<"Session", 'Int'>
-    readonly roomNumber: FieldRef<"Session", 'Int'>
+    readonly roomNumber: FieldRef<"Session", 'String'>
     readonly numberOfExtraBeds: FieldRef<"Session", 'Int'>
     readonly actualCheckIn: FieldRef<"Session", 'DateTime'>
     readonly actualCheckOut: FieldRef<"Session", 'DateTime'>
@@ -8769,22 +8761,20 @@ export namespace Prisma {
 
   export type MiniBarAvgAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
   }
 
   export type MiniBarSumAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
   }
 
   export type MiniBarMinAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
   }
 
   export type MiniBarMaxAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
   }
 
   export type MiniBarCountAggregateOutputType = {
@@ -8796,12 +8786,10 @@ export namespace Prisma {
 
   export type MiniBarAvgAggregateInputType = {
     id?: true
-    roomNumber?: true
   }
 
   export type MiniBarSumAggregateInputType = {
     id?: true
-    roomNumber?: true
   }
 
   export type MiniBarMinAggregateInputType = {
@@ -8908,7 +8896,7 @@ export namespace Prisma {
 
   export type MiniBarGroupByOutputType = {
     id: number
-    roomNumber: number
+    roomNumber: string
     _count: MiniBarCountAggregateOutputType | null
     _avg: MiniBarAvgAggregateOutputType | null
     _sum: MiniBarSumAggregateOutputType | null
@@ -8960,7 +8948,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      roomNumber: number
+      roomNumber: string
     }, ExtArgs["result"]["miniBar"]>
     composites: {}
   }
@@ -9333,7 +9321,7 @@ export namespace Prisma {
    */
   interface MiniBarFieldRefs {
     readonly id: FieldRef<"MiniBar", 'Int'>
-    readonly roomNumber: FieldRef<"MiniBar", 'Int'>
+    readonly roomNumber: FieldRef<"MiniBar", 'String'>
   }
     
 
@@ -12662,17 +12650,15 @@ export namespace Prisma {
 
   export type BookingAvgAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
   }
 
   export type BookingSumAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
   }
 
   export type BookingMinAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
     guestId: string | null
     contactName: string | null
     contactPhone: string | null
@@ -12683,7 +12669,7 @@ export namespace Prisma {
 
   export type BookingMaxAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
     guestId: string | null
     contactName: string | null
     contactPhone: string | null
@@ -12707,12 +12693,10 @@ export namespace Prisma {
 
   export type BookingAvgAggregateInputType = {
     id?: true
-    roomNumber?: true
   }
 
   export type BookingSumAggregateInputType = {
     id?: true
-    roomNumber?: true
   }
 
   export type BookingMinAggregateInputType = {
@@ -12837,7 +12821,7 @@ export namespace Prisma {
 
   export type BookingGroupByOutputType = {
     id: number
-    roomNumber: number
+    roomNumber: string
     guestId: string | null
     contactName: string
     contactPhone: string
@@ -12905,7 +12889,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      roomNumber: number
+      roomNumber: string
       guestId: string | null
       contactName: string
       contactPhone: string
@@ -13284,7 +13268,7 @@ export namespace Prisma {
    */
   interface BookingFieldRefs {
     readonly id: FieldRef<"Booking", 'Int'>
-    readonly roomNumber: FieldRef<"Booking", 'Int'>
+    readonly roomNumber: FieldRef<"Booking", 'String'>
     readonly guestId: FieldRef<"Booking", 'String'>
     readonly contactName: FieldRef<"Booking", 'String'>
     readonly contactPhone: FieldRef<"Booking", 'String'>
@@ -13685,21 +13669,19 @@ export namespace Prisma {
 
   export type ReceiptAvgAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
     totalPrice: number | null
     amountPaid: number | null
   }
 
   export type ReceiptSumAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
     totalPrice: number | null
     amountPaid: number | null
   }
 
   export type ReceiptMinAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
     guestId: string | null
     totalPrice: number | null
     amountPaid: number | null
@@ -13708,7 +13690,7 @@ export namespace Prisma {
 
   export type ReceiptMaxAggregateOutputType = {
     id: number | null
-    roomNumber: number | null
+    roomNumber: string | null
     guestId: string | null
     totalPrice: number | null
     amountPaid: number | null
@@ -13728,14 +13710,12 @@ export namespace Prisma {
 
   export type ReceiptAvgAggregateInputType = {
     id?: true
-    roomNumber?: true
     totalPrice?: true
     amountPaid?: true
   }
 
   export type ReceiptSumAggregateInputType = {
     id?: true
-    roomNumber?: true
     totalPrice?: true
     amountPaid?: true
   }
@@ -13856,7 +13836,7 @@ export namespace Prisma {
 
   export type ReceiptGroupByOutputType = {
     id: number
-    roomNumber: number
+    roomNumber: string
     guestId: string
     totalPrice: number
     amountPaid: number
@@ -13923,7 +13903,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      roomNumber: number
+      roomNumber: string
       guestId: string
       totalPrice: number
       amountPaid: number
@@ -14301,7 +14281,7 @@ export namespace Prisma {
    */
   interface ReceiptFieldRefs {
     readonly id: FieldRef<"Receipt", 'Int'>
-    readonly roomNumber: FieldRef<"Receipt", 'Int'>
+    readonly roomNumber: FieldRef<"Receipt", 'String'>
     readonly guestId: FieldRef<"Receipt", 'String'>
     readonly totalPrice: FieldRef<"Receipt", 'Float'>
     readonly amountPaid: FieldRef<"Receipt", 'Float'>
@@ -20662,6 +20642,20 @@ export namespace Prisma {
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
+  export const RoomOrderByRelevanceFieldEnum: {
+    roomNumber: 'roomNumber'
+  };
+
+  export type RoomOrderByRelevanceFieldEnum = (typeof RoomOrderByRelevanceFieldEnum)[keyof typeof RoomOrderByRelevanceFieldEnum]
+
+
+  export const SessionOrderByRelevanceFieldEnum: {
+    roomNumber: 'roomNumber'
+  };
+
+  export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
+
+
   export const GuestOrderByRelevanceFieldEnum: {
     uid: 'uid',
     name: 'name',
@@ -20674,6 +20668,13 @@ export namespace Prisma {
   export type GuestOrderByRelevanceFieldEnum = (typeof GuestOrderByRelevanceFieldEnum)[keyof typeof GuestOrderByRelevanceFieldEnum]
 
 
+  export const MiniBarOrderByRelevanceFieldEnum: {
+    roomNumber: 'roomNumber'
+  };
+
+  export type MiniBarOrderByRelevanceFieldEnum = (typeof MiniBarOrderByRelevanceFieldEnum)[keyof typeof MiniBarOrderByRelevanceFieldEnum]
+
+
   export const ItemOrderByRelevanceFieldEnum: {
     name: 'name'
   };
@@ -20682,6 +20683,7 @@ export namespace Prisma {
 
 
   export const BookingOrderByRelevanceFieldEnum: {
+    roomNumber: 'roomNumber',
     guestId: 'guestId',
     contactName: 'contactName',
     contactPhone: 'contactPhone',
@@ -20692,6 +20694,7 @@ export namespace Prisma {
 
 
   export const ReceiptOrderByRelevanceFieldEnum: {
+    roomNumber: 'roomNumber',
     guestId: 'guestId',
     paidBy: 'paidBy'
   };
@@ -20895,7 +20898,7 @@ export namespace Prisma {
     AND?: RoomWhereInput | RoomWhereInput[]
     OR?: RoomWhereInput[]
     NOT?: RoomWhereInput | RoomWhereInput[]
-    roomNumber?: IntFilter<"Room"> | number
+    roomNumber?: StringFilter<"Room"> | string
     floorNumber?: IntFilter<"Room"> | number
     roomTypeId?: IntFilter<"Room"> | number
     statusId?: IntNullableFilter<"Room"> | number | null
@@ -20922,10 +20925,11 @@ export namespace Prisma {
     bookings?: BookingOrderByRelationAggregateInput
     receipts?: ReceiptOrderByRelationAggregateInput
     session?: SessionOrderByRelationAggregateInput
+    _relevance?: RoomOrderByRelevanceInput
   }
 
   export type RoomWhereUniqueInput = Prisma.AtLeast<{
-    roomNumber?: number
+    roomNumber?: string
     sessionId?: number
     AND?: RoomWhereInput | RoomWhereInput[]
     OR?: RoomWhereInput[]
@@ -20959,7 +20963,7 @@ export namespace Prisma {
     AND?: RoomScalarWhereWithAggregatesInput | RoomScalarWhereWithAggregatesInput[]
     OR?: RoomScalarWhereWithAggregatesInput[]
     NOT?: RoomScalarWhereWithAggregatesInput | RoomScalarWhereWithAggregatesInput[]
-    roomNumber?: IntWithAggregatesFilter<"Room"> | number
+    roomNumber?: StringWithAggregatesFilter<"Room"> | string
     floorNumber?: IntWithAggregatesFilter<"Room"> | number
     roomTypeId?: IntWithAggregatesFilter<"Room"> | number
     statusId?: IntNullableWithAggregatesFilter<"Room"> | number | null
@@ -20971,7 +20975,7 @@ export namespace Prisma {
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
     id?: IntFilter<"Session"> | number
-    roomNumber?: IntFilter<"Session"> | number
+    roomNumber?: StringFilter<"Session"> | string
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
@@ -20993,11 +20997,12 @@ export namespace Prisma {
     updatedAt?: SortOrder
     room?: RoomOrderByWithRelationInput
     guests?: GuestOrderByRelationAggregateInput
+    _relevance?: SessionOrderByRelevanceInput
   }
 
   export type SessionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    roomNumber?: number
+    roomNumber?: string
     AND?: SessionWhereInput | SessionWhereInput[]
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
@@ -21032,7 +21037,7 @@ export namespace Prisma {
     OR?: SessionScalarWhereWithAggregatesInput[]
     NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Session"> | number
-    roomNumber?: IntWithAggregatesFilter<"Session"> | number
+    roomNumber?: StringWithAggregatesFilter<"Session"> | string
     numberOfExtraBeds?: IntWithAggregatesFilter<"Session"> | number
     actualCheckIn?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     actualCheckOut?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
@@ -21123,7 +21128,7 @@ export namespace Prisma {
     OR?: MiniBarWhereInput[]
     NOT?: MiniBarWhereInput | MiniBarWhereInput[]
     id?: IntFilter<"MiniBar"> | number
-    roomNumber?: IntFilter<"MiniBar"> | number
+    roomNumber?: StringFilter<"MiniBar"> | string
     room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
     items?: MiniBarItemListRelationFilter
   }
@@ -21133,11 +21138,12 @@ export namespace Prisma {
     roomNumber?: SortOrder
     room?: RoomOrderByWithRelationInput
     items?: MiniBarItemOrderByRelationAggregateInput
+    _relevance?: MiniBarOrderByRelevanceInput
   }
 
   export type MiniBarWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    roomNumber?: number
+    roomNumber?: string
     AND?: MiniBarWhereInput | MiniBarWhereInput[]
     OR?: MiniBarWhereInput[]
     NOT?: MiniBarWhereInput | MiniBarWhereInput[]
@@ -21160,7 +21166,7 @@ export namespace Prisma {
     OR?: MiniBarScalarWhereWithAggregatesInput[]
     NOT?: MiniBarScalarWhereWithAggregatesInput | MiniBarScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"MiniBar"> | number
-    roomNumber?: IntWithAggregatesFilter<"MiniBar"> | number
+    roomNumber?: StringWithAggregatesFilter<"MiniBar"> | string
   }
 
   export type ItemWhereInput = {
@@ -21320,7 +21326,7 @@ export namespace Prisma {
     OR?: BookingWhereInput[]
     NOT?: BookingWhereInput | BookingWhereInput[]
     id?: IntFilter<"Booking"> | number
-    roomNumber?: IntFilter<"Booking"> | number
+    roomNumber?: StringFilter<"Booking"> | string
     guestId?: StringNullableFilter<"Booking"> | string | null
     contactName?: StringFilter<"Booking"> | string
     contactPhone?: StringFilter<"Booking"> | string
@@ -21350,7 +21356,7 @@ export namespace Prisma {
     AND?: BookingWhereInput | BookingWhereInput[]
     OR?: BookingWhereInput[]
     NOT?: BookingWhereInput | BookingWhereInput[]
-    roomNumber?: IntFilter<"Booking"> | number
+    roomNumber?: StringFilter<"Booking"> | string
     guestId?: StringNullableFilter<"Booking"> | string | null
     contactName?: StringFilter<"Booking"> | string
     contactPhone?: StringFilter<"Booking"> | string
@@ -21382,7 +21388,7 @@ export namespace Prisma {
     OR?: BookingScalarWhereWithAggregatesInput[]
     NOT?: BookingScalarWhereWithAggregatesInput | BookingScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Booking"> | number
-    roomNumber?: IntWithAggregatesFilter<"Booking"> | number
+    roomNumber?: StringWithAggregatesFilter<"Booking"> | string
     guestId?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     contactName?: StringWithAggregatesFilter<"Booking"> | string
     contactPhone?: StringWithAggregatesFilter<"Booking"> | string
@@ -21396,7 +21402,7 @@ export namespace Prisma {
     OR?: ReceiptWhereInput[]
     NOT?: ReceiptWhereInput | ReceiptWhereInput[]
     id?: IntFilter<"Receipt"> | number
-    roomNumber?: IntFilter<"Receipt"> | number
+    roomNumber?: StringFilter<"Receipt"> | string
     guestId?: StringFilter<"Receipt"> | string
     totalPrice?: FloatFilter<"Receipt"> | number
     amountPaid?: FloatFilter<"Receipt"> | number
@@ -21424,7 +21430,7 @@ export namespace Prisma {
     AND?: ReceiptWhereInput | ReceiptWhereInput[]
     OR?: ReceiptWhereInput[]
     NOT?: ReceiptWhereInput | ReceiptWhereInput[]
-    roomNumber?: IntFilter<"Receipt"> | number
+    roomNumber?: StringFilter<"Receipt"> | string
     guestId?: StringFilter<"Receipt"> | string
     totalPrice?: FloatFilter<"Receipt"> | number
     amountPaid?: FloatFilter<"Receipt"> | number
@@ -21453,7 +21459,7 @@ export namespace Prisma {
     OR?: ReceiptScalarWhereWithAggregatesInput[]
     NOT?: ReceiptScalarWhereWithAggregatesInput | ReceiptScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Receipt"> | number
-    roomNumber?: IntWithAggregatesFilter<"Receipt"> | number
+    roomNumber?: StringWithAggregatesFilter<"Receipt"> | string
     guestId?: StringWithAggregatesFilter<"Receipt"> | string
     totalPrice?: FloatWithAggregatesFilter<"Receipt"> | number
     amountPaid?: FloatWithAggregatesFilter<"Receipt"> | number
@@ -21890,7 +21896,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     floor: FloorCreateNestedOneWithoutRoomsInput
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
@@ -21902,7 +21908,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     statusId?: number | null
@@ -21914,7 +21920,7 @@ export namespace Prisma {
   }
 
   export type RoomUpdateInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     floor?: FloorUpdateOneRequiredWithoutRoomsNestedInput
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
@@ -21926,7 +21932,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -21938,7 +21944,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateManyInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     statusId?: number | null
@@ -21946,12 +21952,12 @@ export namespace Prisma {
   }
 
   export type RoomUpdateManyMutationInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type RoomUncheckedUpdateManyInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -21971,7 +21977,7 @@ export namespace Prisma {
 
   export type SessionUncheckedCreateInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     actualCheckOut?: Date | string | null
@@ -21994,7 +22000,7 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22006,7 +22012,7 @@ export namespace Prisma {
 
   export type SessionCreateManyInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     actualCheckOut?: Date | string | null
@@ -22026,7 +22032,7 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22131,7 +22137,7 @@ export namespace Prisma {
 
   export type MiniBarUncheckedCreateInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     items?: MiniBarItemUncheckedCreateNestedManyWithoutMiniBarInput
   }
 
@@ -22142,13 +22148,13 @@ export namespace Prisma {
 
   export type MiniBarUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     items?: MiniBarItemUncheckedUpdateManyWithoutMiniBarNestedInput
   }
 
   export type MiniBarCreateManyInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
   }
 
   export type MiniBarUpdateManyMutationInput = {
@@ -22157,7 +22163,7 @@ export namespace Prisma {
 
   export type MiniBarUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemCreateInput = {
@@ -22301,7 +22307,7 @@ export namespace Prisma {
 
   export type BookingUncheckedCreateInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     guestId?: string | null
     contactName: string
     contactPhone: string
@@ -22322,7 +22328,7 @@ export namespace Prisma {
 
   export type BookingUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
@@ -22333,7 +22339,7 @@ export namespace Prisma {
 
   export type BookingCreateManyInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     guestId?: string | null
     contactName: string
     contactPhone: string
@@ -22352,7 +22358,7 @@ export namespace Prisma {
 
   export type BookingUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
@@ -22372,7 +22378,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedCreateInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     guestId: string
     totalPrice: number
     amountPaid: number
@@ -22391,7 +22397,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     guestId?: StringFieldUpdateOperationsInput | string
     totalPrice?: FloatFieldUpdateOperationsInput | number
     amountPaid?: FloatFieldUpdateOperationsInput | number
@@ -22401,7 +22407,7 @@ export namespace Prisma {
 
   export type ReceiptCreateManyInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     guestId: string
     totalPrice: number
     amountPaid: number
@@ -22416,7 +22422,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     guestId?: StringFieldUpdateOperationsInput | string
     totalPrice?: FloatFieldUpdateOperationsInput | number
     amountPaid?: FloatFieldUpdateOperationsInput | number
@@ -22948,6 +22954,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type RoomOrderByRelevanceInput = {
+    fields: RoomOrderByRelevanceFieldEnum | RoomOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type RoomCountOrderByAggregateInput = {
     roomNumber?: SortOrder
     floorNumber?: SortOrder
@@ -22957,7 +22969,6 @@ export namespace Prisma {
   }
 
   export type RoomAvgOrderByAggregateInput = {
-    roomNumber?: SortOrder
     floorNumber?: SortOrder
     roomTypeId?: SortOrder
     statusId?: SortOrder
@@ -22981,7 +22992,6 @@ export namespace Prisma {
   }
 
   export type RoomSumOrderByAggregateInput = {
-    roomNumber?: SortOrder
     floorNumber?: SortOrder
     roomTypeId?: SortOrder
     statusId?: SortOrder
@@ -23046,6 +23056,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type SessionOrderByRelevanceInput = {
+    fields: SessionOrderByRelevanceFieldEnum | SessionOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
     roomNumber?: SortOrder
@@ -23059,7 +23075,6 @@ export namespace Prisma {
 
   export type SessionAvgOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
   }
 
@@ -23087,7 +23102,6 @@ export namespace Prisma {
 
   export type SessionSumOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
   }
 
@@ -23209,6 +23223,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type MiniBarOrderByRelevanceInput = {
+    fields: MiniBarOrderByRelevanceFieldEnum | MiniBarOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type MiniBarCountOrderByAggregateInput = {
     id?: SortOrder
     roomNumber?: SortOrder
@@ -23216,7 +23236,6 @@ export namespace Prisma {
 
   export type MiniBarAvgOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
   }
 
   export type MiniBarMaxOrderByAggregateInput = {
@@ -23231,7 +23250,6 @@ export namespace Prisma {
 
   export type MiniBarSumOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
   }
 
   export type InventoryListRelationFilter = {
@@ -23387,7 +23405,6 @@ export namespace Prisma {
 
   export type BookingAvgOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
   }
 
   export type BookingMaxOrderByAggregateInput = {
@@ -23414,7 +23431,6 @@ export namespace Prisma {
 
   export type BookingSumOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
   }
 
   export type GuestScalarRelationFilter = {
@@ -23449,7 +23465,6 @@ export namespace Prisma {
 
   export type ReceiptAvgOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
     totalPrice?: SortOrder
     amountPaid?: SortOrder
   }
@@ -23474,7 +23489,6 @@ export namespace Prisma {
 
   export type ReceiptSumOrderByAggregateInput = {
     id?: SortOrder
-    roomNumber?: SortOrder
     totalPrice?: SortOrder
     amountPaid?: SortOrder
   }
@@ -25038,7 +25052,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateWithoutFloorInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
@@ -25049,7 +25063,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateWithoutFloorInput = {
-    roomNumber: number
+    roomNumber: string
     roomTypeId: number
     statusId?: number | null
     sessionId?: number | null
@@ -25089,7 +25103,7 @@ export namespace Prisma {
     AND?: RoomScalarWhereInput | RoomScalarWhereInput[]
     OR?: RoomScalarWhereInput[]
     NOT?: RoomScalarWhereInput | RoomScalarWhereInput[]
-    roomNumber?: IntFilter<"Room"> | number
+    roomNumber?: StringFilter<"Room"> | string
     floorNumber?: IntFilter<"Room"> | number
     roomTypeId?: IntFilter<"Room"> | number
     statusId?: IntNullableFilter<"Room"> | number | null
@@ -25097,7 +25111,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateWithoutRoomTypeInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     floor: FloorCreateNestedOneWithoutRoomsInput
     status?: RoomStatusCreateNestedOneWithoutRoomsInput
@@ -25108,7 +25122,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateWithoutRoomTypeInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     statusId?: number | null
     sessionId?: number | null
@@ -25145,7 +25159,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateWithoutStatusInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     floor: FloorCreateNestedOneWithoutRoomsInput
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
@@ -25156,7 +25170,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateWithoutStatusInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     sessionId?: number | null
@@ -25442,7 +25456,7 @@ export namespace Prisma {
     OR?: BookingScalarWhereInput[]
     NOT?: BookingScalarWhereInput | BookingScalarWhereInput[]
     id?: IntFilter<"Booking"> | number
-    roomNumber?: IntFilter<"Booking"> | number
+    roomNumber?: StringFilter<"Booking"> | string
     guestId?: StringNullableFilter<"Booking"> | string | null
     contactName?: StringFilter<"Booking"> | string
     contactPhone?: StringFilter<"Booking"> | string
@@ -25472,7 +25486,7 @@ export namespace Prisma {
     OR?: ReceiptScalarWhereInput[]
     NOT?: ReceiptScalarWhereInput | ReceiptScalarWhereInput[]
     id?: IntFilter<"Receipt"> | number
-    roomNumber?: IntFilter<"Receipt"> | number
+    roomNumber?: StringFilter<"Receipt"> | string
     guestId?: StringFilter<"Receipt"> | string
     totalPrice?: FloatFilter<"Receipt"> | number
     amountPaid?: FloatFilter<"Receipt"> | number
@@ -25500,7 +25514,7 @@ export namespace Prisma {
     OR?: SessionScalarWhereInput[]
     NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
     id?: IntFilter<"Session"> | number
-    roomNumber?: IntFilter<"Session"> | number
+    roomNumber?: StringFilter<"Session"> | string
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
@@ -25510,7 +25524,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateWithoutSessionInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     floor: FloorCreateNestedOneWithoutRoomsInput
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
@@ -25521,7 +25535,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateWithoutSessionInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     statusId?: number | null
@@ -25579,7 +25593,7 @@ export namespace Prisma {
   }
 
   export type RoomUpdateWithoutSessionInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     floor?: FloorUpdateOneRequiredWithoutRoomsNestedInput
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
@@ -25590,7 +25604,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateWithoutSessionInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -25642,7 +25656,7 @@ export namespace Prisma {
 
   export type SessionUncheckedCreateWithoutGuestsInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     actualCheckOut?: Date | string | null
@@ -25667,7 +25681,7 @@ export namespace Prisma {
 
   export type BookingUncheckedCreateWithoutGuestInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     contactName: string
     contactPhone: string
     contactEmail?: string | null
@@ -25695,7 +25709,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedCreateWithoutGuestInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     totalPrice: number
     amountPaid: number
     paidBy: string
@@ -25761,7 +25775,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateWithoutMiniBarInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     floor: FloorCreateNestedOneWithoutRoomsInput
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
@@ -25772,7 +25786,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateWithoutMiniBarInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     statusId?: number | null
@@ -25819,7 +25833,7 @@ export namespace Prisma {
   }
 
   export type RoomUpdateWithoutMiniBarInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     floor?: FloorUpdateOneRequiredWithoutRoomsNestedInput
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
@@ -25830,7 +25844,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateWithoutMiniBarInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -25996,7 +26010,7 @@ export namespace Prisma {
 
   export type MiniBarUncheckedCreateWithoutItemsInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
   }
 
   export type MiniBarCreateOrConnectWithoutItemsInput = {
@@ -26041,7 +26055,7 @@ export namespace Prisma {
 
   export type MiniBarUncheckedUpdateWithoutItemsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemUpsertWithoutMiniBarItemsInput = {
@@ -26117,7 +26131,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateWithoutBookingsInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     floor: FloorCreateNestedOneWithoutRoomsInput
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
@@ -26128,7 +26142,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateWithoutBookingsInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     statusId?: number | null
@@ -26186,7 +26200,7 @@ export namespace Prisma {
   }
 
   export type RoomUpdateWithoutBookingsInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     floor?: FloorUpdateOneRequiredWithoutRoomsNestedInput
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
@@ -26197,7 +26211,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateWithoutBookingsInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26245,7 +26259,7 @@ export namespace Prisma {
   }
 
   export type RoomCreateWithoutReceiptsInput = {
-    roomNumber: number
+    roomNumber: string
     sessionId?: number | null
     floor: FloorCreateNestedOneWithoutRoomsInput
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
@@ -26256,7 +26270,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedCreateWithoutReceiptsInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     statusId?: number | null
@@ -26339,7 +26353,7 @@ export namespace Prisma {
   }
 
   export type RoomUpdateWithoutReceiptsInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     floor?: FloorUpdateOneRequiredWithoutRoomsNestedInput
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
@@ -26350,7 +26364,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateWithoutReceiptsInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26432,7 +26446,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedCreateWithoutAdditionalChargesInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     guestId: string
     totalPrice: number
     amountPaid: number
@@ -26521,7 +26535,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedUpdateWithoutAdditionalChargesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     guestId?: StringFieldUpdateOperationsInput | string
     totalPrice?: FloatFieldUpdateOperationsInput | number
     amountPaid?: FloatFieldUpdateOperationsInput | number
@@ -26850,14 +26864,14 @@ export namespace Prisma {
   }
 
   export type RoomCreateManyFloorInput = {
-    roomNumber: number
+    roomNumber: string
     roomTypeId: number
     statusId?: number | null
     sessionId?: number | null
   }
 
   export type RoomUpdateWithoutFloorInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
@@ -26868,7 +26882,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateWithoutFloorInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26879,21 +26893,21 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateManyWithoutFloorInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     roomTypeId?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type RoomCreateManyRoomTypeInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     statusId?: number | null
     sessionId?: number | null
   }
 
   export type RoomUpdateWithoutRoomTypeInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     floor?: FloorUpdateOneRequiredWithoutRoomsNestedInput
     status?: RoomStatusUpdateOneWithoutRoomsNestedInput
@@ -26904,7 +26918,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateWithoutRoomTypeInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26915,21 +26929,21 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateManyWithoutRoomTypeInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     statusId?: NullableIntFieldUpdateOperationsInput | number | null
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type RoomCreateManyStatusInput = {
-    roomNumber: number
+    roomNumber: string
     floorNumber: number
     roomTypeId: number
     sessionId?: number | null
   }
 
   export type RoomUpdateWithoutStatusInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
     floor?: FloorUpdateOneRequiredWithoutRoomsNestedInput
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
@@ -26940,7 +26954,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateWithoutStatusInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26951,7 +26965,7 @@ export namespace Prisma {
   }
 
   export type RoomUncheckedUpdateManyWithoutStatusInput = {
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     floorNumber?: IntFieldUpdateOperationsInput | number
     roomTypeId?: IntFieldUpdateOperationsInput | number
     sessionId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27109,7 +27123,7 @@ export namespace Prisma {
 
   export type BookingCreateManyGuestInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     contactName: string
     contactPhone: string
     contactEmail?: string | null
@@ -27119,7 +27133,7 @@ export namespace Prisma {
 
   export type ReceiptCreateManyGuestInput = {
     id?: number
-    roomNumber: number
+    roomNumber: string
     totalPrice: number
     amountPaid: number
     paidBy: string
@@ -27137,7 +27151,7 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateWithoutGuestsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27148,7 +27162,7 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateManyWithoutGuestsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27168,7 +27182,7 @@ export namespace Prisma {
 
   export type BookingUncheckedUpdateWithoutGuestInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27178,7 +27192,7 @@ export namespace Prisma {
 
   export type BookingUncheckedUpdateManyWithoutGuestInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     contactName?: StringFieldUpdateOperationsInput | string
     contactPhone?: StringFieldUpdateOperationsInput | string
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27196,7 +27210,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedUpdateWithoutGuestInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     totalPrice?: FloatFieldUpdateOperationsInput | number
     amountPaid?: FloatFieldUpdateOperationsInput | number
     paidBy?: StringFieldUpdateOperationsInput | string
@@ -27205,7 +27219,7 @@ export namespace Prisma {
 
   export type ReceiptUncheckedUpdateManyWithoutGuestInput = {
     id?: IntFieldUpdateOperationsInput | number
-    roomNumber?: IntFieldUpdateOperationsInput | number
+    roomNumber?: StringFieldUpdateOperationsInput | string
     totalPrice?: FloatFieldUpdateOperationsInput | number
     amountPaid?: FloatFieldUpdateOperationsInput | number
     paidBy?: StringFieldUpdateOperationsInput | string
