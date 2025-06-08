@@ -17,10 +17,9 @@ class RoomTypeController {
 
   async updateRoomType(req: RoomTypeUpsertRequest, res: Response) {
     const { id } = req.params;
-    const { name, pax, price } = req.body;
     const updatedRoomType = await prismaClient.roomType.update({
       where: { id: Number(id) },
-      data: { name, pax, price },
+      data: req.body,
     });
     return res.status(200).json({
       data: updatedRoomType,

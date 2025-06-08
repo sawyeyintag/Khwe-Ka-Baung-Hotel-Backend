@@ -1,13 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { RoomStatusIds } from "@/shared/enums/RoomStatusIds";
 import log from "@/utils/logger";
 
-const roomStatuses = [
-  { id: RoomStatusIds.AVAILABLE, label: "Available" },
-  { id: RoomStatusIds.IN_SESSION, label: "In Session" },
-  { id: RoomStatusIds.NOT_AVAILABLE, label: "Not Available" },
-  { id: RoomStatusIds.BOOKED, label: "Booked" },
-];
+import { roomStatuses } from "@/shared/constants/roomStatuses";
 
 export async function seedRoomStatuses(prisma: PrismaClient) {
   for (const status of roomStatuses) {
@@ -18,5 +12,5 @@ export async function seedRoomStatuses(prisma: PrismaClient) {
     });
   }
 
-  log.info("✅ Room statuses seeded successfully.");
+  log.info("Room statuses seeded successfully.");
 }

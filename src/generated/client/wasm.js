@@ -127,7 +127,8 @@ exports.Prisma.FloorScalarFieldEnum = {
 exports.Prisma.RoomTypeScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  price: 'price',
+  priceWithBreakfast: 'priceWithBreakfast',
+  priceWithoutBreakfast: 'priceWithoutBreakfast',
   pax: 'pax'
 };
 

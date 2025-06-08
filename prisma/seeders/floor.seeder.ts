@@ -12,5 +12,5 @@ export async function seedFloors(prisma: PrismaClient) {
     });
   }
 
-  log.info("✅ Floors seeded successfully.");
+  log.info("Floors seeded successfully.");
 }

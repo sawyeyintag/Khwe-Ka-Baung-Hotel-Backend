@@ -3634,34 +3634,39 @@ export namespace Prisma {
 
   export type RoomTypeAvgAggregateOutputType = {
     id: number | null
-    price: number | null
+    priceWithBreakfast: number | null
+    priceWithoutBreakfast: number | null
     pax: number | null
   }
 
   export type RoomTypeSumAggregateOutputType = {
     id: number | null
-    price: number | null
+    priceWithBreakfast: number | null
+    priceWithoutBreakfast: number | null
     pax: number | null
   }
 
   export type RoomTypeMinAggregateOutputType = {
     id: number | null
     name: string | null
-    price: number | null
+    priceWithBreakfast: number | null
+    priceWithoutBreakfast: number | null
     pax: number | null
   }
 
   export type RoomTypeMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    price: number | null
+    priceWithBreakfast: number | null
+    priceWithoutBreakfast: number | null
     pax: number | null
   }
 
   export type RoomTypeCountAggregateOutputType = {
     id: number
     name: number
-    price: number
+    priceWithBreakfast: number
+    priceWithoutBreakfast: number
     pax: number
     _all: number
   }
@@ -3669,34 +3674,39 @@ export namespace Prisma {
 
   export type RoomTypeAvgAggregateInputType = {
     id?: true
-    price?: true
+    priceWithBreakfast?: true
+    priceWithoutBreakfast?: true
     pax?: true
   }
 
   export type RoomTypeSumAggregateInputType = {
     id?: true
-    price?: true
+    priceWithBreakfast?: true
+    priceWithoutBreakfast?: true
     pax?: true
   }
 
   export type RoomTypeMinAggregateInputType = {
     id?: true
     name?: true
-    price?: true
+    priceWithBreakfast?: true
+    priceWithoutBreakfast?: true
     pax?: true
   }
 
   export type RoomTypeMaxAggregateInputType = {
     id?: true
     name?: true
-    price?: true
+    priceWithBreakfast?: true
+    priceWithoutBreakfast?: true
     pax?: true
   }
 
   export type RoomTypeCountAggregateInputType = {
     id?: true
     name?: true
-    price?: true
+    priceWithBreakfast?: true
+    priceWithoutBreakfast?: true
     pax?: true
     _all?: true
   }
@@ -3790,7 +3800,8 @@ export namespace Prisma {
   export type RoomTypeGroupByOutputType = {
     id: number
     name: string
-    price: number
+    priceWithBreakfast: number
+    priceWithoutBreakfast: number
     pax: number
     _count: RoomTypeCountAggregateOutputType | null
     _avg: RoomTypeAvgAggregateOutputType | null
@@ -3816,7 +3827,8 @@ export namespace Prisma {
   export type RoomTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    price?: boolean
+    priceWithBreakfast?: boolean
+    priceWithoutBreakfast?: boolean
     pax?: boolean
     rooms?: boolean | RoomType$roomsArgs<ExtArgs>
     _count?: boolean | RoomTypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -3827,11 +3839,12 @@ export namespace Prisma {
   export type RoomTypeSelectScalar = {
     id?: boolean
     name?: boolean
-    price?: boolean
+    priceWithBreakfast?: boolean
+    priceWithoutBreakfast?: boolean
     pax?: boolean
   }
 
-  export type RoomTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "pax", ExtArgs["result"]["roomType"]>
+  export type RoomTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "priceWithBreakfast" | "priceWithoutBreakfast" | "pax", ExtArgs["result"]["roomType"]>
   export type RoomTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rooms?: boolean | RoomType$roomsArgs<ExtArgs>
     _count?: boolean | RoomTypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -3845,7 +3858,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      price: number
+      priceWithBreakfast: number
+      priceWithoutBreakfast: number
       pax: number
     }, ExtArgs["result"]["roomType"]>
     composites: {}
@@ -4219,7 +4233,8 @@ export namespace Prisma {
   interface RoomTypeFieldRefs {
     readonly id: FieldRef<"RoomType", 'Int'>
     readonly name: FieldRef<"RoomType", 'String'>
-    readonly price: FieldRef<"RoomType", 'Float'>
+    readonly priceWithBreakfast: FieldRef<"RoomType", 'Float'>
+    readonly priceWithoutBreakfast: FieldRef<"RoomType", 'Float'>
     readonly pax: FieldRef<"RoomType", 'Int'>
   }
     
@@ -20440,7 +20455,8 @@ export namespace Prisma {
   export const RoomTypeScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    price: 'price',
+    priceWithBreakfast: 'priceWithBreakfast',
+    priceWithoutBreakfast: 'priceWithoutBreakfast',
     pax: 'pax'
   };
 
@@ -20804,7 +20820,8 @@ export namespace Prisma {
     NOT?: RoomTypeWhereInput | RoomTypeWhereInput[]
     id?: IntFilter<"RoomType"> | number
     name?: StringFilter<"RoomType"> | string
-    price?: FloatFilter<"RoomType"> | number
+    priceWithBreakfast?: FloatFilter<"RoomType"> | number
+    priceWithoutBreakfast?: FloatFilter<"RoomType"> | number
     pax?: IntFilter<"RoomType"> | number
     rooms?: RoomListRelationFilter
   }
@@ -20812,7 +20829,8 @@ export namespace Prisma {
   export type RoomTypeOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    price?: SortOrder
+    priceWithBreakfast?: SortOrder
+    priceWithoutBreakfast?: SortOrder
     pax?: SortOrder
     rooms?: RoomOrderByRelationAggregateInput
     _relevance?: RoomTypeOrderByRelevanceInput
@@ -20824,7 +20842,8 @@ export namespace Prisma {
     OR?: RoomTypeWhereInput[]
     NOT?: RoomTypeWhereInput | RoomTypeWhereInput[]
     name?: StringFilter<"RoomType"> | string
-    price?: FloatFilter<"RoomType"> | number
+    priceWithBreakfast?: FloatFilter<"RoomType"> | number
+    priceWithoutBreakfast?: FloatFilter<"RoomType"> | number
     pax?: IntFilter<"RoomType"> | number
     rooms?: RoomListRelationFilter
   }, "id">
@@ -20832,7 +20851,8 @@ export namespace Prisma {
   export type RoomTypeOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    price?: SortOrder
+    priceWithBreakfast?: SortOrder
+    priceWithoutBreakfast?: SortOrder
     pax?: SortOrder
     _count?: RoomTypeCountOrderByAggregateInput
     _avg?: RoomTypeAvgOrderByAggregateInput
@@ -20847,7 +20867,8 @@ export namespace Prisma {
     NOT?: RoomTypeScalarWhereWithAggregatesInput | RoomTypeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"RoomType"> | number
     name?: StringWithAggregatesFilter<"RoomType"> | string
-    price?: FloatWithAggregatesFilter<"RoomType"> | number
+    priceWithBreakfast?: FloatWithAggregatesFilter<"RoomType"> | number
+    priceWithoutBreakfast?: FloatWithAggregatesFilter<"RoomType"> | number
     pax?: IntWithAggregatesFilter<"RoomType"> | number
   }
 
@@ -21812,7 +21833,8 @@ export namespace Prisma {
   export type RoomTypeCreateInput = {
     id: number
     name: string
-    price: number
+    priceWithBreakfast: number
+    priceWithoutBreakfast: number
     pax: number
     rooms?: RoomCreateNestedManyWithoutRoomTypeInput
   }
@@ -21820,7 +21842,8 @@ export namespace Prisma {
   export type RoomTypeUncheckedCreateInput = {
     id: number
     name: string
-    price: number
+    priceWithBreakfast: number
+    priceWithoutBreakfast: number
     pax: number
     rooms?: RoomUncheckedCreateNestedManyWithoutRoomTypeInput
   }
@@ -21828,7 +21851,8 @@ export namespace Prisma {
   export type RoomTypeUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    priceWithBreakfast?: FloatFieldUpdateOperationsInput | number
+    priceWithoutBreakfast?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
     rooms?: RoomUpdateManyWithoutRoomTypeNestedInput
   }
@@ -21836,7 +21860,8 @@ export namespace Prisma {
   export type RoomTypeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    priceWithBreakfast?: FloatFieldUpdateOperationsInput | number
+    priceWithoutBreakfast?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
     rooms?: RoomUncheckedUpdateManyWithoutRoomTypeNestedInput
   }
@@ -21844,21 +21869,24 @@ export namespace Prisma {
   export type RoomTypeCreateManyInput = {
     id: number
     name: string
-    price: number
+    priceWithBreakfast: number
+    priceWithoutBreakfast: number
     pax: number
   }
 
   export type RoomTypeUpdateManyMutationInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    priceWithBreakfast?: FloatFieldUpdateOperationsInput | number
+    priceWithoutBreakfast?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
   }
 
   export type RoomTypeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    priceWithBreakfast?: FloatFieldUpdateOperationsInput | number
+    priceWithoutBreakfast?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
   }
 
@@ -22801,33 +22829,38 @@ export namespace Prisma {
   export type RoomTypeCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    price?: SortOrder
+    priceWithBreakfast?: SortOrder
+    priceWithoutBreakfast?: SortOrder
     pax?: SortOrder
   }
 
   export type RoomTypeAvgOrderByAggregateInput = {
     id?: SortOrder
-    price?: SortOrder
+    priceWithBreakfast?: SortOrder
+    priceWithoutBreakfast?: SortOrder
     pax?: SortOrder
   }
 
   export type RoomTypeMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    price?: SortOrder
+    priceWithBreakfast?: SortOrder
+    priceWithoutBreakfast?: SortOrder
     pax?: SortOrder
   }
 
   export type RoomTypeMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    price?: SortOrder
+    priceWithBreakfast?: SortOrder
+    priceWithoutBreakfast?: SortOrder
     pax?: SortOrder
   }
 
   export type RoomTypeSumOrderByAggregateInput = {
     id?: SortOrder
-    price?: SortOrder
+    priceWithBreakfast?: SortOrder
+    priceWithoutBreakfast?: SortOrder
     pax?: SortOrder
   }
 
@@ -25228,14 +25261,16 @@ export namespace Prisma {
   export type RoomTypeCreateWithoutRoomsInput = {
     id: number
     name: string
-    price: number
+    priceWithBreakfast: number
+    priceWithoutBreakfast: number
     pax: number
   }
 
   export type RoomTypeUncheckedCreateWithoutRoomsInput = {
     id: number
     name: string
-    price: number
+    priceWithBreakfast: number
+    priceWithoutBreakfast: number
     pax: number
   }
 
@@ -25393,14 +25428,16 @@ export namespace Prisma {
   export type RoomTypeUpdateWithoutRoomsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    priceWithBreakfast?: FloatFieldUpdateOperationsInput | number
+    priceWithoutBreakfast?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
   }
 
   export type RoomTypeUncheckedUpdateWithoutRoomsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    priceWithBreakfast?: FloatFieldUpdateOperationsInput | number
+    priceWithoutBreakfast?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
   }
 
