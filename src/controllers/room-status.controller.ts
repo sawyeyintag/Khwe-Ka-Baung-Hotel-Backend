@@ -5,22 +5,6 @@ import { NotFoundException } from "../exceptions/not-found";
 import { RoomStatusUpsertRequest } from "../types/room-status.type";
 
 class RoomStatusController {
-  async createRoomStatus(req: RoomStatusUpsertRequest, res: Response) {
-    const { label } = req.body;
-    const roomStatus = await prismaClient.roomStatus.findFirst({
-      where: { label },
-    });
-    if (roomStatus) {
-      throw new BadRequestsException("The room status already exists");
-    }
-    const createdRoomStatus = await prismaClient.roomStatus.create({
-      data: { label },
-    });
-    return res.status(201).json({
-      data: createdRoomStatus,
-    });
-  }
-
   async getAllRoomStatuses(req: Request, res: Response) {
     const roomStatuses = await prismaClient.roomStatus.findMany();
     return res.status(200).json({

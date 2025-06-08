@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import { NotFoundException } from "../exceptions/not-found";
 import { BookingUpsertRequest } from "../types/booking.type";
-import { roomStatus } from "../constants/roomStatus";
+import { RoomStatusIds } from "../../shared/enums/RoomStatusIds";
 
 import { isBefore } from "date-fns";
 
@@ -23,7 +23,7 @@ class BookingController {
       throw new NotFoundException(`Room ${roomNumber} does not exist`);
     }
 
-    if (room.statusId !== roomStatus.AVAILABLE) {
+    if (room.statusId !== RoomStatusIds.AVAILABLE) {
       throw new BadRequestsException(
         `Room ${roomNumber} is marked as NOT_AVAILABLE`
       );

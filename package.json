@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx nodemon",
+    "db:seed": "tsx prisma/seeders/index.ts",
     "postinstall": "prisma generate",
     "build": "prisma generate && tsc"
   },
@@ -22,6 +23,7 @@
     "pino-pretty": "^13.0.0",
     "prisma": "^6.4.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
     "typescript": "^5.7.3"
   },
   "dependencies": {

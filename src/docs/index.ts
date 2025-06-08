@@ -12,10 +12,10 @@ import { sessionPaths } from "./swagger/paths/session.path";
 const paths = {
   ...authPaths,
   ...roomPaths,
-  ...floorPaths,
   ...roomTypePaths,
-  ...bookingPaths,
   ...roomStatusPaths,
+  ...floorPaths,
+  ...bookingPaths,
   ...guestPaths,
   ...sessionPaths,
   // Add other path imports

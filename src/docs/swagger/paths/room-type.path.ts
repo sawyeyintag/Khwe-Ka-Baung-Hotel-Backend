@@ -21,23 +21,6 @@ export const roomTypePaths = {
         },
       },
     },
-    post: {
-      summary: "Create a new room type",
-      description: "Create a new room type in the system",
-      tags,
-      ...zodSchemaConverter(RoomTypeUpsertSchema),
-      responses: {
-        "201": {
-          description: "Room Type created successfully",
-        },
-        "400": {
-          description: "Invalid input data",
-        },
-        "500": {
-          description: "Internal server error",
-        },
-      },
-    },
   },
   "/room-types/{id}": {
     put: {

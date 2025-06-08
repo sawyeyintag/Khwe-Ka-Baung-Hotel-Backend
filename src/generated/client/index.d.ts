@@ -21810,6 +21810,7 @@ export namespace Prisma {
   }
 
   export type RoomTypeCreateInput = {
+    id: number
     name: string
     price: number
     pax: number
@@ -21817,7 +21818,7 @@ export namespace Prisma {
   }
 
   export type RoomTypeUncheckedCreateInput = {
-    id?: number
+    id: number
     name: string
     price: number
     pax: number
@@ -21825,6 +21826,7 @@ export namespace Prisma {
   }
 
   export type RoomTypeUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
@@ -21840,13 +21842,14 @@ export namespace Prisma {
   }
 
   export type RoomTypeCreateManyInput = {
-    id?: number
+    id: number
     name: string
     price: number
     pax: number
   }
 
   export type RoomTypeUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
@@ -21860,17 +21863,19 @@ export namespace Prisma {
   }
 
   export type RoomStatusCreateInput = {
+    id: number
     label: string
     rooms?: RoomCreateNestedManyWithoutStatusInput
   }
 
   export type RoomStatusUncheckedCreateInput = {
-    id?: number
+    id: number
     label: string
     rooms?: RoomUncheckedCreateNestedManyWithoutStatusInput
   }
 
   export type RoomStatusUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     rooms?: RoomUpdateManyWithoutStatusNestedInput
   }
@@ -21882,11 +21887,12 @@ export namespace Prisma {
   }
 
   export type RoomStatusCreateManyInput = {
-    id?: number
+    id: number
     label: string
   }
 
   export type RoomStatusUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
   }
 
@@ -25220,13 +25226,14 @@ export namespace Prisma {
   }
 
   export type RoomTypeCreateWithoutRoomsInput = {
+    id: number
     name: string
     price: number
     pax: number
   }
 
   export type RoomTypeUncheckedCreateWithoutRoomsInput = {
-    id?: number
+    id: number
     name: string
     price: number
     pax: number
@@ -25238,11 +25245,12 @@ export namespace Prisma {
   }
 
   export type RoomStatusCreateWithoutRoomsInput = {
+    id: number
     label: string
   }
 
   export type RoomStatusUncheckedCreateWithoutRoomsInput = {
-    id?: number
+    id: number
     label: string
   }
 
@@ -25383,6 +25391,7 @@ export namespace Prisma {
   }
 
   export type RoomTypeUpdateWithoutRoomsInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     pax?: IntFieldUpdateOperationsInput | number
@@ -25407,6 +25416,7 @@ export namespace Prisma {
   }
 
   export type RoomStatusUpdateWithoutRoomsInput = {
+    id?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
   }
 

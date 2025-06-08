@@ -2,10 +2,14 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "strict": true,
-    "rootDir": "src",
     "noEmit": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/shared/*": ["./shared/*"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "shared/**/*", "prisma/**/*"]
 }

@@ -21,23 +21,6 @@ export const roomStatusPaths = {
         },
       },
     },
-    post: {
-      summary: "Create a new room status",
-      description: "Create a new room status in the system",
-      tags,
-      ...zodSchemaConverter(RoomStatusUpsertSchema),
-      responses: {
-        "201": {
-          description: "Room Status created successfully",
-        },
-        "400": {
-          description: "Invalid input data",
-        },
-        "500": {
-          description: "Internal server error",
-        },
-      },
-    },
   },
   "/room-statuses/{id}": {
     put: {

@@ -11,11 +11,6 @@ roomStatusRouter.get(
   "",
   routeErrorHandler(roomStatusController.getAllRoomStatuses)
 );
-roomStatusRouter.post(
-  "",
-  validateBody(RoomStatusUpsertSchema),
-  routeErrorHandler(roomStatusController.createRoomStatus)
-);
 roomStatusRouter.put(
   "/:id",
   validateBody(RoomStatusUpsertSchema),

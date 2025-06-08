@@ -21,7 +21,7 @@ model Floor {
 }
 
 model RoomType {
-  id    Int    @id @default(autoincrement())
+  id    Int    @id
   name  String
   price Float
   pax   Int
@@ -29,17 +29,17 @@ model RoomType {
 }
 
 model RoomStatus {
-  id    Int    @id @default(autoincrement())
+  id    Int    @id
   label String
   rooms Room[]
 }
 
 model Room {
-  roomNumber  Int  @id
+  roomNumber  String @id
   floorNumber Int
   roomTypeId  Int
   statusId    Int?
-  sessionId   Int? @unique
+  sessionId   Int?   @unique
 
   floor    Floor       @relation(fields: [floorNumber], references: [floorNumber])
   roomType RoomType    @relation(fields: [roomTypeId], references: [id])
@@ -52,7 +52,7 @@ model Room {
 
 model Session {
   id                Int       @id @default(autoincrement())
-  roomNumber        Int       @unique
+  roomNumber        String    @unique
   numberOfExtraBeds Int
   actualCheckIn     DateTime
   actualCheckOut    DateTime?
@@ -81,7 +81,7 @@ model Guest {
 
 model MiniBar {
   id         Int           @id @default(autoincrement())
-  roomNumber Int           @unique
+  roomNumber String        @unique
   room       Room          @relation(fields: [roomNumber], references: [roomNumber])
   items      MiniBarItem[]
 }
@@ -117,7 +117,7 @@ model Inventory {
 
 model Booking {
   id           Int      @id @default(autoincrement())
-  roomNumber   Int
+  roomNumber   String
   guestId      String?
   contactName  String
   contactPhone String
@@ -131,7 +131,7 @@ model Booking {
 
 model Receipt {
   id         Int    @id @default(autoincrement())
-  roomNumber Int
+  roomNumber String
   guestId    String
   totalPrice Float
   amountPaid Float

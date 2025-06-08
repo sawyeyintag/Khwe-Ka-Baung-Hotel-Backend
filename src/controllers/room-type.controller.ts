@@ -4,16 +4,6 @@ import { NotFoundException } from "../exceptions/not-found";
 import { RoomTypeUpsertRequest } from "../types/room-type.type";
 
 class RoomTypeController {
-  async createRoomType(req: RoomTypeUpsertRequest, res: Response) {
-    const { name, pax, price } = req.body;
-    const createdRoomType = await prismaClient.roomType.create({
-      data: { name, pax, price },
-    });
-    return res.status(201).json({
-      data: createdRoomType,
-    });
-  }
-
   async getAllRoomTypes(req: Request, res: Response) {
     const roomTypes = await prismaClient.roomType.findMany({
       include: {

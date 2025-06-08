@@ -21,7 +21,7 @@ model Floor {
 }
 
 model RoomType {
-  id    Int    @id @default(autoincrement())
+  id    Int    @id
   name  String
   price Float
   pax   Int
@@ -29,7 +29,7 @@ model RoomType {
 }
 
 model RoomStatus {
-  id    Int    @id @default(autoincrement())
+  id    Int    @id
   label String
   rooms Room[]
 }

@@ -8,11 +8,6 @@ import roomTypeController from "../controllers/room-type.controller";
 const roomTypeRouter: Router = Router();
 
 roomTypeRouter.get("", routeErrorHandler(roomTypeController.getAllRoomTypes));
-roomTypeRouter.post(
-  "",
-  validateBody(RoomTypeUpsertSchema),
-  routeErrorHandler(roomTypeController.createRoomType)
-);
 roomTypeRouter.put(
   "/:id",
   validateBody(RoomTypeUpsertSchema),
