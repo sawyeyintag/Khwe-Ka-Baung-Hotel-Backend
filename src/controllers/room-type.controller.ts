@@ -5,11 +5,7 @@ import { RoomTypeUpsertRequest } from "../types/room-type.type";
 
 class RoomTypeController {
   async getAllRoomTypes(req: Request, res: Response) {
-    const roomTypes = await prismaClient.roomType.findMany({
-      include: {
-        rooms: true,
-      },
-    });
+    const roomTypes = await prismaClient.roomType.findMany();
     return res.status(200).json({
       data: roomTypes,
     });
