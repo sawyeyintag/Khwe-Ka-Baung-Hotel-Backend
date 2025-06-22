@@ -7,14 +7,57 @@ export const roomPaths = {
   "/rooms": {
     get: {
       summary: "Get all rooms",
-      description: "Retrieve a list of all rooms in the system",
+      description:
+        "Retrieve a list of all rooms in the system with optional filtering",
       tags,
+      parameters: [
+        {
+          name: "roomStatusId",
+          in: "query",
+          description: "Filter rooms by status ID",
+          required: false,
+          schema: {
+            type: "integer",
+            example: 1,
+          },
+        },
+        {
+          name: "roomTypeId",
+          in: "query",
+          description: "Filter rooms by room type ID",
+          required: false,
+          schema: {
+            type: "integer",
+            example: 1,
+          },
+        },
+        {
+          name: "floor",
+          in: "query",
+          description: "Filter rooms by floor number",
+          required: false,
+          schema: {
+            type: "integer",
+            example: 1,
+          },
+        },
+      ],
       responses: {
         "200": {
           description: "List of rooms retrieved successfully",
+          content: {
+            "application/json": {
+              schema: {
+                type: "array",
+                items: {
+                  // Your room object schema here
+                },
+              },
+            },
+          },
         },
         "404": {
-          description: "No rooms found",
+          description: "No rooms found matching the criteria",
         },
         "500": {
           description: "Internal server error",

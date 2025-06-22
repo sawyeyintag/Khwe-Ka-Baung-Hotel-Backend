@@ -2,7 +2,7 @@ import { Router } from "express";
 import sessionController from "../controllers/session.controller";
 import { routeErrorHandler } from "../middlewares/route-error.middleware";
 import { validateBody } from "../middlewares/validation.middleware";
-import { validateParams } from "../middlewares/validateParams.middleware";
+import { validateParams } from "../middlewares/validate-params.middleware";
 import { SessionCreateSchema, SessionEndSchema } from "../schema/session.zod";
 
 const sessionRouter: Router = Router();

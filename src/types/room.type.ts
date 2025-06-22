@@ -14,3 +14,11 @@ export interface RoomEditSchemaRequest extends Request {
   body: RoomEditSchema;
   params: { roomNumber: string };
 }
+
+export interface RoomGetAllRequest extends Request {
+  query: {
+    roomStatusId?: string;
+    roomTypeId?: string;
+    floor?: string;
+  };
+}

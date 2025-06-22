@@ -4,11 +4,19 @@ import { BadRequestsException } from "../exceptions/bad-requests";
 import {
   RoomCreateSchemaRequest,
   RoomEditSchemaRequest,
+  RoomGetAllRequest,
 } from "../types/room.type";
 
 class RoomController {
-  async getAllRooms(req: Request, res: Response) {
+  async getAllRooms(req: RoomGetAllRequest, res: Response) {
+    const { roomStatusId, roomTypeId, floor } = req.query;
+
     const rooms = await prismaClient.room.findMany({
+      where: {
+        ...(roomStatusId && { roomStatusId: Number(roomStatusId) }),
+        ...(roomTypeId && { roomTypeId: Number(roomTypeId) }),
+        ...(floor && { floorNumber: Number(floor) }),
+      },
       include: {
         roomType: true,
         status: true,

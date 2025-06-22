@@ -60,7 +60,57 @@ export function zodSchemaConverter<T extends ZodRawShape>(
         property.description = description;
       }
 
-      // Add format for specific types
+      // Handle array types - add items property
+      if (fieldType === "ZodArray") {
+        const arrayElement = field._def.type;
+        const elementType = arrayElement._def.typeName;
+        property.items = {
+          type: mapZodTypeToSwagger(elementType),
+        };
+
+        // Handle string format for array elements
+        if (elementType === "ZodString" && arrayElement._def.checks) {
+          const formatCheck = arrayElement._def.checks.find(
+            (check: ZodCheck) =>
+              check.kind === "email" ||
+              check.kind === "url" ||
+              check.kind === "uuid"
+          );
+          if (formatCheck) {
+            property.items.format = formatCheck.kind;
+          }
+        }
+      }
+
+      // Handle ZodEffects (for .refine() calls)
+      if (fieldType === "ZodEffects") {
+        const innerType = field._def.schema._def.typeName;
+        property.type = mapZodTypeToSwagger(innerType);
+
+        // If it's an array with effects, handle the array structure
+        if (innerType === "ZodArray") {
+          const arrayElement = field._def.schema._def.type;
+          const elementType = arrayElement._def.typeName;
+          property.items = {
+            type: mapZodTypeToSwagger(elementType),
+          };
+
+          // Handle string format for array elements
+          if (elementType === "ZodString" && arrayElement._def.checks) {
+            const formatCheck = arrayElement._def.checks.find(
+              (check: ZodCheck) =>
+                check.kind === "email" ||
+                check.kind === "url" ||
+                check.kind === "uuid"
+            );
+            if (formatCheck) {
+              property.items.format = formatCheck.kind;
+            }
+          }
+        }
+      }
+
+      // Add format for specific types (non-array)
       if (fieldType === "ZodString" && field._def.checks) {
         const formatCheck = field._def.checks.find(
           (check: ZodCheck) =>
@@ -71,6 +121,36 @@ export function zodSchemaConverter<T extends ZodRawShape>(
         if (formatCheck) {
           property.format = formatCheck.kind;
         }
+
+        // Handle regex patterns
+        const regexCheck = field._def.checks.find(
+          (check: ZodCheck) => check.kind === "regex"
+        );
+        if (regexCheck) {
+          property.description = property.description
+            ? `${property.description} (Pattern: ${regexCheck.regex})`
+            : `Pattern: ${regexCheck.regex}`;
+        }
+      }
+
+      // Handle number constraints (integer)
+      if (fieldType === "ZodNumber" && field._def.checks) {
+        const intCheck = field._def.checks.find(
+          (check: ZodCheck) => check.kind === "int"
+        );
+        if (intCheck) {
+          property.type = "integer";
+        }
+      }
+
+      // Handle Date type with proper format
+      if (fieldType === "ZodDate") {
+        property.format = "date-time";
+      }
+
+      // Handle enum types
+      if (fieldType === "ZodEnum") {
+        property.enum = field._def.values;
       }
 
       // Add property to properties object
@@ -117,6 +197,7 @@ function mapZodTypeToSwagger(zodType: string): string {
     ZodObject: "object",
     ZodEnum: "string",
     ZodDate: "string", // with format: date-time
+    ZodEffects: "object", // Will be overridden based on inner type
   };
 
   return typeMap[zodType] || "string";
