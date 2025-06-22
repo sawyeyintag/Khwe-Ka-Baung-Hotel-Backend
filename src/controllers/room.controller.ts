@@ -13,7 +13,7 @@ class RoomController {
 
     const rooms = await prismaClient.room.findMany({
       where: {
-        ...(roomStatusId && { roomStatusId: Number(roomStatusId) }),
+        ...(roomStatusId && { statusId: Number(roomStatusId) }),
         ...(roomTypeId && { roomTypeId: Number(roomTypeId) }),
         ...(floor && { floorNumber: Number(floor) }),
       },
