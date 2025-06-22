@@ -70,7 +70,7 @@ model Guest {
   phone      String
   email      String
   address    String
-  nicCardNum String?
+  nicCardNum String?  @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 

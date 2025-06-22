@@ -29,6 +29,19 @@ class GuestController {
     });
   }
 
+  async getGuestByNicCardNum(req: Request, res: Response) {
+    const { nicCardNum } = req.params;
+    const guest = await prismaClient.guest.findUnique({
+      where: { nicCardNum },
+    });
+    if (!guest) {
+      throw new NotFoundException("Guest not found");
+    }
+    return res.status(200).json({
+      data: guest,
+    });
+  }
+
   async updateGuest(req: GuestUpsertRequest, res: Response) {
     const { id } = req.params;
     const { name, phone, email, address, nicCardNum } = req.body;

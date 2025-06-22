@@ -99,4 +99,50 @@ export const guestPaths = {
       },
     },
   },
+  "/guests/{nicCardNum}": {
+    get: {
+      summary: "Get guest by NIC card number",
+      description: "Retrieve a guest by their NIC card number",
+      tags: ["Guest"],
+      parameters: [
+        {
+          name: "nicCardNum",
+          in: "path",
+          required: true,
+          description: "NIC card number of the guest",
+          schema: {
+            type: "string",
+          },
+        },
+      ],
+      responses: {
+        "200": {
+          description: "Guest retrieved successfully",
+          content: {
+            "application/json": {
+              example: {
+                data: {
+                  id: "12345",
+                  nicCardNum: "123456789V",
+                  firstName: "John",
+                  lastName: "Doe",
+                  email: "john.doe@example.com",
+                  phone: "+94771234567",
+                  checkInDate: "2024-06-20T14:00:00Z",
+                  checkOutDate: "2024-06-25T11:00:00Z",
+                  roomNumber: "101",
+                },
+              },
+            },
+          },
+        },
+        "404": {
+          description: "Guest not found",
+        },
+        "500": {
+          description: "Internal server error",
+        },
+      },
+    },
+  },
 };

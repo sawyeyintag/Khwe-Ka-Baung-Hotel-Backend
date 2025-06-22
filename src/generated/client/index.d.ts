@@ -21101,6 +21101,7 @@ export namespace Prisma {
 
   export type GuestWhereUniqueInput = Prisma.AtLeast<{
     uid?: string
+    nicCardNum?: string
     AND?: GuestWhereInput | GuestWhereInput[]
     OR?: GuestWhereInput[]
     NOT?: GuestWhereInput | GuestWhereInput[]
@@ -21108,13 +21109,12 @@ export namespace Prisma {
     phone?: StringFilter<"Guest"> | string
     email?: StringFilter<"Guest"> | string
     address?: StringFilter<"Guest"> | string
-    nicCardNum?: StringNullableFilter<"Guest"> | string | null
     createdAt?: DateTimeFilter<"Guest"> | Date | string
     updatedAt?: DateTimeFilter<"Guest"> | Date | string
     sessions?: SessionListRelationFilter
     bookings?: BookingListRelationFilter
     receipts?: ReceiptListRelationFilter
-  }, "uid">
+  }, "uid" | "nicCardNum">
 
   export type GuestOrderByWithAggregationInput = {
     uid?: SortOrder
