@@ -10,6 +10,11 @@ const guestRouter: Router = Router();
 
 guestRouter.get("", routeErrorHandler(guestController.getAllGuests));
 guestRouter.get(
+  "/:id",
+  validateParams({ id: "string" }),
+  routeErrorHandler(guestController.getGuestById)
+);
+guestRouter.get(
   "/:nicCardNum",
   validateParams({ nicCardNum: "string" }),
   routeErrorHandler(guestController.getGuestByNicCardNum)

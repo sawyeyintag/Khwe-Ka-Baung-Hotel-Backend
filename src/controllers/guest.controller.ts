@@ -29,6 +29,19 @@ class GuestController {
     });
   }
 
+  async getGuestById(req: Request, res: Response) {
+    const { id } = req.params;
+    const guest = await prismaClient.guest.findUnique({
+      where: { uid: id },
+    });
+    if (!guest) {
+      throw new NotFoundException("Guest not found");
+    }
+    return res.status(200).json({
+      data: guest,
+    });
+  }
+
   async getGuestByNicCardNum(req: Request, res: Response) {
     const { nicCardNum } = req.params;
     const guest = await prismaClient.guest.findUnique({

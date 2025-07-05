@@ -40,6 +40,33 @@ export const guestPaths = {
     },
   },
   "/guests/{id}": {
+    get: {
+      summary: "Get guest by ID",
+      description: "Retrieve a guest by their unique ID",
+      tags,
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+          required: true,
+          description: "ID of the guest to retrieve",
+          schema: {
+            type: "string", // <-- should be 'type', not 'status'
+          },
+        },
+      ],
+      responses: {
+        "200": {
+          description: "Guest retrieved successfully",
+        },
+        "404": {
+          description: "Guest not found",
+        },
+        "500": {
+          description: "Internal server error",
+        },
+      },
+    },
     put: {
       summary: "Update an existing guest",
       description: "Update an existing guest in the system",
