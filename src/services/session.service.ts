@@ -43,7 +43,7 @@ class SessionService {
     });
   }
 
-  async endSession(id: number, actualCheckOut: Date) {
+  async endSession(id: number, actualCheckOut: string) {
     return await prismaClient.session.update({
       where: { id },
       data: { actualCheckOut, isActive: false },

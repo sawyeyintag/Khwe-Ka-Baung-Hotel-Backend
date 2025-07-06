@@ -15,7 +15,7 @@ guestRouter.get(
   routeErrorHandler(guestController.getGuestById)
 );
 guestRouter.get(
-  "/:nicCardNum",
+  "/nic-card/:nicCardNum",
   validateParams({ nicCardNum: "string" }),
   routeErrorHandler(guestController.getGuestByNicCardNum)
 );

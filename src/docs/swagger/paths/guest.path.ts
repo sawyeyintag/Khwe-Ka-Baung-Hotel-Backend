@@ -126,7 +126,7 @@ export const guestPaths = {
       },
     },
   },
-  "/guests/{nicCardNum}": {
+  "/guests/nic-card/{nicCardNum}": {
     get: {
       summary: "Get guest by NIC card number",
       description: "Retrieve a guest by their NIC card number",

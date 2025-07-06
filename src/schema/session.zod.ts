@@ -10,9 +10,9 @@ export const SessionCreateSchema = z.object({
       message: "Guest IDs must be valid UUIDs",
     }),
   numberOfExtraBeds: z.number().int(),
-  actualCheckIn: z.date(),
+  actualCheckIn: z.string(),
 });
 
 export const SessionEndSchema = z.object({
-  actualCheckOut: z.date(),
+  actualCheckOut: z.string(),
 });
