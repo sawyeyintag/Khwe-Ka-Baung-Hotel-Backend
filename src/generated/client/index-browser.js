@@ -150,6 +150,7 @@ exports.Prisma.SessionScalarFieldEnum = {
   roomNumber: 'roomNumber',
   numberOfExtraBeds: 'numberOfExtraBeds',
   actualCheckIn: 'actualCheckIn',
+  note: 'note',
   actualCheckOut: 'actualCheckOut',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -272,7 +273,8 @@ exports.Prisma.RoomOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.SessionOrderByRelevanceFieldEnum = {
-  roomNumber: 'roomNumber'
+  roomNumber: 'roomNumber',
+  note: 'note'
 };
 
 exports.Prisma.GuestOrderByRelevanceFieldEnum = {

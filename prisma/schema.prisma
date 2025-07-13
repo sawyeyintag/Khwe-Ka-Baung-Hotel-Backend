@@ -55,6 +55,7 @@ model Session {
   roomNumber        String    @unique
   numberOfExtraBeds Int
   actualCheckIn     DateTime
+  note              String?
   actualCheckOut    DateTime?
   isActive          Boolean   @default(true)
   createdAt         DateTime  @default(now())

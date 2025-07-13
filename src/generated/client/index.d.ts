@@ -6715,6 +6715,7 @@ export namespace Prisma {
     roomNumber: string | null
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
+    note: string | null
     actualCheckOut: Date | null
     isActive: boolean | null
     createdAt: Date | null
@@ -6726,6 +6727,7 @@ export namespace Prisma {
     roomNumber: string | null
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
+    note: string | null
     actualCheckOut: Date | null
     isActive: boolean | null
     createdAt: Date | null
@@ -6737,6 +6739,7 @@ export namespace Prisma {
     roomNumber: number
     numberOfExtraBeds: number
     actualCheckIn: number
+    note: number
     actualCheckOut: number
     isActive: number
     createdAt: number
@@ -6760,6 +6763,7 @@ export namespace Prisma {
     roomNumber?: true
     numberOfExtraBeds?: true
     actualCheckIn?: true
+    note?: true
     actualCheckOut?: true
     isActive?: true
     createdAt?: true
@@ -6771,6 +6775,7 @@ export namespace Prisma {
     roomNumber?: true
     numberOfExtraBeds?: true
     actualCheckIn?: true
+    note?: true
     actualCheckOut?: true
     isActive?: true
     createdAt?: true
@@ -6782,6 +6787,7 @@ export namespace Prisma {
     roomNumber?: true
     numberOfExtraBeds?: true
     actualCheckIn?: true
+    note?: true
     actualCheckOut?: true
     isActive?: true
     createdAt?: true
@@ -6880,6 +6886,7 @@ export namespace Prisma {
     roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date
+    note: string | null
     actualCheckOut: Date | null
     isActive: boolean
     createdAt: Date
@@ -6910,6 +6917,7 @@ export namespace Prisma {
     roomNumber?: boolean
     numberOfExtraBeds?: boolean
     actualCheckIn?: boolean
+    note?: boolean
     actualCheckOut?: boolean
     isActive?: boolean
     createdAt?: boolean
@@ -6926,13 +6934,14 @@ export namespace Prisma {
     roomNumber?: boolean
     numberOfExtraBeds?: boolean
     actualCheckIn?: boolean
+    note?: boolean
     actualCheckOut?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomNumber" | "numberOfExtraBeds" | "actualCheckIn" | "actualCheckOut" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomNumber" | "numberOfExtraBeds" | "actualCheckIn" | "note" | "actualCheckOut" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     room?: boolean | RoomDefaultArgs<ExtArgs>
     guests?: boolean | Session$guestsArgs<ExtArgs>
@@ -6950,6 +6959,7 @@ export namespace Prisma {
       roomNumber: string
       numberOfExtraBeds: number
       actualCheckIn: Date
+      note: string | null
       actualCheckOut: Date | null
       isActive: boolean
       createdAt: Date
@@ -7329,6 +7339,7 @@ export namespace Prisma {
     readonly roomNumber: FieldRef<"Session", 'String'>
     readonly numberOfExtraBeds: FieldRef<"Session", 'Int'>
     readonly actualCheckIn: FieldRef<"Session", 'DateTime'>
+    readonly note: FieldRef<"Session", 'String'>
     readonly actualCheckOut: FieldRef<"Session", 'DateTime'>
     readonly isActive: FieldRef<"Session", 'Boolean'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
@@ -20487,6 +20498,7 @@ export namespace Prisma {
     roomNumber: 'roomNumber',
     numberOfExtraBeds: 'numberOfExtraBeds',
     actualCheckIn: 'actualCheckIn',
+    note: 'note',
     actualCheckOut: 'actualCheckOut',
     isActive: 'isActive',
     createdAt: 'createdAt',
@@ -20666,7 +20678,8 @@ export namespace Prisma {
 
 
   export const SessionOrderByRelevanceFieldEnum: {
-    roomNumber: 'roomNumber'
+    roomNumber: 'roomNumber',
+    note: 'note'
   };
 
   export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
@@ -20999,6 +21012,7 @@ export namespace Prisma {
     roomNumber?: StringFilter<"Session"> | string
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
+    note?: StringNullableFilter<"Session"> | string | null
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
     isActive?: BoolFilter<"Session"> | boolean
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -21012,6 +21026,7 @@ export namespace Prisma {
     roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
+    note?: SortOrderInput | SortOrder
     actualCheckOut?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -21029,6 +21044,7 @@ export namespace Prisma {
     NOT?: SessionWhereInput | SessionWhereInput[]
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
+    note?: StringNullableFilter<"Session"> | string | null
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
     isActive?: BoolFilter<"Session"> | boolean
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -21042,6 +21058,7 @@ export namespace Prisma {
     roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
+    note?: SortOrderInput | SortOrder
     actualCheckOut?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -21061,6 +21078,7 @@ export namespace Prisma {
     roomNumber?: StringWithAggregatesFilter<"Session"> | string
     numberOfExtraBeds?: IntWithAggregatesFilter<"Session"> | number
     actualCheckIn?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    note?: StringNullableWithAggregatesFilter<"Session"> | string | null
     actualCheckOut?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
     isActive?: BoolWithAggregatesFilter<"Session"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
@@ -22001,6 +22019,7 @@ export namespace Prisma {
   export type SessionCreateInput = {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -22014,6 +22033,7 @@ export namespace Prisma {
     roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -22024,6 +22044,7 @@ export namespace Prisma {
   export type SessionUpdateInput = {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22037,6 +22058,7 @@ export namespace Prisma {
     roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22049,6 +22071,7 @@ export namespace Prisma {
     roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -22058,6 +22081,7 @@ export namespace Prisma {
   export type SessionUpdateManyMutationInput = {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22069,6 +22093,7 @@ export namespace Prisma {
     roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23064,6 +23089,21 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -23106,6 +23146,7 @@ export namespace Prisma {
     roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
+    note?: SortOrder
     actualCheckOut?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -23122,6 +23163,7 @@ export namespace Prisma {
     roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
+    note?: SortOrder
     actualCheckOut?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -23133,6 +23175,7 @@ export namespace Prisma {
     roomNumber?: SortOrder
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
+    note?: SortOrder
     actualCheckOut?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -23158,6 +23201,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -23178,21 +23239,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type GuestOrderByRelevanceInput = {
@@ -23232,24 +23278,6 @@ export namespace Prisma {
     nicCardNum?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type MiniBarItemListRelationFilter = {
@@ -24135,6 +24163,10 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -24215,10 +24247,6 @@ export namespace Prisma {
     connectOrCreate?: ReceiptCreateOrConnectWithoutGuestInput | ReceiptCreateOrConnectWithoutGuestInput[]
     createMany?: ReceiptCreateManyGuestInputEnvelope
     connect?: ReceiptWhereUniqueInput | ReceiptWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type SessionUpdateManyWithoutGuestsNestedInput = {
@@ -25005,6 +25033,21 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -25035,6 +25078,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -25055,39 +25116,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type RoomCreateWithoutFloorInput = {
@@ -25367,6 +25395,7 @@ export namespace Prisma {
   export type SessionCreateWithoutRoomInput = {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -25378,6 +25407,7 @@ export namespace Prisma {
     id?: number
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -25564,6 +25594,7 @@ export namespace Prisma {
     roomNumber?: StringFilter<"Session"> | string
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
+    note?: StringNullableFilter<"Session"> | string | null
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
     isActive?: BoolFilter<"Session"> | boolean
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -25694,6 +25725,7 @@ export namespace Prisma {
   export type SessionCreateWithoutGuestsInput = {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -25706,6 +25738,7 @@ export namespace Prisma {
     roomNumber: string
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -27040,6 +27073,7 @@ export namespace Prisma {
     id?: number
     numberOfExtraBeds: number
     actualCheckIn: Date | string
+    note?: string | null
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -27103,6 +27137,7 @@ export namespace Prisma {
   export type SessionUpdateWithoutRoomInput = {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27114,6 +27149,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27125,6 +27161,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27189,6 +27226,7 @@ export namespace Prisma {
   export type SessionUpdateWithoutGuestsInput = {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27201,6 +27239,7 @@ export namespace Prisma {
     roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27212,6 +27251,7 @@ export namespace Prisma {
     roomNumber?: StringFieldUpdateOperationsInput | string
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
