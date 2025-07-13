@@ -9,20 +9,21 @@ import { validateParams } from "../middlewares/validate-params.middleware";
 const guestRouter: Router = Router();
 
 guestRouter.get("", routeErrorHandler(guestController.getAllGuests));
-guestRouter.get(
-  "/:id",
-  validateParams({ id: "string" }),
-  routeErrorHandler(guestController.getGuestById)
+guestRouter.post(
+  "",
+  validateBody(GuestUpsertSchema),
+  routeErrorHandler(guestController.createGuest)
 );
+guestRouter.get("/search", routeErrorHandler(guestController.searchGuests));
 guestRouter.get(
   "/nic-card/:nicCardNum",
   validateParams({ nicCardNum: "string" }),
   routeErrorHandler(guestController.getGuestByNicCardNum)
 );
-guestRouter.post(
-  "",
-  validateBody(GuestUpsertSchema),
-  routeErrorHandler(guestController.createGuest)
+guestRouter.get(
+  "/:id",
+  validateParams({ id: "string" }),
+  routeErrorHandler(guestController.getGuestById)
 );
 guestRouter.put(
   "/:id",
