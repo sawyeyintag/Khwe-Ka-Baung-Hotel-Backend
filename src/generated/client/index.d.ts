@@ -6716,6 +6716,7 @@ export namespace Prisma {
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
     note: string | null
+    isBreakfastIncluded: boolean | null
     actualCheckOut: Date | null
     isActive: boolean | null
     createdAt: Date | null
@@ -6728,6 +6729,7 @@ export namespace Prisma {
     numberOfExtraBeds: number | null
     actualCheckIn: Date | null
     note: string | null
+    isBreakfastIncluded: boolean | null
     actualCheckOut: Date | null
     isActive: boolean | null
     createdAt: Date | null
@@ -6740,6 +6742,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: number
     note: number
+    isBreakfastIncluded: number
     actualCheckOut: number
     isActive: number
     createdAt: number
@@ -6764,6 +6767,7 @@ export namespace Prisma {
     numberOfExtraBeds?: true
     actualCheckIn?: true
     note?: true
+    isBreakfastIncluded?: true
     actualCheckOut?: true
     isActive?: true
     createdAt?: true
@@ -6776,6 +6780,7 @@ export namespace Prisma {
     numberOfExtraBeds?: true
     actualCheckIn?: true
     note?: true
+    isBreakfastIncluded?: true
     actualCheckOut?: true
     isActive?: true
     createdAt?: true
@@ -6788,6 +6793,7 @@ export namespace Prisma {
     numberOfExtraBeds?: true
     actualCheckIn?: true
     note?: true
+    isBreakfastIncluded?: true
     actualCheckOut?: true
     isActive?: true
     createdAt?: true
@@ -6887,6 +6893,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date
     note: string | null
+    isBreakfastIncluded: boolean
     actualCheckOut: Date | null
     isActive: boolean
     createdAt: Date
@@ -6918,6 +6925,7 @@ export namespace Prisma {
     numberOfExtraBeds?: boolean
     actualCheckIn?: boolean
     note?: boolean
+    isBreakfastIncluded?: boolean
     actualCheckOut?: boolean
     isActive?: boolean
     createdAt?: boolean
@@ -6935,13 +6943,14 @@ export namespace Prisma {
     numberOfExtraBeds?: boolean
     actualCheckIn?: boolean
     note?: boolean
+    isBreakfastIncluded?: boolean
     actualCheckOut?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomNumber" | "numberOfExtraBeds" | "actualCheckIn" | "note" | "actualCheckOut" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomNumber" | "numberOfExtraBeds" | "actualCheckIn" | "note" | "isBreakfastIncluded" | "actualCheckOut" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     room?: boolean | RoomDefaultArgs<ExtArgs>
     guests?: boolean | Session$guestsArgs<ExtArgs>
@@ -6960,6 +6969,7 @@ export namespace Prisma {
       numberOfExtraBeds: number
       actualCheckIn: Date
       note: string | null
+      isBreakfastIncluded: boolean
       actualCheckOut: Date | null
       isActive: boolean
       createdAt: Date
@@ -7340,6 +7350,7 @@ export namespace Prisma {
     readonly numberOfExtraBeds: FieldRef<"Session", 'Int'>
     readonly actualCheckIn: FieldRef<"Session", 'DateTime'>
     readonly note: FieldRef<"Session", 'String'>
+    readonly isBreakfastIncluded: FieldRef<"Session", 'Boolean'>
     readonly actualCheckOut: FieldRef<"Session", 'DateTime'>
     readonly isActive: FieldRef<"Session", 'Boolean'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
@@ -20499,6 +20510,7 @@ export namespace Prisma {
     numberOfExtraBeds: 'numberOfExtraBeds',
     actualCheckIn: 'actualCheckIn',
     note: 'note',
+    isBreakfastIncluded: 'isBreakfastIncluded',
     actualCheckOut: 'actualCheckOut',
     isActive: 'isActive',
     createdAt: 'createdAt',
@@ -21013,6 +21025,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
     note?: StringNullableFilter<"Session"> | string | null
+    isBreakfastIncluded?: BoolFilter<"Session"> | boolean
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
     isActive?: BoolFilter<"Session"> | boolean
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -21027,6 +21040,7 @@ export namespace Prisma {
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     note?: SortOrderInput | SortOrder
+    isBreakfastIncluded?: SortOrder
     actualCheckOut?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -21045,6 +21059,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
     note?: StringNullableFilter<"Session"> | string | null
+    isBreakfastIncluded?: BoolFilter<"Session"> | boolean
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
     isActive?: BoolFilter<"Session"> | boolean
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -21059,6 +21074,7 @@ export namespace Prisma {
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     note?: SortOrderInput | SortOrder
+    isBreakfastIncluded?: SortOrder
     actualCheckOut?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -21079,6 +21095,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntWithAggregatesFilter<"Session"> | number
     actualCheckIn?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     note?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    isBreakfastIncluded?: BoolWithAggregatesFilter<"Session"> | boolean
     actualCheckOut?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
     isActive?: BoolWithAggregatesFilter<"Session"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
@@ -22020,6 +22037,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -22034,6 +22052,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -22045,6 +22064,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22059,6 +22079,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22072,6 +22093,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -22082,6 +22104,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22094,6 +22117,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23104,6 +23128,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -23113,11 +23142,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type RoomScalarRelationFilter = {
@@ -23147,6 +23171,7 @@ export namespace Prisma {
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     note?: SortOrder
+    isBreakfastIncluded?: SortOrder
     actualCheckOut?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -23164,6 +23189,7 @@ export namespace Prisma {
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     note?: SortOrder
+    isBreakfastIncluded?: SortOrder
     actualCheckOut?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -23176,6 +23202,7 @@ export namespace Prisma {
     numberOfExtraBeds?: SortOrder
     actualCheckIn?: SortOrder
     note?: SortOrder
+    isBreakfastIncluded?: SortOrder
     actualCheckOut?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
@@ -23219,6 +23246,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -23231,14 +23266,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type GuestOrderByRelevanceInput = {
@@ -24167,12 +24194,12 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type RoomUpdateOneRequiredWithoutSessionNestedInput = {
@@ -25048,6 +25075,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -25057,11 +25089,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -25096,6 +25123,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -25108,14 +25143,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type RoomCreateWithoutFloorInput = {
@@ -25396,6 +25423,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -25408,6 +25436,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -25595,6 +25624,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFilter<"Session"> | number
     actualCheckIn?: DateTimeFilter<"Session"> | Date | string
     note?: StringNullableFilter<"Session"> | string | null
+    isBreakfastIncluded?: BoolFilter<"Session"> | boolean
     actualCheckOut?: DateTimeNullableFilter<"Session"> | Date | string | null
     isActive?: BoolFilter<"Session"> | boolean
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -25726,6 +25756,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -25739,6 +25770,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -27074,6 +27106,7 @@ export namespace Prisma {
     numberOfExtraBeds: number
     actualCheckIn: Date | string
     note?: string | null
+    isBreakfastIncluded?: boolean
     actualCheckOut?: Date | string | null
     isActive?: boolean
     createdAt?: Date | string
@@ -27138,6 +27171,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27150,6 +27184,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27162,6 +27197,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27227,6 +27263,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27240,6 +27277,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27252,6 +27290,7 @@ export namespace Prisma {
     numberOfExtraBeds?: IntFieldUpdateOperationsInput | number
     actualCheckIn?: DateTimeFieldUpdateOperationsInput | Date | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreakfastIncluded?: BoolFieldUpdateOperationsInput | boolean
     actualCheckOut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

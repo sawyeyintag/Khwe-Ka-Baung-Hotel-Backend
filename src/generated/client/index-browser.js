@@ -151,6 +151,7 @@ exports.Prisma.SessionScalarFieldEnum = {
   numberOfExtraBeds: 'numberOfExtraBeds',
   actualCheckIn: 'actualCheckIn',
   note: 'note',
+  isBreakfastIncluded: 'isBreakfastIncluded',
   actualCheckOut: 'actualCheckOut',
   isActive: 'isActive',
   createdAt: 'createdAt',

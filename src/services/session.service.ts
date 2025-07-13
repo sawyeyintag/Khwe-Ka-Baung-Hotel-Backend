@@ -3,14 +3,21 @@ import { SessionCreate } from "../types/session.type";
 
 class SessionService {
   async createSession(newSession: SessionCreate) {
-    const { roomNumber, guestIds, numberOfExtraBeds, actualCheckIn, note } =
-      newSession;
+    const {
+      roomNumber,
+      guestIds,
+      numberOfExtraBeds,
+      actualCheckIn,
+      note,
+      isBreakfastIncluded,
+    } = newSession;
     return await prismaClient.session.create({
       data: {
         roomNumber,
         numberOfExtraBeds,
         actualCheckIn,
         note,
+        isBreakfastIncluded,
         guests: {
           connect: guestIds.map((uid) => ({ uid })),
         },

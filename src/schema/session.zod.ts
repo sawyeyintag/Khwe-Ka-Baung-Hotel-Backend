@@ -11,6 +11,7 @@ export const SessionCreateSchema = z.object({
     }),
   numberOfExtraBeds: z.number().int(),
   note: z.string().optional(),
+  isBreakfastIncluded: z.boolean(),
   actualCheckIn: z.string(),
 });
 

@@ -51,15 +51,16 @@ model Room {
 }
 
 model Session {
-  id                Int       @id @default(autoincrement())
-  roomNumber        String    @unique
-  numberOfExtraBeds Int
-  actualCheckIn     DateTime
-  note              String?
-  actualCheckOut    DateTime?
-  isActive          Boolean   @default(true)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  id                  Int       @id @default(autoincrement())
+  roomNumber          String    @unique
+  numberOfExtraBeds   Int
+  actualCheckIn       DateTime
+  note                String?
+  isBreakfastIncluded Boolean   @default(false)
+  actualCheckOut      DateTime?
+  isActive            Boolean   @default(true)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
 
   room   Room    @relation(fields: [roomNumber], references: [roomNumber])
   guests Guest[]
