@@ -13,189 +13,132 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// ----------- Item -----------
-model Floor {
-  floorNumber Int    @id
-  rooms       Room[]
-}
+/// ----------- Hotel data models (aligned with provided list) -----------
 
 model RoomType {
-  id                    Int    @id
-  name                  String
-  priceWithBreakfast    Float
-  priceWithoutBreakfast Float
-  pax                   Int
-  rooms                 Room[]
-}
-
-model RoomStatus {
-  id    Int    @id
-  label String
+  id    Int    @id @default(autoincrement())
+  name  String
   rooms Room[]
 }
 
 model Room {
-  roomNumber  String @id
+  roomNumber  String     @id
+  price       Float
   floorNumber Int
   roomTypeId  Int
-  statusId    Int?
-  sessionId   Int?   @unique
-
-  floor    Floor       @relation(fields: [floorNumber], references: [floorNumber])
-  roomType RoomType    @relation(fields: [roomTypeId], references: [id])
-  status   RoomStatus? @relation(fields: [statusId], references: [id])
-  miniBar  MiniBar?
-  bookings Booking[]
-  receipts Receipt[]
-  session  Session[]
-}
-
-model Session {
-  id                Int       @id @default(autoincrement())
-  roomNumber        String    @unique
-  numberOfExtraBeds Int
-  actualCheckIn     DateTime
-  actualCheckOut    DateTime?
-  isActive          Boolean   @default(true)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-
-  room   Room    @relation(fields: [roomNumber], references: [roomNumber])
-  guests Guest[]
-}
-
-model Guest {
-  uid        String   @id @default(uuid())
-  name       String
-  phone      String
-  email      String
-  address    String
-  nicCardNum String?  @unique
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  sessions Session[]
-  bookings Booking[]
-  receipts Receipt[]
-}
-
-model MiniBar {
-  id         Int           @id @default(autoincrement())
-  roomNumber String        @unique
-  room       Room          @relation(fields: [roomNumber], references: [roomNumber])
-  items      MiniBarItem[]
-}
-
-model Item {
-  id    Int    @id @default(autoincrement())
-  name  String
-  price Float
-
-  miniBarItems      MiniBarItem[]
-  inventory         Inventory[]
-  additionalCharges AddChargeItem[]
-}
-
-model MiniBarItem {
-  miniBarId Int
-  itemId    Int
-  quantity  Int
-
-  miniBar MiniBar @relation(fields: [miniBarId], references: [id])
-  item    Item    @relation(fields: [itemId], references: [id])
-
-  @@id([miniBarId, itemId])
-}
-
-model Inventory {
-  id       Int @id @default(autoincrement())
-  itemId   Int
-  quantity Int
-
-  item Item @relation(fields: [itemId], references: [id])
+  roomType    RoomType   @relation(fields: [roomTypeId], references: [id])
+  sessions    Session[]
+  bookings    Booking[]
+  roomItems   RoomItem[]
 }
 
 model Booking {
   id           Int      @id @default(autoincrement())
   roomNumber   String
-  guestId      String?
   contactName  String
   contactPhone String
-  contactEmail String?
+  note         String?
   estCheckIn   DateTime
   estCheckOut  DateTime
+  room         Room     @relation(fields: [roomNumber], references: [roomNumber])
 
-  room  Room   @relation(fields: [roomNumber], references: [roomNumber])
-  guest Guest? @relation(fields: [guestId], references: [uid])
+  @@unique([roomNumber, estCheckIn, estCheckOut])
+  @@index([roomNumber, estCheckIn, estCheckOut])
 }
 
-model Receipt {
-  id         Int    @id @default(autoincrement())
-  roomNumber String
-  guestId    String
-  totalPrice Float
-  amountPaid Float
-  paidBy     String
+model Session {
+  id                  Int             @id @default(autoincrement())
+  roomNumber          String
+  discount            Float?
+  numberOfExtraBeds   Int?
+  extraBedPrice       Float?
+  checkedInAt         DateTime
+  checkedOutAt        DateTime?
+  note                String?
+  isBreakfastIncluded Boolean         @default(false)
+  isActive            Boolean         @default(true)
+  room                Room            @relation(fields: [roomNumber], references: [roomNumber])
+  guests              Guest[]
+  receipt             SessionReceipt?
+  otherReceipts       OtherReceipt[]
 
-  room              Room                      @relation(fields: [roomNumber], references: [roomNumber])
-  guest             Guest                     @relation(fields: [guestId], references: [uid])
-  additionalCharges AdditionalChargeReceipt[]
+  @@unique([roomNumber, checkedInAt, checkedOutAt])
 }
 
-model AdditionalChargeReceipt {
+model SessionReceipt {
   id           Int      @id @default(autoincrement())
-  receiptId    Int
-  purchaseDate DateTime
-
-  receipt           Receipt            @relation(fields: [receiptId], references: [id])
-  restaurantReceipt RestaurantReceipt?
-  items             AddChargeItem[]
-  services          AddChargeService[]
-}
-
-model RestaurantReceipt {
-  id           Int      @id @default(autoincrement())
-  addChargeId  Int      @unique
+  sessionId    Int      @unique
+  issuedAt     DateTime
+  amountOfPaid Float
+  discount     Float?
   totalPrice   Float
-  purchaseDate DateTime
+  session      Session  @relation(fields: [sessionId], references: [id])
+}
 
-  additionalCharge AdditionalChargeReceipt @relation(fields: [addChargeId], references: [id])
+model Guest {
+  id            Int      @id @default(autoincrement())
+  name          String
+  phone         String
+  email         String?
+  address       String?
+  nicCardNumber String?  @unique
+  sessionId     Int?
+  session       Session? @relation(fields: [sessionId], references: [id])
+}
+
+model OtherReceipt {
+  id           Int                   @id @default(autoincrement())
+  amountOfPaid Float
+  discount     Float?
+  totalPrice   Float
+  sessionId    Int
+  session      Session               @relation(fields: [sessionId], references: [id])
+  items        OtherReceiptItem[]
+  services     OtherReceiptService[]
+}
+
+model Item {
+  id                Int                @id @default(autoincrement())
+  name              String
+  price             Float
+  quantity          Int
+  roomItems         RoomItem[]
+  otherReceiptItems OtherReceiptItem[]
+}
+
+model RoomItem {
+  roomNumber String
+  itemId     Int
+  quantity   Int
+  room       Room   @relation(fields: [roomNumber], references: [roomNumber])
+  item       Item   @relation(fields: [itemId], references: [id])
+
+  @@id([roomNumber, itemId])
 }
 
 model Service {
-  id    Int    @id @default(autoincrement())
-  name  String
-  price Float
-
-  additionalCharges AddChargeService[]
+  id                   Int                   @id @default(autoincrement())
+  name                 String
+  price                Float
+  otherReceiptServices OtherReceiptService[]
 }
 
-model AddChargeItem {
-  addChargeId Int
-  itemId      Int
-  quantity    Int
+model OtherReceiptService {
+  otherReceiptId Int
+  serviceId      Int
+  quantity       Int
+  otherReceipt   OtherReceipt @relation(fields: [otherReceiptId], references: [id])
+  service        Service      @relation(fields: [serviceId], references: [id])
 
-  additionalCharge AdditionalChargeReceipt @relation(fields: [addChargeId], references: [id])
-  item             Item                    @relation(fields: [itemId], references: [id])
-
-  @@id([addChargeId, itemId])
+  @@id([otherReceiptId, serviceId])
 }
 
-model AddChargeService {
-  addChargeId Int
-  serviceId   Int
-  quantity    Int
+model OtherReceiptItem {
+  otherReceiptId Int
+  itemId         Int
+  quantity       Int
+  otherReceipt   OtherReceipt @relation(fields: [otherReceiptId], references: [id])
+  item           Item         @relation(fields: [itemId], references: [id])
 
-  additionalCharge AdditionalChargeReceipt @relation(fields: [addChargeId], references: [id])
-  service          Service                 @relation(fields: [serviceId], references: [id])
-
-  @@id([addChargeId, serviceId])
-}
-
-model Admin {
-  id        String   @id @default(uuid())
-  username  String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@id([otherReceiptId, itemId])
 }
