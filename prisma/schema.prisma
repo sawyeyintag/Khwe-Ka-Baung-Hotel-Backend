@@ -13,17 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// ----------- Hotel data models (aligned with provided list) -----------
-
 model RoomType {
-  id    Int    @id @default(autoincrement())
-  name  String
-  rooms Room[]
+  id                    Int    @id @default(autoincrement())
+  name                  String
+  PriceWithBreakfast    Float
+  PriceWithoutBreakfast Float
+  rooms                 Room[]
 }
 
 model Room {
   roomNumber  String     @id
-  price       Float
   floorNumber Int
   roomTypeId  Int
   roomType    RoomType   @relation(fields: [roomTypeId], references: [id])
@@ -50,7 +49,7 @@ model Booking {
 model Session {
   id                  Int             @id @default(autoincrement())
   roomNumber          String
-  discount            Float?
+  roomPrice           Float
   numberOfExtraBeds   Int?
   extraBedPrice       Float?
   checkedInAt         DateTime
