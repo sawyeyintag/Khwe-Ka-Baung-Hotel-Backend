@@ -1,9 +1,10 @@
 import { Router } from "express";
+
+import roomStatusController from "../controllers/room-status.controller";
 import { routeErrorHandler } from "../middlewares/route-error.middleware";
 import { validateBody } from "../middlewares/validation.middleware";
 import { RoomStatusUpsertSchema } from "../schema/room-status.zod";
 
-import roomStatusController from "../controllers/room-status.controller";
 
 const roomStatusRouter: Router = Router();
 

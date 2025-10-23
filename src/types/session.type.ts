@@ -1,5 +1,6 @@
-import { z } from "zod";
 import { Request } from "express";
+import { z } from "zod";
+
 import { SessionCreateSchema, SessionEndSchema } from "../schema/session.zod";
 
 export type SessionCreate = z.infer<typeof SessionCreateSchema>;

@@ -1,4 +1,5 @@
 import { RoomTypeUpsert } from "@/types/room-type.type";
+
 import { RoomTypeIds } from "../enums/RoomTypeIds";
 
 interface RoomType extends RoomTypeUpsert {

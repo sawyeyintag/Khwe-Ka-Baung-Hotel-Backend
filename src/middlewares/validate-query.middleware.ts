@@ -1,5 +1,6 @@
 // middleware/validateQuery.ts
 import { Request, Response, NextFunction } from "express";
+
 import { BadRequestsException } from "../exceptions/bad-requests";
 
 type ValidationSchema = {

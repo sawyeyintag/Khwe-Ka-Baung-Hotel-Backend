@@ -1,5 +1,6 @@
-import { z } from "zod";
 import { Request } from "express";
+import { z } from "zod";
+
 import { RoomStatusUpsertSchema } from "../schema/room-status.zod";
 
 type RommStatusUpsert = z.infer<typeof RoomStatusUpsertSchema>;

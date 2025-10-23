@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { routeErrorHandler } from "../middlewares/route-error.middleware";
+
 import floorController from "../controllers/floor.controller";
+import { routeErrorHandler } from "../middlewares/route-error.middleware";
 
 const floorRouter: Router = Router();
 

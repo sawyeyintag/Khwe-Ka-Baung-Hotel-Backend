@@ -1,5 +1,5 @@
-import { RoomTypeIds } from "../enums/RoomTypeIds";
 import { RoomStatusIds } from "../enums/RoomStatusIds";
+import { RoomTypeIds } from "../enums/RoomTypeIds";
 
 interface RoomData {
   roomNumber: string;

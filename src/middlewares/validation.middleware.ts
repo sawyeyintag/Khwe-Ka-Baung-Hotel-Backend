@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { AnyZodObject, ZodError } from "zod";
+
 import { ValidationException } from "../exceptions/validation";
 
 export function validateBody(schema: AnyZodObject): RequestHandler {

@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { HttpException } from "./root";
 
 export class ValidationException extends HttpException {

@@ -1,9 +1,11 @@
 import { PrismaClient } from "@/generated/client";
-import { seedRoomStatuses } from "./room-status.seeder";
+import log from "@/utils/logger";
+
 import { seedFloors } from "./floor.seeder";
+import { seedRoomStatuses } from "./room-status.seeder";
 import { seedRoomTypes } from "./room-type.seeder";
 import { seedRooms } from "./room.seeder";
-import log from "@/utils/logger";
+
 
 const prisma = new PrismaClient();
 

@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import log from "@/utils/logger";
 
 import { roomTypes } from "@/shared/constants/roomTypes";
+import log from "@/utils/logger";
+
 
 export async function seedRoomTypes(prisma: PrismaClient) {
   for (const roomType of roomTypes) {

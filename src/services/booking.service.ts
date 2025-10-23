@@ -1,8 +1,12 @@
-import { BadRequestsException } from "@/exceptions/bad-requests";
-import prismaClient from "../config/prismaClient";
 import { isBefore } from "date-fns";
-import { BookingUpsertRequest } from "@/types/booking.type";
+
+import { BadRequestsException } from "@/exceptions/bad-requests";
 import { NotFoundException } from "@/exceptions/not-found";
+import { BookingUpsertRequest } from "@/types/booking.type";
+
+import prismaClient from "../config/prismaClient";
+
+
 import { SessionService } from "./session.service";
 
 export class BookingService {

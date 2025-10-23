@@ -1,8 +1,8 @@
 import { Router } from "express";
+
+import bookingController from "../controllers/booking.controller";
 import { routeErrorHandler } from "../middlewares/route-error.middleware";
 import { validateBody } from "../middlewares/validation.middleware";
-import bookingController from "../controllers/booking.controller";
-
 import { BookingUpsertSchema } from "../schema/booking.zod";
 
 const bookingRouter: Router = Router();

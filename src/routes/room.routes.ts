@@ -1,10 +1,11 @@
 import { Router } from "express";
+
 import roomController from "../controllers/room.controller";
 import { routeErrorHandler } from "../middlewares/route-error.middleware";
-import { validateBody } from "../middlewares/validation.middleware";
-import { RoomCreateSchema, RoomEditSchema } from "../schema/room.zod";
 import { validateParams } from "../middlewares/validate-params.middleware";
 import { validateQuery } from "../middlewares/validate-query.middleware";
+import { validateBody } from "../middlewares/validation.middleware";
+import { RoomCreateSchema, RoomEditSchema } from "../schema/room.zod";
 
 const roomRouter: Router = Router();
 

@@ -1,10 +1,12 @@
 import { Express, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
-import log from "./logger";
+
+import swaggerDocument from "../docs";
 import { PORT } from "../secret";
 
+import log from "./logger";
+
 // Import the combined swagger document
-import swaggerDocument from "../docs";
 
 function swaggerDocs(app: Express) {
   // Swagger page

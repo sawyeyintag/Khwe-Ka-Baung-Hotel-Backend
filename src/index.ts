@@ -1,11 +1,11 @@
-import express, { Express, Request, Response } from "express";
 import cors from "cors";
+import express, { Express, Request, Response } from "express";
+
+import { globalErrorHandler } from "./middlewares/global-error.middleware";
 import rootRouter from "./routes";
 import { PORT } from "./secret";
-import { globalErrorHandler } from "./middlewares/global-error.middleware";
-
-import swaggerDocs from "./utils/swagger";
 import log from "./utils/logger";
+import swaggerDocs from "./utils/swagger";
 
 const app: Express = express();
 

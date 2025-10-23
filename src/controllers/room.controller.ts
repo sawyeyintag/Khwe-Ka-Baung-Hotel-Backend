@@ -1,5 +1,6 @@
-import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
+
+import prismaClient from "../config/prismaClient";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import {
   RoomCreateSchemaRequest,

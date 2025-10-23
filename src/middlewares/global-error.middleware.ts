@@ -1,5 +1,6 @@
-import { HttpException } from "../exceptions/root";
 import { Request, Response, NextFunction } from "express";
+
+import { HttpException } from "../exceptions/root";
 
 export function globalErrorHandler(
   error: HttpException,

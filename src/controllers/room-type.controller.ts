@@ -1,5 +1,6 @@
-import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
+
+import prismaClient from "../config/prismaClient";
 import { NotFoundException } from "../exceptions/not-found";
 import { RoomTypeUpsertRequest } from "../types/room-type.type";
 

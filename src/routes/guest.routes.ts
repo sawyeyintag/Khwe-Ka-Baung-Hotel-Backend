@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { routeErrorHandler } from "../middlewares/route-error.middleware";
-import { validateBody } from "../middlewares/validation.middleware";
-import guestController from "../controllers/guest.controller";
 
-import { GuestUpsertSchema } from "../schema/guest.zod";
+import guestController from "../controllers/guest.controller";
+import { routeErrorHandler } from "../middlewares/route-error.middleware";
 import { validateParams } from "../middlewares/validate-params.middleware";
+import { validateBody } from "../middlewares/validation.middleware";
+import { GuestUpsertSchema } from "../schema/guest.zod";
 
 const guestRouter: Router = Router();
 

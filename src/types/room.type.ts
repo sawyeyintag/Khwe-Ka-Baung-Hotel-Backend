@@ -1,5 +1,6 @@
-import { z } from "zod";
 import { Request } from "express";
+import { z } from "zod";
+
 import { RoomCreateSchema, RoomEditSchema } from "../schema/room.zod";
 
 type RoomCreateSchema = z.infer<typeof RoomCreateSchema>;

@@ -1,4 +1,5 @@
 import { BadRequestsException } from "@/exceptions/bad-requests";
+
 import prismaClient from "../config/prismaClient";
 import { SessionCreate } from "../types/session.type";
 

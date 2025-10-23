@@ -1,5 +1,6 @@
-import { z } from "zod";
 import { Request } from "express";
+import { z } from "zod";
+
 import { AdminRegisterSchema } from "../schema/auth.zod";
 
 // Data structures

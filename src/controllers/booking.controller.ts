@@ -1,7 +1,10 @@
-import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
-import { BookingUpsertRequest } from "../types/booking.type";
+
 import { BookingService } from "@/services/booking.service";
+
+import prismaClient from "../config/prismaClient";
+import { BookingUpsertRequest } from "../types/booking.type";
+
 
 export class BookingController {
   async createBooking(req: BookingUpsertRequest, res: Response) {

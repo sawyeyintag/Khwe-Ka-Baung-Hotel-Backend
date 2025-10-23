@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+
 import log from "@/utils/logger";
 
 const floors = [{ floorNumber: 1 }, { floorNumber: 2 }];

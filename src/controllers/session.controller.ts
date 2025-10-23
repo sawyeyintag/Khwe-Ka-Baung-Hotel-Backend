@@ -1,9 +1,11 @@
-import prismaClient from "../config/prismaClient";
 import { Request, Response } from "express";
-import { BadRequestsException } from "../exceptions/bad-requests";
-import { SessionCreateRequest, SessionEndRequest } from "../types/session.type";
-import { Session } from "../generated/client";
+
 import { SessionService } from "@/services/session.service";
+
+import prismaClient from "../config/prismaClient";
+import { BadRequestsException } from "../exceptions/bad-requests";
+import { Session } from "../generated/client";
+import { SessionCreateRequest, SessionEndRequest } from "../types/session.type";
 
 export class SessionController {
   async createSession(req: SessionCreateRequest, res: Response) {

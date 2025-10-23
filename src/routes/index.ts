@@ -1,11 +1,12 @@
 import { Router } from "express";
+
 import authRoutes from "./auth.routes";
-import roomRoutes from "./room.routes";
-import roomTypeRoutes from "./room-type.routes";
-import floorRoutes from "./floor.routes";
-import roomStatusRoutes from "./room-status.routes";
 import bookingRoutes from "./booking.routes";
+import floorRoutes from "./floor.routes";
 import guestRoutes from "./guest.routes";
+import roomStatusRoutes from "./room-status.routes";
+import roomTypeRoutes from "./room-type.routes";
+import roomRoutes from "./room.routes";
 import sessionRoutes from "./session.routes";
 
 const rootRouter: Router = Router();
