@@ -10,9 +10,13 @@ export const SessionCreateSchema = z.object({
       message: "Guest IDs must be valid UUIDs",
     }),
   numberOfExtraBeds: z.number().int(),
+  extraBedPrice: z.number(),
   note: z.string().optional(),
   isBreakfastIncluded: z.boolean(),
-  actualCheckIn: z.string(),
+  checkedInAt: z.string(),
+  checkedOutAt: z.string(),
+  discount: z.number().min(0).optional(),
+  isActive: z.boolean().default(true),
 });
 
 export const SessionEndSchema = z.object({

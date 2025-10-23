@@ -5,17 +5,17 @@ import { NotFoundException } from "../exceptions/not-found";
 import { GuestUpsertRequest } from "../types/guest.type";
 import log from "../utils/logger";
 
-class GuestController {
+export class GuestController {
   async createGuest(req: GuestUpsertRequest, res: Response) {
-    const { name, phone, email, address, nicCardNum } = req.body;
+    const { name, phone, email, address, nicCardNumber } = req.body;
     const guest = await prismaClient.guest.findFirst({
-      where: { nicCardNum },
+      where: { nicCardNumber },
     });
     if (guest) {
       throw new BadRequestsException("The guest already exists");
     }
     const createdGuest = await prismaClient.guest.create({
-      data: { name, phone, email, address, nicCardNum },
+      data: { name, phone, email, address, nicCardNumber },
     });
     return res.status(201).json({
       data: createdGuest,
@@ -43,9 +43,9 @@ class GuestController {
   }
 
   async getGuestByNicCardNum(req: Request, res: Response) {
-    const { nicCardNum } = req.params;
+    const { nicCardNumber } = req.params;
     const guest = await prismaClient.guest.findUnique({
-      where: { nicCardNum },
+      where: { nicCardNumber },
     });
     if (!guest) {
       throw new NotFoundException("Guest not found");
@@ -73,7 +73,7 @@ class GuestController {
         OR: [
           { name: { contains: searchQuery } },
           { phone: { contains: searchQuery } },
-          { nicCardNum: { contains: searchQuery } },
+          { nicCardNumber: { contains: searchQuery } },
         ],
       },
       take: resultLimit * 2, // Get more results to sort properly
@@ -82,7 +82,7 @@ class GuestController {
         name: true,
         phone: true,
         email: true,
-        nicCardNum: true,
+        nicCardNumber: true,
       },
     });
 
@@ -92,7 +92,7 @@ class GuestController {
     const filteredGuests = guests.filter((guest) => {
       const nameLower = guest.name.toLowerCase();
       const phoneLower = guest.phone.toLowerCase();
-      const nicLower = guest.nicCardNum?.toLowerCase() || "";
+      const nicLower = guest.nicCardNumber?.toLowerCase() || "";
 
       return (
         nameLower.includes(searchLower) ||
@@ -107,8 +107,8 @@ class GuestController {
       const bExactName = b.name.toLowerCase() === searchLower;
       const aExactPhone = a.phone.toLowerCase() === searchLower;
       const bExactPhone = b.phone.toLowerCase() === searchLower;
-      const aExactNic = a.nicCardNum?.toLowerCase() === searchLower;
-      const bExactNic = b.nicCardNum?.toLowerCase() === searchLower;
+      const aExactNic = a.nicCardNumber?.toLowerCase() === searchLower;
+      const bExactNic = b.nicCardNumber?.toLowerCase() === searchLower;
 
       // Exact matches first
       const aExact = aExactName || aExactPhone || aExactNic;
@@ -131,7 +131,7 @@ class GuestController {
 
   async updateGuest(req: GuestUpsertRequest, res: Response) {
     const { id } = req.params;
-    const { name, phone, email, address, nicCardNum } = req.body;
+    const { name, phone, email, address, nicCardNumber } = req.body;
     const guest = await prismaClient.guest.findUnique({
       where: { uid: id },
     });
@@ -140,7 +140,7 @@ class GuestController {
     }
     const updatedGuest = await prismaClient.guest.update({
       where: { uid: id },
-      data: { name, phone, email, address, nicCardNum },
+      data: { name, phone, email, address, nicCardNumber },
     });
     return res.status(200).json({
       data: updatedGuest,
@@ -161,5 +161,3 @@ class GuestController {
     return res.status(204).send();
   }
 }
-
-export default new GuestController();

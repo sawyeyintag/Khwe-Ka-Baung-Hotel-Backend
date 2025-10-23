@@ -5,5 +5,5 @@ export const GuestUpsertSchema = z.object({
   phone: z.string(),
   email: z.string(),
   address: z.string(),
-  nicCardNum: z.string().optional(),
+  nicCardNumber: z.string().optional(),
 });

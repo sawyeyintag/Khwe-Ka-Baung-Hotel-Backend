@@ -37,6 +37,7 @@ model Booking {
   roomNumber   String
   contactName  String
   contactPhone String
+  contactEmail String?
   note         String?
   estCheckIn   DateTime
   estCheckOut  DateTime
@@ -76,7 +77,7 @@ model SessionReceipt {
 }
 
 model Guest {
-  id            Int      @id @default(autoincrement())
+  uid           String   @id @default(uuid())
   name          String
   phone         String
   email         String?

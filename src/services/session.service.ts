@@ -1,13 +1,18 @@
+import { BadRequestsException } from "@/exceptions/bad-requests";
 import prismaClient from "../config/prismaClient";
 import { SessionCreate } from "../types/session.type";
 
-class SessionService {
-  async createSession(newSession: SessionCreate) {
+export class SessionService {
+  static async createSession(newSession: SessionCreate) {
     const {
       roomNumber,
       guestIds,
       numberOfExtraBeds,
-      actualCheckIn,
+      checkedInAt,
+      checkedOutAt,
+      extraBedPrice,
+      isActive,
+      discount,
       note,
       isBreakfastIncluded,
     } = newSession;
@@ -15,7 +20,11 @@ class SessionService {
       data: {
         roomNumber,
         numberOfExtraBeds,
-        actualCheckIn,
+        checkedInAt: new Date(checkedInAt),
+        checkedOutAt: new Date(checkedOutAt),
+        extraBedPrice,
+        isActive,
+        discount,
         note,
         isBreakfastIncluded,
         guests: {
@@ -28,7 +37,7 @@ class SessionService {
     });
   }
 
-  async getAllSessions() {
+  static async getAllSessions() {
     return await prismaClient.session.findMany({
       include: {
         guests: true,
@@ -36,7 +45,7 @@ class SessionService {
     });
   }
 
-  async getSessionById(id: number) {
+  static async getSessionById(id: number) {
     return await prismaClient.session.findUnique({
       where: { id },
       include: {
@@ -45,18 +54,38 @@ class SessionService {
     });
   }
 
-  async deleteSession(id: number) {
+  static async deleteSession(id: number) {
     return await prismaClient.session.delete({
       where: { id },
     });
   }
 
-  async endSession(id: number, actualCheckOut: string) {
+  static async endSession(id: number, checkedOutAt: string) {
     return await prismaClient.session.update({
       where: { id },
-      data: { actualCheckOut, isActive: false },
+      data: { checkedOutAt: new Date(checkedOutAt), isActive: false },
     });
   }
-}
 
-export default new SessionService();
+  static async checkOverlappingSession(
+    roomNumber: string,
+    checkedInAt: Date,
+    checkedOutAt: Date
+  ) {
+    const overlappingSession = await prismaClient.session.findFirst({
+      where: {
+        roomNumber,
+        isActive: true,
+        checkedInAt,
+        checkedOutAt,
+      },
+    });
+    if (overlappingSession) {
+      throw new BadRequestsException(
+        `Room ${roomNumber} is currently occupied from ` +
+          `${overlappingSession.checkedInAt.toISOString()} to ` +
+          `${overlappingSession.checkedOutAt?.toISOString() || "now"}`
+      );
+    }
+  }
+}

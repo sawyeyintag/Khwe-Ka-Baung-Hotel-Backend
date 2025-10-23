@@ -7,7 +7,7 @@ import {
   RoomGetAllRequest,
 } from "../types/room.type";
 
-class RoomController {
+export class RoomController {
   async getAllRooms(req: RoomGetAllRequest, res: Response) {
     const { roomStatusId, roomTypeId, floor } = req.query;
 
@@ -83,5 +83,3 @@ class RoomController {
     return res.status(204).send();
   }
 }
-
-export default new RoomController();

@@ -134,6 +134,7 @@ exports.Prisma.BookingScalarFieldEnum = {
   roomNumber: 'roomNumber',
   contactName: 'contactName',
   contactPhone: 'contactPhone',
+  contactEmail: 'contactEmail',
   note: 'note',
   estCheckIn: 'estCheckIn',
   estCheckOut: 'estCheckOut'
@@ -162,7 +163,7 @@ exports.Prisma.SessionReceiptScalarFieldEnum = {
 };
 
 exports.Prisma.GuestScalarFieldEnum = {
-  id: 'id',
+  uid: 'uid',
   name: 'name',
   phone: 'phone',
   email: 'email',
@@ -232,6 +233,7 @@ exports.Prisma.BookingOrderByRelevanceFieldEnum = {
   roomNumber: 'roomNumber',
   contactName: 'contactName',
   contactPhone: 'contactPhone',
+  contactEmail: 'contactEmail',
   note: 'note'
 };
 
@@ -241,6 +243,7 @@ exports.Prisma.SessionOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.GuestOrderByRelevanceFieldEnum = {
+  uid: 'uid',
   name: 'name',
   phone: 'phone',
   email: 'email',

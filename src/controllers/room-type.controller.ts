@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { NotFoundException } from "../exceptions/not-found";
 import { RoomTypeUpsertRequest } from "../types/room-type.type";
 
-class RoomTypeController {
+export class RoomTypeController {
   async getAllRoomTypes(req: Request, res: Response) {
     const roomTypes = await prismaClient.roomType.findMany();
     return res.status(200).json({
@@ -22,5 +22,4 @@ class RoomTypeController {
     });
   }
 }
-
-export default new RoomTypeController();
+s;

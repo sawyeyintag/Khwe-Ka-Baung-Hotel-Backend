@@ -1,21 +1,21 @@
-import { Router } from "express";
-import authController from "../controllers/auth.controller";
-import { routeErrorHandler } from "../middlewares/route-error.middleware";
-import { validateBody } from "../middlewares/validation.middleware";
-import { AdminLoginSchema, AdminRegisterSchema } from "../schema/auth.zod";
+// import { Router } from "express";
+// import { routeErrorHandler } from "../middlewares/route-error.middleware";
+// import { validateBody } from "../middlewares/validation.middleware";
+// import { AdminLoginSchema, AdminRegisterSchema } from "../schema/auth.zod";
+// import { AuthController } from "@/controllers/auth.controller";
 
-const authRouter: Router = Router();
+// const authRouter: Router = Router();
 
-authRouter.post(
-  "",
-  validateBody(AdminRegisterSchema),
-  routeErrorHandler(authController.registerAdmin)
-);
+// authRouter.post(
+//   "",
+//   validateBody(AdminRegisterSchema),
+//   routeErrorHandler(AuthController.registerAdmin)
+// );
 
-authRouter.post(
-  "/tokens",
-  validateBody(AdminLoginSchema),
-  routeErrorHandler(authController.loginAdmin)
-);
+// authRouter.post(
+//   "/tokens",
+//   validateBody(AdminLoginSchema),
+//   routeErrorHandler(authController.loginAdmin)
+// );
 
-export default authRouter;
+// export default authRouter;

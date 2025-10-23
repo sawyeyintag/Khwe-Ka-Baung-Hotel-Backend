@@ -3,10 +3,9 @@ import { Request, Response } from "express";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import { SessionCreateRequest, SessionEndRequest } from "../types/session.type";
 import { Session } from "../generated/client";
+import { SessionService } from "@/services/session.service";
 
-import sessionService from "../services/session.service";
-
-class SessionController {
+export class SessionController {
   async createSession(req: SessionCreateRequest, res: Response) {
     const { guestIds } = req.body;
     // Check if the guest already have a session
@@ -18,7 +17,7 @@ class SessionController {
         "The guest already have an active session"
       );
     }
-    const createdSession = await sessionService.createSession(req.body);
+    const createdSession = await SessionService.createSession(req.body);
 
     return res.status(201).json({
       data: createdSession,
@@ -26,7 +25,7 @@ class SessionController {
   }
 
   async getAllSessions(req: Request, res: Response) {
-    const sessions: Session[] = await sessionService.getAllSessions();
+    const sessions: Session[] = await SessionService.getAllSessions();
     return res.status(200).json({
       data: sessions,
     });
@@ -34,7 +33,7 @@ class SessionController {
 
   async getSessionById(req: Request, res: Response) {
     const { id } = req.params;
-    const session: Session | null = await sessionService.getSessionById(
+    const session: Session | null = await SessionService.getSessionById(
       parseInt(id)
     );
     if (!session) {
@@ -48,7 +47,7 @@ class SessionController {
   async endSession(req: SessionEndRequest, res: Response) {
     const { id } = req.params;
     const { actualCheckOut } = req.body;
-    const session: Session | null = await sessionService.getSessionById(
+    const session: Session | null = await SessionService.getSessionById(
       parseInt(id)
     );
     if (!session) {
@@ -57,7 +56,7 @@ class SessionController {
     if (!session.isActive) {
       throw new BadRequestsException("Session is already ended");
     }
-    const updatedSession = await sessionService.endSession(
+    const updatedSession = await SessionService.endSession(
       parseInt(id),
       actualCheckOut
     );
@@ -68,13 +67,13 @@ class SessionController {
 
   async deleteSession(req: Request, res: Response) {
     const { id } = req.params;
-    const session: Session | null = await sessionService.getSessionById(
+    const session: Session | null = await SessionService.getSessionById(
       parseInt(id)
     );
     if (!session) {
       throw new BadRequestsException("Session not found");
     }
-    await sessionService.deleteSession(parseInt(id));
+    await SessionService.deleteSession(parseInt(id));
     return res.status(204).send();
   }
 }
