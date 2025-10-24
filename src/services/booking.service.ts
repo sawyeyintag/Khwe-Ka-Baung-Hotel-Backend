@@ -6,7 +6,6 @@ import { BookingUpsertRequest } from "@/types/booking.type";
 
 import prismaClient from "../config/prismaClient";
 
-
 import { SessionService } from "./session.service";
 
 export class BookingService {

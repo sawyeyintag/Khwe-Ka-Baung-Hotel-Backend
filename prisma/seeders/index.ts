@@ -6,7 +6,6 @@ import { seedRoomStatuses } from "./room-status.seeder";
 import { seedRoomTypes } from "./room-type.seeder";
 import { seedRooms } from "./room.seeder";
 
-
 const prisma = new PrismaClient();
 
 interface SeederFunction {

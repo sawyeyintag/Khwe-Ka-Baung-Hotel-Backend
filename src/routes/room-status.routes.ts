@@ -5,7 +5,6 @@ import { routeErrorHandler } from "../middlewares/route-error.middleware";
 import { validateBody } from "../middlewares/validation.middleware";
 import { RoomStatusUpsertSchema } from "../schema/room-status.zod";
 
-
 const roomStatusRouter: Router = Router();
 
 roomStatusRouter.get(
