@@ -2,6 +2,8 @@
 CREATE TABLE `RoomType` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+    `PriceWithBreakfast` DOUBLE NOT NULL,
+    `PriceWithoutBreakfast` DOUBLE NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -9,7 +11,6 @@ CREATE TABLE `RoomType` (
 -- CreateTable
 CREATE TABLE `Room` (
     `roomNumber` VARCHAR(191) NOT NULL,
-    `price` DOUBLE NOT NULL,
     `floorNumber` INTEGER NOT NULL,
     `roomTypeId` INTEGER NOT NULL,
 
@@ -22,6 +23,7 @@ CREATE TABLE `Booking` (
     `roomNumber` VARCHAR(191) NOT NULL,
     `contactName` VARCHAR(191) NOT NULL,
     `contactPhone` VARCHAR(191) NOT NULL,
+    `contactEmail` VARCHAR(191) NULL,
     `note` VARCHAR(191) NULL,
     `estCheckIn` DATETIME(3) NOT NULL,
     `estCheckOut` DATETIME(3) NOT NULL,
@@ -35,16 +37,16 @@ CREATE TABLE `Booking` (
 CREATE TABLE `Session` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `roomNumber` VARCHAR(191) NOT NULL,
-    `discount` DOUBLE NULL,
+    `roomPrice` DOUBLE NOT NULL,
     `numberOfExtraBeds` INTEGER NULL,
     `extraBedPrice` DOUBLE NULL,
-    `checkedInAt` DATETIME(3) NOT NULL,
-    `checkedOutAt` DATETIME(3) NULL,
+    `checkInAt` DATETIME(3) NOT NULL,
+    `checkOutAt` DATETIME(3) NULL,
     `note` VARCHAR(191) NULL,
     `isBreakfastIncluded` BOOLEAN NOT NULL DEFAULT false,
     `isActive` BOOLEAN NOT NULL DEFAULT true,
 
-    UNIQUE INDEX `Session_roomNumber_checkedInAt_checkedOutAt_key`(`roomNumber`, `checkedInAt`, `checkedOutAt`),
+    UNIQUE INDEX `Session_roomNumber_checkInAt_checkOutAt_key`(`roomNumber`, `checkInAt`, `checkOutAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -63,7 +65,7 @@ CREATE TABLE `SessionReceipt` (
 
 -- CreateTable
 CREATE TABLE `Guest` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `uid` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `phone` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NULL,
@@ -72,7 +74,7 @@ CREATE TABLE `Guest` (
     `sessionId` INTEGER NULL,
 
     UNIQUE INDEX `Guest_nicCardNumber_key`(`nicCardNumber`),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`uid`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -167,4 +169,3 @@ ALTER TABLE `OtherReceiptItem` ADD CONSTRAINT `OtherReceiptItem_otherReceiptId_f
 
 -- AddForeignKey
 ALTER TABLE `OtherReceiptItem` ADD CONSTRAINT `OtherReceiptItem_itemId_fkey` FOREIGN KEY (`itemId`) REFERENCES `Item`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-

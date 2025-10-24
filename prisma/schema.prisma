@@ -52,17 +52,17 @@ model Session {
   roomPrice           Float
   numberOfExtraBeds   Int?
   extraBedPrice       Float?
-  checkedInAt         DateTime
-  checkedOutAt        DateTime?
+  checkInAt         DateTime
+  checkOutAt        DateTime?
   note                String?
   isBreakfastIncluded Boolean         @default(false)
-  isActive            Boolean         @default(true)
+  isActive           Boolean         @default(true)
   room                Room            @relation(fields: [roomNumber], references: [roomNumber])
   guests              Guest[]
   receipt             SessionReceipt?
   otherReceipts       OtherReceipt[]
 
-  @@unique([roomNumber, checkedInAt, checkedOutAt])
+  @@unique([roomNumber, checkInAt, checkOutAt])
 }
 
 model SessionReceipt {

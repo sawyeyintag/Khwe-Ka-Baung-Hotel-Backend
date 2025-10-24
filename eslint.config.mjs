@@ -1,6 +1,8 @@
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import typescriptParser from "@typescript-eslint/parser";
 import importPlugin from "eslint-plugin-import";
+import prettier from "eslint-plugin-prettier";
+import prettierConfig from "eslint-config-prettier";
 
 export default [
   {
@@ -41,9 +43,12 @@ export default [
     plugins: {
       "@typescript-eslint": typescriptEslint,
       import: importPlugin,
+      prettier: prettier,
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,
+      ...prettierConfig.rules,
+      "prettier/prettier": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {

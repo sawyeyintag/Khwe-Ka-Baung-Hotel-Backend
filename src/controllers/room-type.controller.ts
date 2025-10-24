@@ -1,18 +1,17 @@
 import { Request, Response } from "express";
 
 import prismaClient from "../config/prismaClient";
-import { NotFoundException } from "../exceptions/not-found";
 import { RoomTypeUpsertRequest } from "../types/room-type.type";
 
 export class RoomTypeController {
-  async getAllRoomTypes(req: Request, res: Response) {
+  static async getAllRoomTypes(req: Request, res: Response) {
     const roomTypes = await prismaClient.roomType.findMany();
     return res.status(200).json({
       data: roomTypes,
     });
   }
 
-  async updateRoomType(req: RoomTypeUpsertRequest, res: Response) {
+  static async updateRoomType(req: RoomTypeUpsertRequest, res: Response) {
     const { id } = req.params;
     const updatedRoomType = await prismaClient.roomType.update({
       where: { id: Number(id) },
@@ -23,4 +22,3 @@ export class RoomTypeController {
     });
   }
 }
-s;
