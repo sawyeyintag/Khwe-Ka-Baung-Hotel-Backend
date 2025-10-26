@@ -1,6 +1,7 @@
 import { Router } from "express";
 
-import guestController from "../controllers/guest.controller";
+import { GuestController } from "@/controllers/guest.controller";
+
 import { routeErrorHandler } from "../middlewares/route-error.middleware";
 import { validateParams } from "../middlewares/validate-params.middleware";
 import { validateBody } from "../middlewares/validation.middleware";
@@ -8,28 +9,28 @@ import { GuestUpsertSchema } from "../schema/guest.zod";
 
 const guestRouter: Router = Router();
 
-guestRouter.get("", routeErrorHandler(guestController.getAllGuests));
+guestRouter.get("", routeErrorHandler(GuestController.getAllGuests));
 guestRouter.post(
   "",
   validateBody(GuestUpsertSchema),
-  routeErrorHandler(guestController.createGuest)
+  routeErrorHandler(GuestController.createGuest)
 );
-guestRouter.get("/search", routeErrorHandler(guestController.searchGuests));
+guestRouter.get("/search", routeErrorHandler(GuestController.searchGuests));
 guestRouter.get(
   "/nic-card/:nicCardNum",
   validateParams({ nicCardNum: "string" }),
-  routeErrorHandler(guestController.getGuestByNicCardNum)
+  routeErrorHandler(GuestController.getGuestByNicCardNum)
 );
 guestRouter.get(
   "/:id",
   validateParams({ id: "string" }),
-  routeErrorHandler(guestController.getGuestById)
+  routeErrorHandler(GuestController.getGuestById)
 );
 guestRouter.put(
   "/:id",
   validateBody(GuestUpsertSchema),
-  routeErrorHandler(guestController.updateGuest)
+  routeErrorHandler(GuestController.updateGuest)
 );
-guestRouter.delete("/:id", routeErrorHandler(guestController.deleteGuest));
+guestRouter.delete("/:id", routeErrorHandler(GuestController.deleteGuest));
 
 export default guestRouter;

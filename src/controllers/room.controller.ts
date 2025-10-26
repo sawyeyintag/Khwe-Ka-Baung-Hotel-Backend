@@ -1,19 +1,9 @@
 import { Request, Response } from "express";
 
 import prismaClient from "../config/prismaClient";
-import { BadRequestsException } from "../exceptions/bad-requests";
-import {
-  RoomCreateSchemaRequest,
-  RoomEditSchemaRequest,
-  RoomGetAllRequest,
-  RoomGetAllResponse,
-} from "../types/room.type";
 
 export class RoomController {
-  static async getAllRooms(
-    req: RoomGetAllRequest,
-    res: Response
-  ): Promise<Response<RoomGetAllResponse>> {
+  static async getAllRooms(req: Request, res: Response) {
     const { roomTypeId, floor, date, isAvailable } = req.query;
 
     // Use current date if not provided
@@ -29,10 +19,10 @@ export class RoomController {
         // Include active sessions that overlap with the check date
         sessions: {
           where: {
-            checkedInAt: { lte: checkDate },
+            checkInAt: { lte: checkDate },
             OR: [
-              { checkedOutAt: { gte: checkDate } },
-              { checkedOutAt: null }, // Still checked in
+              { checkInAt: { gte: checkDate } },
+              { checkOutAt: null }, // Still checked in
             ],
           },
         },
@@ -67,59 +57,5 @@ export class RoomController {
     return res.status(200).json({
       data: filteredRooms,
     });
-  }
-
-  static async createRoom(req: RoomCreateSchemaRequest, res: Response) {
-    const { roomNumber, floorNumber, roomTypeId } = req.body;
-    const room = await prismaClient.room.findFirst({
-      where: { roomNumber },
-    });
-    if (room) {
-      throw new BadRequestsException("The room already exists");
-    }
-    const createdRoom = await prismaClient.room.create({
-      data: { roomNumber, floorNumber, roomTypeId },
-    });
-    return res.status(201).json({
-      data: createdRoom,
-    });
-  }
-
-  static async updateRoom(req: RoomEditSchemaRequest, res: Response) {
-    const { floorNumber, roomTypeId } = req.body;
-    const { roomNumber } = req.params;
-
-    const room = await prismaClient.room.findUnique({
-      where: { roomNumber },
-    });
-    if (!room) {
-      throw new BadRequestsException("Room not found");
-    }
-
-    const updatedRoom = await prismaClient.room.update({
-      where: { roomNumber },
-      data: { roomNumber, floorNumber, roomTypeId },
-    });
-
-    return res.status(200).json({
-      data: updatedRoom,
-    });
-  }
-
-  static async deleteRoom(req: Request, res: Response) {
-    const { roomNumber } = req.params;
-
-    const room = await prismaClient.room.findUnique({
-      where: { roomNumber },
-    });
-    if (!room) {
-      throw new BadRequestsException("Room not found");
-    }
-
-    await prismaClient.room.delete({
-      where: { roomNumber },
-    });
-
-    return res.status(204).send();
   }
 }

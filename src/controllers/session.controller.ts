@@ -8,7 +8,7 @@ import { Session } from "../generated/client";
 import { SessionCreateRequest, SessionEndRequest } from "../types/session.type";
 
 export class SessionController {
-  async createSession(req: SessionCreateRequest, res: Response) {
+  static async createSession(req: SessionCreateRequest, res: Response) {
     const { guestIds } = req.body;
     // Check if the guest already have a session
     const existingSession = await prismaClient.session.findFirst({
@@ -26,14 +26,14 @@ export class SessionController {
     });
   }
 
-  async getAllSessions(req: Request, res: Response) {
+  static async getAllSessions(req: Request, res: Response) {
     const sessions: Session[] = await SessionService.getAllSessions();
     return res.status(200).json({
       data: sessions,
     });
   }
 
-  async getSessionById(req: Request, res: Response) {
+  static async getSessionById(req: Request, res: Response) {
     const { id } = req.params;
     const session: Session | null = await SessionService.getSessionById(
       parseInt(id)
@@ -46,7 +46,7 @@ export class SessionController {
     });
   }
 
-  async endSession(req: SessionEndRequest, res: Response) {
+  static async endSession(req: SessionEndRequest, res: Response) {
     const { id } = req.params;
     const { actualCheckOut } = req.body;
     const session: Session | null = await SessionService.getSessionById(
@@ -67,7 +67,7 @@ export class SessionController {
     });
   }
 
-  async deleteSession(req: Request, res: Response) {
+  static async deleteSession(req: Request, res: Response) {
     const { id } = req.params;
     const session: Session | null = await SessionService.getSessionById(
       parseInt(id)

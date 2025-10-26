@@ -4,10 +4,9 @@ import prismaClient from "../config/prismaClient";
 import { BadRequestsException } from "../exceptions/bad-requests";
 import { NotFoundException } from "../exceptions/not-found";
 import { GuestUpsertRequest } from "../types/guest.type";
-import log from "../utils/logger";
 
 export class GuestController {
-  async createGuest(req: GuestUpsertRequest, res: Response) {
+  static async createGuest(req: GuestUpsertRequest, res: Response) {
     const { name, phone, email, address, nicCardNumber } = req.body;
     const guest = await prismaClient.guest.findFirst({
       where: { nicCardNumber },
@@ -23,14 +22,14 @@ export class GuestController {
     });
   }
 
-  async getAllGuests(req: Request, res: Response) {
+  static async getAllGuests(req: Request, res: Response) {
     const guests = await prismaClient.guest.findMany();
     return res.status(200).json({
       data: guests,
     });
   }
 
-  async getGuestById(req: Request, res: Response) {
+  static async getGuestById(req: Request, res: Response) {
     const { id } = req.params;
     const guest = await prismaClient.guest.findUnique({
       where: { uid: id },
@@ -43,7 +42,7 @@ export class GuestController {
     });
   }
 
-  async getGuestByNicCardNum(req: Request, res: Response) {
+  static async getGuestByNicCardNum(req: Request, res: Response) {
     const { nicCardNumber } = req.params;
     const guest = await prismaClient.guest.findUnique({
       where: { nicCardNumber },
@@ -56,7 +55,7 @@ export class GuestController {
     });
   }
 
-  async searchGuests(req: Request, res: Response) {
+  static async searchGuests(req: Request, res: Response) {
     const { q, limit = 10 } = req.query;
 
     if (!q || typeof q !== "string" || q.trim().length === 0) {
@@ -130,7 +129,7 @@ export class GuestController {
     });
   }
 
-  async updateGuest(req: GuestUpsertRequest, res: Response) {
+  static async updateGuest(req: GuestUpsertRequest, res: Response) {
     const { id } = req.params;
     const { name, phone, email, address, nicCardNumber } = req.body;
     const guest = await prismaClient.guest.findUnique({
@@ -148,7 +147,7 @@ export class GuestController {
     });
   }
 
-  async deleteGuest(req: Request, res: Response) {
+  static async deleteGuest(req: Request, res: Response) {
     const { id } = req.params;
     const guest = await prismaClient.guest.findUnique({
       where: { uid: id },

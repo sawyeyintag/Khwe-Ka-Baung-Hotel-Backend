@@ -1,17 +1,18 @@
 import { Router } from "express";
 
-import bookingController from "../controllers/booking.controller";
+import { BookingController } from "@/controllers/booking.controller";
+
 import { routeErrorHandler } from "../middlewares/route-error.middleware";
 import { validateBody } from "../middlewares/validation.middleware";
 import { BookingUpsertSchema } from "../schema/booking.zod";
 
 const bookingRouter: Router = Router();
 
-bookingRouter.get("", routeErrorHandler(bookingController.getAllBooking));
+bookingRouter.get("", routeErrorHandler(BookingController.getAllBooking));
 bookingRouter.post(
   "",
   validateBody(BookingUpsertSchema),
-  routeErrorHandler(bookingController.createBooking)
+  routeErrorHandler(BookingController.createBooking)
 );
 
 export default bookingRouter;

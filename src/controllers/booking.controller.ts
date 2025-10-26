@@ -6,7 +6,7 @@ import prismaClient from "../config/prismaClient";
 import { BookingUpsertRequest } from "../types/booking.type";
 
 export class BookingController {
-  async createBooking(req: BookingUpsertRequest, res: Response) {
+  static async createBooking(req: BookingUpsertRequest, res: Response) {
     const {
       roomNumber,
       contactName,
@@ -33,7 +33,7 @@ export class BookingController {
     });
   }
 
-  async getAllBooking(req: Request, res: Response) {
+  static async getAllBooking(req: Request, res: Response) {
     const bookings = await prismaClient.booking.findMany({});
     return res.status(200).json({
       data: bookings,
