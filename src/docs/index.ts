@@ -2,9 +2,7 @@ import { version } from "../../package.json";
 
 import { authPaths } from "./swagger/paths/auth.path";
 import { bookingPaths } from "./swagger/paths/booking.path";
-import { floorPaths } from "./swagger/paths/floor.path";
 import { guestPaths } from "./swagger/paths/guest.path";
-import { roomStatusPaths } from "./swagger/paths/room-status.path";
 import { roomTypePaths } from "./swagger/paths/room-type.path";
 import { roomPaths } from "./swagger/paths/room.path";
 import { sessionPaths } from "./swagger/paths/session.path";
@@ -14,8 +12,6 @@ const paths = {
   ...authPaths,
   ...roomPaths,
   ...roomTypePaths,
-  ...roomStatusPaths,
-  ...floorPaths,
   ...bookingPaths,
   ...guestPaths,
   ...sessionPaths,
