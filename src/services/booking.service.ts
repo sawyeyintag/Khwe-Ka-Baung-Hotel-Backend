@@ -1,10 +1,9 @@
 import { isBefore } from "date-fns";
 
+import prismaClient from "@/config/prismaClient";
 import { BadRequestsException } from "@/exceptions/bad-requests";
 import { NotFoundException } from "@/exceptions/not-found";
 import { BookingUpsertRequest } from "@/types/booking.type";
-
-import prismaClient from "../config/prismaClient";
 
 import { SessionService } from "./session.service";
 

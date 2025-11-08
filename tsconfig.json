@@ -5,11 +5,13 @@
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@/shared/*": ["./shared/*"]
     }
   },
-  "include": ["src/**/*", "shared/**/*", "prisma/**/*"]
+  "include": ["src/**/*", "shared/**/*", "prisma/**/*"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
 }
