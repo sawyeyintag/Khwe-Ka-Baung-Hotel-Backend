@@ -12,16 +12,6 @@ export const roomPaths = {
       tags,
       parameters: [
         {
-          name: "roomStatusId",
-          in: "query",
-          description: "Filter rooms by status ID",
-          required: false,
-          schema: {
-            type: "integer",
-            example: 1,
-          },
-        },
-        {
           name: "roomTypeId",
           in: "query",
           description: "Filter rooms by room type ID",
