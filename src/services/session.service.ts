@@ -9,11 +9,11 @@ export class SessionService {
       roomNumber,
       guestIds,
       numberOfExtraBeds,
-      checkedInAt,
-      checkedOutAt,
+      checkInAt,
+      checkOutAt,
+      roomPrice,
       extraBedPrice,
       isActive,
-      discount,
       note,
       isBreakfastIncluded,
     } = newSession;
@@ -21,11 +21,11 @@ export class SessionService {
       data: {
         roomNumber,
         numberOfExtraBeds,
-        checkedInAt: new Date(checkedInAt),
-        checkedOutAt: new Date(checkedOutAt),
+        checkInAt: new Date(checkInAt),
+        checkOutAt: new Date(checkOutAt),
+        roomPrice,
         extraBedPrice,
         isActive,
-        discount,
         note,
         isBreakfastIncluded,
         guests: {
@@ -61,31 +61,31 @@ export class SessionService {
     });
   }
 
-  static async endSession(id: number, checkedOutAt: string) {
+  static async endSession(id: number, checkOutAt: string) {
     return await prismaClient.session.update({
       where: { id },
-      data: { checkedOutAt: new Date(checkedOutAt), isActive: false },
+      data: { checkOutAt: new Date(checkOutAt), isActive: false },
     });
   }
 
   static async checkOverlappingSession(
     roomNumber: string,
-    checkedInAt: Date,
-    checkedOutAt: Date
+    checkInAt: Date,
+    checkOutAt: Date
   ) {
     const overlappingSession = await prismaClient.session.findFirst({
       where: {
         roomNumber,
         isActive: true,
-        checkedInAt,
-        checkedOutAt,
+        checkInAt,
+        checkOutAt,
       },
     });
     if (overlappingSession) {
       throw new BadRequestsException(
         `Room ${roomNumber} is currently occupied from ` +
-          `${overlappingSession.checkedInAt.toISOString()} to ` +
-          `${overlappingSession.checkedOutAt?.toISOString() || "now"}`
+          `${overlappingSession.checkInAt.toISOString()} to ` +
+          `${overlappingSession.checkOutAt?.toISOString() || "now"}`
       );
     }
   }
