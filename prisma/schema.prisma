@@ -16,8 +16,9 @@ datasource db {
 model RoomType {
   id                    Int    @id @default(autoincrement())
   name                  String
-  PriceWithBreakfast    Float
-  PriceWithoutBreakfast Float
+  priceWithBreakfast    Float
+  priceWithoutBreakfast Float
+  pax                   Int
   rooms                 Room[]
 }
 
@@ -52,11 +53,11 @@ model Session {
   roomPrice           Float
   numberOfExtraBeds   Int?
   extraBedPrice       Float?
-  checkInAt         DateTime
-  checkOutAt        DateTime?
+  checkInAt           DateTime
+  checkOutAt          DateTime?
   note                String?
   isBreakfastIncluded Boolean         @default(false)
-  isActive           Boolean         @default(true)
+  isActive            Boolean         @default(true)
   room                Room            @relation(fields: [roomNumber], references: [roomNumber])
   guests              Guest[]
   receipt             SessionReceipt?

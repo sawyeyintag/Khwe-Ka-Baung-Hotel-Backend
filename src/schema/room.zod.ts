@@ -18,3 +18,20 @@ export const RoomEditSchema = z.object({
     .min(1, "Room type ID must be a positive integer")
     .optional(),
 });
+
+export const RoomQuerySchema = z.object({
+  roomTypeId: z.string().optional(),
+  floor: z.string().optional(),
+});
+
+export const RoomAvailabilityQuerySchema = z.object({
+  startDate: z.string().datetime(),
+  endDate: z.string().datetime(),
+  roomTypeId: z.string().optional(),
+  floor: z.string().optional(),
+});
+
+export const RoomDetailQuerySchema = z.object({
+  startDate: z.string().datetime().optional(),
+  endDate: z.string().datetime().optional(),
+});

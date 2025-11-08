@@ -1,8 +1,6 @@
 import { PrismaClient } from "@/generated/client";
 import log from "@/utils/logger";
 
-import { seedFloors } from "./floor.seeder";
-import { seedRoomStatuses } from "./room-status.seeder";
 import { seedRoomTypes } from "./room-type.seeder";
 import { seedRooms } from "./room.seeder";
 
@@ -14,10 +12,8 @@ interface SeederFunction {
 }
 
 const seeders: SeederFunction[] = [
-  { name: "Room Statuses", fn: seedRoomStatuses },
-  { name: "Floors", fn: seedFloors },
-  { name: "Room Types", fn: seedRoomTypes },
-  { name: "Rooms", fn: seedRooms },
+  { name: "Room Types", fn: seedRoomTypes }, // ✅ Run first - parent table
+  { name: "Rooms", fn: seedRooms }, // ✅ Run second - child table
 ];
 
 async function main() {
@@ -30,6 +26,10 @@ async function main() {
         await seeder.fn(prisma);
       } catch (error) {
         log.error(`Error in ${seeder.name} seeder:`, error);
+        if (error instanceof Error) {
+          log.error(`Error message: ${error.message}`);
+          log.error(`Error stack: ${error.stack}`);
+        }
         throw new Error(`Failed to seed ${seeder.name}`);
       }
     }
@@ -37,6 +37,9 @@ async function main() {
     log.info("Database seeding completed successfully!");
   } catch (error) {
     log.error("Database seeding failed:", error);
+    if (error instanceof Error) {
+      log.error(`Final error: ${error.message}`);
+    }
     process.exit(1);
   } finally {
     await prisma.$disconnect();

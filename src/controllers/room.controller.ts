@@ -3,11 +3,9 @@ import { Request, Response } from "express";
 import prismaClient from "../config/prismaClient";
 
 export class RoomController {
+  // GET /rooms - Get all rooms with basic info (no date filtering)
   static async getAllRooms(req: Request, res: Response) {
-    const { roomTypeId, floor, date, isAvailable } = req.query;
-
-    // Use current date if not provided
-    const checkDate = date ? new Date(date as string) : new Date();
+    const { roomTypeId, floor } = req.query;
 
     const rooms = await prismaClient.room.findMany({
       where: {
@@ -16,46 +14,124 @@ export class RoomController {
       },
       include: {
         roomType: true,
-        // Include active sessions that overlap with the check date
+      },
+      orderBy: {
+        roomNumber: "asc",
+      },
+    });
+
+    return res.status(200).json({
+      data: rooms,
+    });
+  }
+
+  // GET /rooms/:roomNumber - Get specific room details with sessions/bookings
+  static async getRoomByNumber(req: Request, res: Response) {
+    const { roomNumber } = req.params;
+    const { startDate, endDate } = req.query;
+
+    const room = await prismaClient.room.findUnique({
+      where: {
+        roomNumber: roomNumber,
+      },
+      include: {
+        roomType: true,
         sessions: {
-          where: {
-            checkInAt: { lte: checkDate },
-            OR: [
-              { checkInAt: { gte: checkDate } },
-              { checkOutAt: null }, // Still checked in
-            ],
+          where:
+            startDate && endDate
+              ? {
+                  checkInAt: { lte: new Date(endDate as string) },
+                  OR: [
+                    { checkOutAt: { gte: new Date(startDate as string) } },
+                    { checkOutAt: null }, // Still checked in
+                  ],
+                }
+              : undefined,
+          orderBy: {
+            checkInAt: "desc",
           },
         },
-        // Include bookings that overlap with the check date
         bookings: {
-          where: {
-            estCheckIn: { lte: checkDate },
-            estCheckOut: { gte: checkDate },
+          where:
+            startDate && endDate
+              ? {
+                  estCheckIn: { lte: new Date(endDate as string) },
+                  estCheckOut: { gte: new Date(startDate as string) },
+                }
+              : undefined,
+          orderBy: {
+            estCheckIn: "desc",
           },
         },
       },
     });
 
-    // Map rooms with current session and booking
-    const roomsWithStatus = rooms.map((room) => ({
-      roomNumber: room.roomNumber,
-      floorNumber: room.floorNumber,
-      roomType: room.roomType,
-      currentSession: room.sessions.length > 0 ? room.sessions[0] : null,
-      currentBooking: room.bookings.length > 0 ? room.bookings[0] : null,
-    }));
+    if (!room) {
+      return res.status(404).json({
+        error: "Room not found",
+      });
+    }
 
-    // Filter by availability if requested
-    const filteredRooms = isAvailable
-      ? roomsWithStatus.filter((room) => {
-          const shouldBeAvailable = isAvailable === "true";
-          const roomIsAvailable = !room.currentSession && !room.currentBooking;
-          return roomIsAvailable === shouldBeAvailable;
-        })
-      : roomsWithStatus;
+    // Check if room is available during the specified period
+    const isAvailable =
+      room.sessions.length === 0 && room.bookings.length === 0;
 
     return res.status(200).json({
-      data: filteredRooms,
+      data: {
+        ...room,
+        isAvailable,
+      },
+    });
+  }
+
+  // GET /rooms/available - Get available rooms for a date range
+  static async getAvailableRooms(req: Request, res: Response) {
+    const { startDate, endDate, roomTypeId, floor } = req.query;
+
+    if (!startDate || !endDate) {
+      return res.status(400).json({
+        error: "startDate and endDate are required",
+      });
+    }
+
+    const rooms = await prismaClient.room.findMany({
+      where: {
+        ...(roomTypeId && { roomTypeId: Number(roomTypeId) }),
+        ...(floor && { floorNumber: Number(floor) }),
+      },
+      include: {
+        roomType: true,
+        sessions: {
+          where: {
+            checkInAt: { lte: new Date(endDate as string) },
+            OR: [
+              { checkOutAt: { gte: new Date(startDate as string) } },
+              { checkOutAt: null },
+            ],
+          },
+        },
+        bookings: {
+          where: {
+            estCheckIn: { lte: new Date(endDate as string) },
+            estCheckOut: { gte: new Date(startDate as string) },
+          },
+        },
+      },
+    });
+
+    // Filter only available rooms (no overlapping sessions or bookings)
+    const availableRooms = rooms
+      .filter(
+        (room) => room.sessions.length === 0 && room.bookings.length === 0
+      )
+      .map((room) => ({
+        roomNumber: room.roomNumber,
+        floorNumber: room.floorNumber,
+        roomType: room.roomType,
+      }));
+
+    return res.status(200).json({
+      data: availableRooms,
     });
   }
 }
