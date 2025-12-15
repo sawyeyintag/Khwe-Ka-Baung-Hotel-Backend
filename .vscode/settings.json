@@ -14,5 +14,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "prettier.requireConfig": true,
-  "eslint.validate": ["javascript", "typescript"]
+  "eslint.validate": ["javascript", "typescript"],
+  "prisma.pinToPrisma6": true
 }
