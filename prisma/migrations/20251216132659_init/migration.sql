@@ -2,8 +2,9 @@
 CREATE TABLE `RoomType` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `PriceWithBreakfast` DOUBLE NOT NULL,
-    `PriceWithoutBreakfast` DOUBLE NOT NULL,
+    `pax` INTEGER NOT NULL,
+    `priceWithBreakfast` DOUBLE NOT NULL,
+    `priceWithoutBreakfast` DOUBLE NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -18,35 +19,36 @@ CREATE TABLE `Room` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Booking` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `roomNumber` VARCHAR(191) NOT NULL,
-    `contactName` VARCHAR(191) NOT NULL,
-    `contactPhone` VARCHAR(191) NOT NULL,
-    `contactEmail` VARCHAR(191) NULL,
-    `note` VARCHAR(191) NULL,
-    `estCheckIn` DATETIME(3) NOT NULL,
-    `estCheckOut` DATETIME(3) NOT NULL,
-
-    INDEX `Booking_roomNumber_estCheckIn_estCheckOut_idx`(`roomNumber`, `estCheckIn`, `estCheckOut`),
-    UNIQUE INDEX `Booking_roomNumber_estCheckIn_estCheckOut_key`(`roomNumber`, `estCheckIn`, `estCheckOut`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `Session` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `roomNumber` VARCHAR(191) NOT NULL,
+    `sessionStatusId` INTEGER NOT NULL,
     `roomPrice` DOUBLE NOT NULL,
     `numberOfExtraBeds` INTEGER NULL,
     `extraBedPrice` DOUBLE NULL,
     `checkInAt` DATETIME(3) NOT NULL,
-    `checkOutAt` DATETIME(3) NULL,
+    `checkOutAt` DATETIME(3) NOT NULL,
     `note` VARCHAR(191) NULL,
     `isBreakfastIncluded` BOOLEAN NOT NULL DEFAULT false,
     `isActive` BOOLEAN NOT NULL DEFAULT true,
 
     UNIQUE INDEX `Session_roomNumber_checkInAt_checkOutAt_key`(`roomNumber`, `checkInAt`, `checkOutAt`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `GuestSession` (
+    `guestUid` VARCHAR(191) NOT NULL,
+    `sessionId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`guestUid`, `sessionId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `SessionStatus` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -71,7 +73,6 @@ CREATE TABLE `Guest` (
     `email` VARCHAR(191) NULL,
     `address` VARCHAR(191) NULL,
     `nicCardNumber` VARCHAR(191) NULL,
-    `sessionId` INTEGER NULL,
 
     UNIQUE INDEX `Guest_nicCardNumber_key`(`nicCardNumber`),
     PRIMARY KEY (`uid`)
@@ -84,6 +85,7 @@ CREATE TABLE `OtherReceipt` (
     `discount` DOUBLE NULL,
     `totalPrice` DOUBLE NOT NULL,
     `sessionId` INTEGER NOT NULL,
+    `services` JSON NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -108,24 +110,6 @@ CREATE TABLE `RoomItem` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Service` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL,
-    `price` DOUBLE NOT NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `OtherReceiptService` (
-    `otherReceiptId` INTEGER NOT NULL,
-    `serviceId` INTEGER NOT NULL,
-    `quantity` INTEGER NOT NULL,
-
-    PRIMARY KEY (`otherReceiptId`, `serviceId`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `OtherReceiptItem` (
     `otherReceiptId` INTEGER NOT NULL,
     `itemId` INTEGER NOT NULL,
@@ -138,16 +122,19 @@ CREATE TABLE `OtherReceiptItem` (
 ALTER TABLE `Room` ADD CONSTRAINT `Room_roomTypeId_fkey` FOREIGN KEY (`roomTypeId`) REFERENCES `RoomType`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Booking` ADD CONSTRAINT `Booking_roomNumber_fkey` FOREIGN KEY (`roomNumber`) REFERENCES `Room`(`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `Session` ADD CONSTRAINT `Session_roomNumber_fkey` FOREIGN KEY (`roomNumber`) REFERENCES `Room`(`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `SessionReceipt` ADD CONSTRAINT `SessionReceipt_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `Session`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Session` ADD CONSTRAINT `Session_sessionStatusId_fkey` FOREIGN KEY (`sessionStatusId`) REFERENCES `SessionStatus`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Guest` ADD CONSTRAINT `Guest_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `Session`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `GuestSession` ADD CONSTRAINT `GuestSession_guestUid_fkey` FOREIGN KEY (`guestUid`) REFERENCES `Guest`(`uid`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `GuestSession` ADD CONSTRAINT `GuestSession_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `Session`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `SessionReceipt` ADD CONSTRAINT `SessionReceipt_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `Session`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `OtherReceipt` ADD CONSTRAINT `OtherReceipt_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `Session`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -157,12 +144,6 @@ ALTER TABLE `RoomItem` ADD CONSTRAINT `RoomItem_roomNumber_fkey` FOREIGN KEY (`r
 
 -- AddForeignKey
 ALTER TABLE `RoomItem` ADD CONSTRAINT `RoomItem_itemId_fkey` FOREIGN KEY (`itemId`) REFERENCES `Item`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `OtherReceiptService` ADD CONSTRAINT `OtherReceiptService_otherReceiptId_fkey` FOREIGN KEY (`otherReceiptId`) REFERENCES `OtherReceipt`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `OtherReceiptService` ADD CONSTRAINT `OtherReceiptService_serviceId_fkey` FOREIGN KEY (`serviceId`) REFERENCES `Service`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `OtherReceiptItem` ADD CONSTRAINT `OtherReceiptItem_otherReceiptId_fkey` FOREIGN KEY (`otherReceiptId`) REFERENCES `OtherReceipt`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -16,9 +16,9 @@ datasource db {
 model RoomType {
   id                    Int    @id @default(autoincrement())
   name                  String
+  pax                   Int
   priceWithBreakfast    Float
   priceWithoutBreakfast Float
-  pax                   Int
   rooms                 Room[]
 }
 
@@ -26,44 +26,45 @@ model Room {
   roomNumber  String     @id
   floorNumber Int
   roomTypeId  Int
-  roomType    RoomType   @relation(fields: [roomTypeId], references: [id])
   sessions    Session[]
-  bookings    Booking[]
   roomItems   RoomItem[]
-}
-
-model Booking {
-  id           Int      @id @default(autoincrement())
-  roomNumber   String
-  contactName  String
-  contactPhone String
-  contactEmail String?
-  note         String?
-  estCheckIn   DateTime
-  estCheckOut  DateTime
-  room         Room     @relation(fields: [roomNumber], references: [roomNumber])
-
-  @@unique([roomNumber, estCheckIn, estCheckOut])
-  @@index([roomNumber, estCheckIn, estCheckOut])
+  roomType    RoomType   @relation(fields: [roomTypeId], references: [id])
 }
 
 model Session {
   id                  Int             @id @default(autoincrement())
   roomNumber          String
+  sessionStatusId     Int
   roomPrice           Float
   numberOfExtraBeds   Int?
   extraBedPrice       Float?
   checkInAt           DateTime
-  checkOutAt          DateTime?
+  checkOutAt          DateTime
   note                String?
   isBreakfastIncluded Boolean         @default(false)
   isActive            Boolean         @default(true)
-  room                Room            @relation(fields: [roomNumber], references: [roomNumber])
-  guests              Guest[]
-  receipt             SessionReceipt?
+  guests              GuestSession[]
   otherReceipts       OtherReceipt[]
+  receipt             SessionReceipt?
+  room                Room            @relation(fields: [roomNumber], references: [roomNumber])
+  sessionStatus       SessionStatus   @relation(fields: [sessionStatusId], references: [id])
 
   @@unique([roomNumber, checkInAt, checkOutAt])
+}
+
+model GuestSession {
+  guestUid  String
+  sessionId Int
+  guest     Guest   @relation(fields: [guestUid], references: [uid])
+  session   Session @relation(fields: [sessionId], references: [id])
+
+  @@id([guestUid, sessionId])
+}
+
+model SessionStatus {
+  id       Int       @id @default(autoincrement())
+  name     String
+  sessions Session[]
 }
 
 model SessionReceipt {
@@ -77,25 +78,24 @@ model SessionReceipt {
 }
 
 model Guest {
-  uid           String   @id @default(uuid())
+  uid           String         @id @default(uuid())
   name          String
   phone         String
   email         String?
   address       String?
-  nicCardNumber String?  @unique
-  sessionId     Int?
-  session       Session? @relation(fields: [sessionId], references: [id])
+  nicCardNumber String?        @unique
+  sessions      GuestSession[]
 }
 
 model OtherReceipt {
-  id           Int                   @id @default(autoincrement())
+  id           Int                @id @default(autoincrement())
   amountOfPaid Float
   discount     Float?
   totalPrice   Float
   sessionId    Int
-  session      Session               @relation(fields: [sessionId], references: [id])
+  session      Session            @relation(fields: [sessionId], references: [id])
   items        OtherReceiptItem[]
-  services     OtherReceiptService[]
+  services     Json?
 }
 
 model Item {
@@ -115,23 +115,6 @@ model RoomItem {
   item       Item   @relation(fields: [itemId], references: [id])
 
   @@id([roomNumber, itemId])
-}
-
-model Service {
-  id                   Int                   @id @default(autoincrement())
-  name                 String
-  price                Float
-  otherReceiptServices OtherReceiptService[]
-}
-
-model OtherReceiptService {
-  otherReceiptId Int
-  serviceId      Int
-  quantity       Int
-  otherReceipt   OtherReceipt @relation(fields: [otherReceiptId], references: [id])
-  service        Service      @relation(fields: [serviceId], references: [id])
-
-  @@id([otherReceiptId, serviceId])
 }
 
 model OtherReceiptItem {
