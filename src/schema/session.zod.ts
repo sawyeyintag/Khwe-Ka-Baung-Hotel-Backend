@@ -9,6 +9,7 @@ export const SessionCreateSchema = z.object({
     .refine((arr) => arr.every((id) => typeof id === "string"), {
       message: "Guest IDs must be valid UUIDs",
     }),
+  sessionStatusId: z.number().int(),
   numberOfExtraBeds: z.number().int(),
   roomPrice: z.number(),
   extraBedPrice: z.number(),

@@ -1,28 +1,42 @@
 import { Request, Response } from "express";
 
-import prismaClient from "@/config/prismaClient";
 import { BadRequestsException } from "@/exceptions/bad-requests";
 import { Session } from "@/generated/client";
+import { GuestService } from "@/services/guest.service";
 import { SessionService } from "@/services/session.service";
 import { SessionCreateRequest, SessionEndRequest } from "@/types/session.type";
 
 export class SessionController {
-  static async createSession(req: SessionCreateRequest, res: Response) {
+  static async create(req: SessionCreateRequest, res: Response) {
     const { guestIds } = req.body;
+
     // Check if the guest already have a session
-    const existingSession = await prismaClient.session.findFirst({
-      where: { isActive: true, guests: { some: { uid: { in: guestIds } } } },
-    });
-    if (existingSession) {
+    const isGuestInSession = await GuestService.validateInSession(guestIds);
+    if (isGuestInSession) {
       throw new BadRequestsException(
-        "The guest already have an active session"
+        "One or more guests already have an active session"
       );
     }
-    const createdSession = await SessionService.createSession(req.body);
+
+    const createdSession = await SessionService.create(req.body);
 
     return res.status(201).json({
       data: createdSession,
     });
+  }
+
+  static async updateGuestIds(req: Request, res: Response) {
+    const sessionId = parseInt(req.params.id);
+    const { guestIds } = req.body;
+
+    // Validate session exists
+    const session = await SessionService.getById(sessionId);
+    if (!session) {
+      throw new BadRequestsException(`Session with ID ${sessionId} not found`);
+    }
+
+    // Validate all guests exist
+    await GuestService.validateGuestsExist(guestIds);
   }
 
   static async getAllSessions(req: Request, res: Response) {
